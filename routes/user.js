@@ -10,25 +10,25 @@ const Users = require('../models/users');
 const initializePassport = require('../middleware/passport-config');
 initializePassport (passport);
 
-router.get('/login', (req, res) => {
+router.get('/login', notAuth, (req, res) => {
     res.render('pages/login', {
         title : "Login - OLIS ITDEL"
     });
 });
 
-// router.get('/register', notAuth,  (req,res) => {
-//     res.render('pages/register');
-// });
+router.get('/register', notAuth,  (req,res) => {
+    res.render('pages/register');
+});
 
-// router.post('/register', notAuth, async (req,res) => {
-//     const user = new Users(req.body);
-//     try {
-//         await user.save();
-//         res.redirect('/user/login');
-//     } catch (e) {
-//         res.redirect('/user/register');
-//     }
-// });
+router.post('/register', notAuth, async (req,res) => {
+    const user = new Users(req.body);
+    try {
+        await user.save();
+        res.redirect('/user/login');
+    } catch (e) {
+        res.redirect('/user/register');
+    }
+});
 
 router.post('/login', notAuth, passport.authenticate('local', {
     successRedirect: '/',

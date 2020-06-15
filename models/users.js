@@ -21,7 +21,6 @@ const userSchema = mongoose.Schema({
     statusKeanggotaan : {
         type : Boolean,
         default : false,
-        required : true,
     },
     email : {
         type : String,
