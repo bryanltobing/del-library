@@ -3,13 +3,14 @@ const router = express.Router();
 
 router.get('/', function(req, res) {
     res.render('pages/index' , {
-        title : "OLIS ITDEL"
+        title : "OLIS ITDEL",
     });
 });
 
 router.get('/services', function(req, res) {
     res.render('pages/services' , {
-        title : "Services - OLIS ITDEL"
+        title : "Services - OLIS ITDEL",
+        session : req.session.passport
     });
 });
 

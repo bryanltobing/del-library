@@ -30,6 +30,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use(function(req,res,next){
+    global.session = req.isAuthenticated();   // hostname = 'localhost:8080'
+    next();
+});
 
 // routes use
 app.use('/', index);

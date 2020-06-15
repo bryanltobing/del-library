@@ -27,8 +27,13 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="topbar-links">
-                                        <a href="/user/login"><i class="fa fa-lock"></i>Login</a>
-                                        <span>|</span>
+                                        <% if(session) { %> 
+                                            <a href="/user/logout"><i class="fa fa-sign-out"></i>Logout</a>
+                                            <span>|</span>
+                                        <% } else { %>
+                                            <a href="/user/login"><i class="fa fa-lock"></i>Login</a>
+                                            <span>|</span>
+                                        <% } %>
                                     </div>
                                 </div>
                             </div>
