@@ -18317,6 +18317,10 @@ a:focus {
   line-height: 12px;
   padding: 12px 30px;
 }
+.error-info .search-submit:hover {
+  background-color: black;
+}
+
 .pagination {
   border-radius: 0;
   display: block;

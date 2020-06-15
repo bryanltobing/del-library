@@ -41,4 +41,10 @@ router.delete('/logout', (req, res) => {
     res.redirect('/user/login');
 });
 
+router.get('/dashboard', auth, (req, res) => {
+    res.render('pages/login', {
+        title : "Login - OLIS ITDEL"
+    });
+});
+
 module.exports = router;

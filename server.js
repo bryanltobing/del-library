@@ -39,9 +39,11 @@ app.use(function(req,res,next){
 app.use('/', index);
 app.use('/user', user);
 
-// app.get('*',(req, res) => {
-//     res.render('404');
-// });
+app.get('*',(req, res) => {
+    res.render('pages/404', {
+        title : '404 not found'
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
