@@ -49,4 +49,11 @@ router.get('/dashboard', auth, (req, res) => {
     });
 });
 
+router.get('/profil', auth, (req, res) => {
+    res.render('pages/userprofil', {
+        title : "Profil",
+        user : req.user
+    });
+});
+
 module.exports = router;
