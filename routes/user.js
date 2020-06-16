@@ -45,7 +45,8 @@ router.delete('/logout', (req, res) => {
 router.get('/dashboard', auth, (req, res) => {
     res.render('pages/dashboard', {
         title : "Dashboard",
-        name : req.user.fullname
+        name : req.user.fullname,
+        user : req.user
     });
 });
 
