@@ -44,7 +44,7 @@
                         <h2 style="color: black;">Form request card</h2>
                         <span class="underline left"></span>
                         <div class="contact-fields">
-                            <form class="" style="padding: 20px;" id="contact" name="contact" method="post" >
+                            <form action="/user/request-library-card" style="padding: 20px;" id="contact" name="contact" method="post" >
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
@@ -83,17 +83,17 @@
                                     
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Nomor Induk" name="prodi" id="prodi" size="30" value="<%= user.nomorinduk %>" aria-required="true" />
+                                            <input class="form-control" type="text" placeholder="Nomor Induk" name="nomorinduk" id="nomorinduk" size="30" value="<%= user.nomorinduk %>" aria-required="true" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Phone Number" name="phone" id="phone" size="30" value="" aria-required="true" />
+                                            <input class="form-control" type="text" placeholder="Phone Number" name="phoneNumber" id="phone" size="30" value="" aria-required="true" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" placeholder="Your message" id="message" aria-required="true"></textarea>
+                                            <textarea class="form-control" placeholder="Your message" id="message" name="message" aria-required="true"></textarea>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
