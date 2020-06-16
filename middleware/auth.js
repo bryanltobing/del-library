@@ -3,6 +3,7 @@ const auth = (req, res, next) => {
         return next();
     }
 
+    req.flash('errorAuth', 'You need to login before accessing this page');
     res.redirect('/user/login');
 }
 

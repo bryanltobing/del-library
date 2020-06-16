@@ -56,4 +56,12 @@ router.get('/profil', auth, (req, res) => {
     });
 });
 
+// LIBRARY CARD REQUEST
+router.get('/request-library-card', auth , (req, res) => {
+    res.render('pages/requestcard', {
+        title : "Request Card",
+        user : req.user
+    });
+});
+
 module.exports = router;
