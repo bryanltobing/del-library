@@ -5,7 +5,9 @@ const passport = require('passport');
 // Middleware
 const { auth, notAuth } = require('../middleware/auth');
 
+// Models
 const Users = require('../models/users');
+const Cards = require('../models/card_request');
 
 const initializePassport = require('../middleware/passport-config');
 initializePassport (passport);
@@ -42,6 +44,7 @@ router.delete('/logout', (req, res) => {
     res.redirect('/user/login');
 });
 
+// ----------------- DASHBOARD -------------------- //
 router.get('/dashboard', auth, (req, res) => {
     res.render('pages/dashboard', {
         title : "Dashboard",
@@ -57,12 +60,28 @@ router.get('/profil', auth, (req, res) => {
     });
 });
 
-// LIBRARY CARD REQUEST
 router.get('/request-library-card', auth , (req, res) => {
     res.render('pages/requestcard', {
         title : "Request Card",
         user : req.user
     });
+});
+
+router.post('/request-library-card', auth , async (req, res) => {
+    const cards = new Cards({
+        ...req.body,
+        owner : req.user._id
+    });
+
+    try {
+        await cards.save();
+        req.flash('successAdded', 'Data Successfully Added');
+        res.redirect('/user/request-library-card');
+    } catch (e) {
+        req.flash('errorAdded', 'Data Failed Added');
+        res.redirect('/user/request-library-card');
+    }
+    
 });
 
 module.exports = router;

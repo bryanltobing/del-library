@@ -40,6 +40,11 @@ const cardSchema = mongoose.Schema({
     isApproved : {
         type : Boolean,
         default : false
+    },
+    owner : {
+        type : mongoose.Schema.Types.ObjectId,
+        required : true,
+        trim : true
     }
 
 });
