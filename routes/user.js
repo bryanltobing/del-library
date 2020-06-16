@@ -31,7 +31,7 @@ router.post('/register', notAuth, async (req,res) => {
 });
 
 router.post('/login', notAuth, passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/user/dashboard',
     failureRedirect: '/user/login',
     failureFlash: true
 }));
@@ -42,8 +42,9 @@ router.delete('/logout', (req, res) => {
 });
 
 router.get('/dashboard', auth, (req, res) => {
-    res.render('pages/login', {
-        title : "Login - OLIS ITDEL"
+    res.render('pages/dashboard', {
+        title : "Dashboard",
+        name : req.user.fullname
     });
 });
 

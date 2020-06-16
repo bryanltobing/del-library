@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <%- include('../partials/head') %>
+
+    <body>
+        
+        <!-- Start: Header Section -->
+        <%- include('../partials/navbar') %>
+        <!-- End: Header Section -->
+        
+        <!-- Start: Page Banner -->
+        <section class="page-banner services-banner">
+            <div class="container">
+                <div class="banner-header">
+                    <h2><%= name %></h2>
+                    <span class="underline center"></span>
+                    <p class="lead">Welcome</p>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/">User</a></li>
+                        <li>Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End: Page Banner -->
+        
+        <!-- Start: Footer -->
+        <%- include('../partials/footer') %>
+
+        <!-- End: Footer -->
+        
+        <%- include('../partials/footscript') %>
+
+    </body>
+
+
+</html>

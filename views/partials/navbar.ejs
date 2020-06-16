@@ -28,8 +28,9 @@
                                 <div class="col-sm-6">
                                     <div class="topbar-links">
                                         <% if(session) { %> 
-                                            <a href="/user/logout"><i class="fa fa-sign-out"></i>Logout</a>
-                                            <span>|</span>
+                                            <form action="/user/logout?_method=DELETE" method="POST">
+                                                <li><button class="btnLog" style="background-color: transparent; padding: 0; margin: 0; font-size: 11px; font-weight: bold;" type="submit"><i style="color: #1087cf;" class="fa fa-sign-out"></i> Logout<span>|</span></button></li>
+                                            </form>
                                         <% } else { %>
                                             <a href="/user/login"><i class="fa fa-lock"></i>Login</a>
                                             <span>|</span>
@@ -74,21 +75,14 @@
                                 <a href="#" class="close"></a>
                             </li>
                             <li>
-                                <a href="index-2.html">Home</a>
-                                <ul>
-                                    <li><a href="index-2.html">Home V1</a></li>
-                                    <li><a href="home-v2.html">Home V2</a></li>
-                                    <li><a href="home-v3.html">Home V3</a></li>
-                                </ul>
+                                <a href="/">Home</a>
                             </li>
                             <li>
-                                <a href="books-media-list-view.html">Books &amp; Media</a>
+                                <a href="#">Books &amp; Media</a>
                                 <ul>
-                                    <li><a href="books-media-list-view.html">Books &amp; Media List View</a></li>
-                                    <li><a href="books-media-gird-view-v1.html">Books &amp; Media Grid View V1</a></li>
-                                    <li><a href="books-media-gird-view-v2.html">Books &amp; Media Grid View V2</a></li>
-                                    <li><a href="books-media-detail-v1.html">Books &amp; Media Detail V1</a></li>
-                                    <li><a href="books-media-detail-v2.html">Books &amp; Media Detail V2</a></li>
+                                    <li style="background-color: white"><a style="color: black;" href="books-media-list-view.html">Books</a></li>
+                                    <li style="background-color: white"><a style="color: black;" href="books-media-gird-view-v1.html">CD/DVD</a></li>
+                                    <li style="background-color: white"><a style="color: black;" href="books-media-gird-view-v2.html">TA Document</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -96,15 +90,6 @@
                                 <ul>
                                     <li><a href="news-events-list-view.html">News &amp; Events List View</a></li>
                                     <li><a href="news-events-detail.html">News &amp; Events Detail</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Pages</a>
-                                <ul>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="signin.html">Signin/Register</a></li>
-                                    <li><a href="404.html">404/Error</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -116,6 +101,14 @@
                             </li>
                             <li><a href="services.html">Services</a></li>
                             <li><a href="contact.html">Contact</a></li>
+                            <li><a href="/user/dashboard">Dashboard</a></li>
+                            <% if(session) { %>
+                            <form action="/user/logout?_method=DELETE" method="POST">
+                                <li><button type="submit"><i class="fa fa-sign-out"></i> Logout</button></li>
+                            </form>
+                            <% } else { %>
+                                <li><a href="/user/login"> <i class="fa fa-lock"></i> Login </i></a></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
