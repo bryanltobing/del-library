@@ -3,6 +3,14 @@
     
     <%- include('../partials/head') %>
 
+    <style>
+        .formRequest {
+            -webkit-box-shadow: 0 0 10px gray;
+            box-shadow: 0 0 10px gray;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+    </style>
     <body>
         
         <!-- Start: Header Section -->
@@ -15,13 +23,13 @@
                 <div class="banner-header">
                     <h2>Request Card</h2>
                     <span class="underline center"></span>
-                    <p class="lead">Login untuk mengakses aplikasi</p>
+                    <p style="padding: 20px;" class="lead"></p>
                 </div>
                 <div class="breadcrumb">
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/user/dashboard">Dashboard</a></li>
-                        <li>Profil</li>
+                        <li>Request Card</li>
                     </ul>
                 </div>
             </div>
@@ -29,65 +37,77 @@
         <!-- End: Page Banner -->
 
         <!-- Start: Products Section -->
-        <div id="content" class="site-content">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main">
-                    <div class="booksmedia-detail-main">
-                        <div class="container">
-                            <div class="row">
-                                <!-- Start: Search Section -->
-                                <section class="search-filters" style="margin: 0;">
-                                    <div class="container">
-                                        <div class="filter-box">
-                                            <h3 style="padding:0; margin: 0;">Detail Profil</h3>
+        <div class="container formRequest" style="padding: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact-form bg-light margin-right">
+                        <h2 style="color: black;">Form request card</h2>
+                        <span class="underline left"></span>
+                        <div class="contact-fields">
+                            <form class="" style="padding: 20px;" id="contact" name="contact" method="post" >
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Full Name" name="fullname" id="fullname" size="30" value="<%= user.fullname %>" aria-required="true"/>
                                         </div>
                                     </div>
-                                </section>
-                                <!-- End: Search Section -->
-                            </div>
-                            <div class="booksmedia-detail-box">
-                                <div class="detailed-box">
-                                    <div class="col-xs-12 col-sm-5 col-md-3">
-                                        <div class="post-thumbnail">
-                                            <img src="/images/profil/profil1.png" alt="Book Image">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" id="email" size="30" value="<%= user.email %>" aria-required="true" />
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-7 col-md-6">
-                                        <div class="post-center-content" style="width: 100%; padding: 50px">
-                                            <h2>User Detail</h2>
-                                            <table>
-                                                <tr>
-                                                    <td><strong>Full Name</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.fullname %></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Nomor Induk</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.nomorinduk %></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Role</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.role %></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Email</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.email %></td>
-                                                </tr>
-                                            </table>
-                                            
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <select name="prodi" id="prodi" class="form-control">
+                                                <option>Prodi</option>
+                                                <option>D3 Teknologi Informasi</option>
+                                                <option>D3 Teknologi Komputer</option>
+                                                <option>D4 Teknologi Rekayasa Perangkat Lunak</option>
+                                                <option>S1 Informatika</option>
+                                                <option>S1 Sistem Informasi</option>
+                                                <option>S1 Teknik Elektro</option>
+                                                <option>S1 Teknik Bioproses</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="clearfix"></div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <select name="fakultas" id="fakultas" class="form-control">
+                                                <option>Fakultas</option>
+                                                <option>Fakultas Teknik Informatika dan Elektro</option>
+                                                <option>Fakultas Teknik Industri</option>
+                                                <option>Fakultas Bioteknologi</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Nomor Induk" name="prodi" id="prodi" size="30" value="<%= user.nomorinduk %>" aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Phone Number" name="phone" id="phone" size="30" value="" aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Your message" id="message" aria-required="true"></textarea>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-submit">
+                                            <input style="background-color: black;" class="btn btn-default" id="submit-contact-form" type="button" name="submit" value="Send Request"  />
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="clearfix"></div>
-                                <p><strong>Summary:</strong> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. </p>
-                            </div>
-                        </div>
+                            </form> 
+                        </div>                                                                   
                     </div>
-                </main>
+                </div>
             </div>
         </div>
         <!-- End: Products Section -->

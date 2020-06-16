@@ -6,7 +6,7 @@
   padding: 20px;
   background-color: #f44336;
   color: white;
-  animation: 0.2s ease-out 0s 1 slideInFromTop;
+  animation: 0.8s ease-out 0s 1 slideInFromTop;
 }
 
 .closebtnLog {
@@ -26,7 +26,7 @@
 
 @keyframes slideInFromTop{
   0% {
-      transform: translateY(-1000%);
+      transform: translateY(-100%);
   }
   100% {
       transform: translateY(0);
