@@ -41,7 +41,7 @@
                         </div>
                         <div class="navbar-collapse hidden-sm hidden-xs">
                             <ul class="nav navbar-nav">
-                                <li class="dropdown active">
+                            <li <% if(title === "OLIS ITDEL") {%> class="dropdown active" <%}%> >
                                     <a data-toggle="dropdown" class="dropdown-toggle disabled" href="/">Home</a>
                                 </li>
                                 <li class="dropdown">
@@ -60,8 +60,8 @@
                                     </ul>
                                 </li>
                                 <li><a href="/contact">Contact</a></li>
-                                <li><a href="/services">Services</a></li>
-                                <li><a href="/user/dashboard">Dashboard</a></li>
+                                <li <% if(title === "Services - OLIS ITDEL") {%>class="active" <%}%>><a href="/services">Services</a></li>
+                            <li <% if(title === "Dashboard") {%>class="active" <%}%>><a href="/user/dashboard">Dashboard</a></li>
                             </ul>
                         </div>
                     </div>
