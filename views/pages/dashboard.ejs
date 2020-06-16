@@ -2,8 +2,53 @@
 <html lang="en">
     
     <%- include('../partials/head') %>
+    <style>
+        .topFixedAlertSuccess {
+            position: absolute;
+            z-index: 10000;
+            width: 25%;
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+        }
 
+        .alertLogSuccess {
+            padding: 20px;
+            background-color: green;
+            color: white;
+        }
+
+        .closebtnLogSuccess {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtnLogSuccess:hover {
+            color: black;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
     <body>
+        <% if (messages.success) { %>
+            <div class="topFixedAlertSuccess">
+                <div class="alertLogSuccess">
+                    <span class="closebtnLogSuccess" onclick="this.parentElement.style.display='none';">&times;</span> 
+                    <strong><%= messages.success %></strong>
+                </div>
+            </div>
+        <%}%>
         
         <!-- Start: Header Section -->
         <%- include('../partials/navbar') %>

@@ -32,8 +32,9 @@ router.post('/register', notAuth, async (req,res) => {
 
 router.post('/login', notAuth, passport.authenticate('local', {
     successRedirect: '/user/dashboard',
+    successFlash : true,
     failureRedirect: '/user/login',
-    failureFlash: true
+    failureFlash: true,
 }));
 
 router.delete('/logout', (req, res) => {

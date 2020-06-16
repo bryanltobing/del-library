@@ -6,6 +6,7 @@
   padding: 20px;
   background-color: #f44336;
   color: white;
+  animation: 0.2s ease-out 0s 1 slideInFromTop;
 }
 
 .closebtnLog {
@@ -21,6 +22,15 @@
 
 .closebtnLog:hover {
   color: black;
+}
+
+@keyframes slideInFromTop{
+  0% {
+      transform: translateY(-1000%);
+  }
+  100% {
+      transform: translateY(0);
+  }
 }
 /*
     mmenu CSS

@@ -14,7 +14,7 @@ module.exports = function(passport) {
         try {
            const isMatch = await bcrypt.compare(password, user.password);
            if(isMatch) {
-               return done(null, user);
+               return done(null, user, { message : 'Login successfully' });
            }
            return done(null, false, { message : 'Password incorrect'});
         } catch (e) {
