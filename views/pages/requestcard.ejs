@@ -120,6 +120,17 @@
         
         <%- include('../partials/footscript') %>
 
+        <%if (successAdded.length > 0) { %>
+            <script>
+                swal({
+                    title : "Data Successfully Added",
+                    icon: "success",
+                    text : "Request has been sent",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
+        
     </body>
 
 
