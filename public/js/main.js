@@ -395,7 +395,12 @@ $(function () {
             message: messageFieldObj.val()
         };
         if (data.fullname === '' ||  data.email === '' || data.prodi === '' || data.fakultas === '' || data.nomorinduk === '' ||data.phone === '' || data.message === '') {
-            alert("All fields are mandatory");
+            swal({
+                title : "error",
+                icon: "error",
+                text : "All field must be filled in",
+                button: "Okay",
+            });
         } else {
             if (validateEmail(emailaddress)) {
                 if (emailerrorvalidation === 1) {
