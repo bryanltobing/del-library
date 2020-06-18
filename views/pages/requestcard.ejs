@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="contact-form bg-light margin-right">
-                        <h2 style="color: black;">Form request card</h2>
+                        <h2 style="color: black;">Form request card <%= successAdded %> <%= errorAdded %></h2>
                         <span class="underline left"></span>
                         <div class="contact-fields">
                             <form action="/user/request-library-card" style="padding: 20px;" id="contact" name="contact" method="post" >
@@ -59,24 +59,24 @@
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
                                             <select name="prodi" id="prodi" class="form-control">
-                                                <option>Prodi</option>
-                                                <option>D3 Teknologi Informasi</option>
-                                                <option>D3 Teknologi Komputer</option>
-                                                <option>D4 Teknologi Rekayasa Perangkat Lunak</option>
-                                                <option>S1 Informatika</option>
-                                                <option>S1 Sistem Informasi</option>
-                                                <option>S1 Teknik Elektro</option>
-                                                <option>S1 Teknik Bioproses</option>
+                                                <option value="">--- Prodi ---</option>
+                                                <option value="D3 Teknologi Informasi">D3 Teknologi Informasi</option>
+                                                <option value="D3 Teknologi Komputer">D3 Teknologi Komputer</option>
+                                                <option value="D4 Teknologi Rekayasa Perangkat Lunak">D4 Teknologi Rekayasa Perangkat Lunak</option>
+                                                <option value="S1 Informatika">S1 Informatika</option>
+                                                <option value="S1 Sistem Informasi">S1 Sistem Informasi</option>
+                                                <option value="S1 Teknik Elektro">S1 Teknik Elektro</option>
+                                                <option value="S1 Teknik Bioproses">S1 Teknik Bioproses</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
                                             <select name="fakultas" id="fakultas" class="form-control">
-                                                <option>Fakultas</option>
-                                                <option>Fakultas Teknik Informatika dan Elektro</option>
-                                                <option>Fakultas Teknik Industri</option>
-                                                <option>Fakultas Bioteknologi</option>
+                                                <option value="">--- Select Fakultas ---</option>
+                                                <option value="Fakultas Teknik Informatika dan Elektro">Fakultas Teknik Informatika dan Elektro</option>
+                                                <option value="Fakultas Teknik Industri">Fakultas Teknik Industri</option>
+                                                <option value="Fakultas Bioteknologi">Fakultas Bioteknologi</option>
                                             </select>
                                         </div>
                                     </div>

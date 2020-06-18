@@ -63,14 +63,16 @@ router.get('/profil', auth, (req, res) => {
 router.get('/request-library-card', auth , (req, res) => {
     res.render('pages/requestcard', {
         title : "Request Card",
-        user : req.user
+        user : req.user,
+        successAdded : req.flash('successAdded'),
+        errorAdded : req.flash('errorAdded')
     });
 });
 
 router.post('/request-library-card', auth , async (req, res) => {
     const cards = new Cards({
         ...req.body,
-        owner : req.user._id
+        owner : req.user._id,
     });
 
     try {

@@ -366,13 +366,13 @@ $(function () {
     var emailerrorvalidation = 0;
     var formObj = $('#contact');
     var contactFormObj = $('#submit-contact-form');
-    var firstNameFieldObj = $("#first-name");
-    var lastNameFieldObj = $("#last-name");
+    var fullname = $("#fullname");
     var emailFieldObj = $("#email");
+    var prodi = $("#prodi");
+    var fakultas = $("#fakultas");
+    var nomorinduk = $("#nomorinduk");
     var phoneFieldObj = $("#phone");
     var messageFieldObj = $("#message");
-    var successObj = $('#success');
-    var errorObj = $('#error');
 
     contactFormObj.on('click', function () {
         var emailaddress = emailFieldObj.val();
@@ -386,13 +386,15 @@ $(function () {
         }
 
         var data = {
-            firstname: firstNameFieldObj.val(),
-            lastname: lastNameFieldObj.val(),
+            fullname: fullname.val(),
             email: emailFieldObj.val(),
+            prodi : prodi.val(),
+            fakultas : fakultas.val(),
+            nomorinduk : nomorinduk.val(),
             phone: phoneFieldObj.val(),
             message: messageFieldObj.val()
         };
-        if (data.firstname === '' || data.lastname === '' || data.email === '' || data.phone === '' || data.message === '') {
+        if (data.fullname === '' ||  data.email === '' || data.prodi === '' || data.fakultas === '' || data.nomorinduk === '' ||data.phone === '' || data.message === '') {
             alert("All fields are mandatory");
         } else {
             if (validateEmail(emailaddress)) {
@@ -400,25 +402,12 @@ $(function () {
                     alert('Nice! your Email is valid, you can proceed now.');
                 }
                 emailerrorvalidation = 0;
-                $.ajax({
-                    type: "POST",
-                    url: "contact.php",
-                    data: data,
-                    cache: false,
-                    success: function () {
-                        successObj.fadeIn(1000);
-                        formObj[0].reset();
-                    },
-                    error: function () {
-                        errorObj.fadeIn(1000);
-                    }
-                });
             } else {
                 emailerrorvalidation = 1;
                 alert('Oops! Invalid Email Address');
             }
         }
-        return false;
+        return true;
     });
 });
 
