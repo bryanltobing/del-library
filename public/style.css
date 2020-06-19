@@ -9549,7 +9549,7 @@ a:focus {
 }
 .category-filter {
   background-attachment: fixed;
-  background-image: url(images/project-filter-bg-home-v1.jpg);
+  /* background-image: url(images/project-filter-bg-home-v1.jpg); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9560,10 +9560,10 @@ a:focus {
   }
 }
 .category-filter h2 {
-  color: #fff;
+  color: #000;
 }
 .category-filter .lead {
-  color: #cfcfcf;
+  color: #000011;
 }
 .category-filter .filter-buttons {
   margin: 0 0 40px;

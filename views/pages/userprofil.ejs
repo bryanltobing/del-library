@@ -2,7 +2,17 @@
 <html lang="en">
     
     <%- include('../partials/head') %>
-
+    <style>
+        
+        @media only screen and (max-width: 600px) {
+            td {
+                display: block;
+            }
+            .titikdua {
+                display: none;
+            }
+        }
+    </style>
     <body>
         
         <!-- Start: Header Section -->
@@ -54,28 +64,30 @@
                                     <div class="col-xs-12 col-sm-7 col-md-6">
                                         <div class="post-center-content" style="width: 100%; padding: 50px">
                                             <h2>User Detail</h2>
-                                            <table>
-                                                <tr>
-                                                    <td><strong>Full Name</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.fullname %></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Nomor Induk</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.nomorinduk %></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Role</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.role %></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><strong>Email</strong></td>
-                                                    <td>:</td>
-                                                    <td><%= user.email %></td>
-                                                </tr>
-                                            </table>
+                                            <div class="overflow-x:auto;">
+                                                <table>
+                                                    <tr>
+                                                        <td><strong>Full Name</strong></td>
+                                                        <td class="titikdua">:</td>
+                                                        <td><%= user.fullname %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Nomor Induk</strong></td>
+                                                        <td class="titikdua">:</td>
+                                                        <td><%= user.nomorinduk %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Role</strong></td>
+                                                        <td class="titikdua">:</td>
+                                                        <td><%= user.role %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Email</strong></td>
+                                                        <td class="titikdua">:</td>
+                                                        <td><%= user.email %></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
                                             
                                         </div>
                                     </div>

@@ -76,12 +76,22 @@ router.get('/request-library-card', auth , async (req, res) => {
     } catch(e) {
         console.log("Error " + e);
     };
+});
 
-    
+router.get('/request-card-list', auth, async (req, res) => {
+    try {
+        const card = await Cards.find({});
+        res.render('pages/requestcard_list', {
+            title : "Request Card List",
+            user : req.user,
+            request : card
+        });
+    } catch(e) {
+        console.log("error " + e);
+    }
 });
 
 router.post('/request-library-card', auth , async (req, res) => {
-    Const 
     const cards = new Cards({
         ...req.body,
         owner : req.user._id,
