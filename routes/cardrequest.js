@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth, notAuth } = require('../middleware/auth');
 const Cards = require('../models/card_request');
+const moment = require('moment-timezone');
 
 router.get('/request-library-card', auth , async (req, res) => {
 
@@ -13,6 +14,7 @@ router.get('/request-library-card', auth , async (req, res) => {
             title : "Request Card",
             user : req.user,
             request : req.user.card_requests,
+            time : moment(req.user.card_requests.createdAt).tz('Asia/Jakarta').format('LLLL'),
             successAdded : req.flash('successAdded'),
             errorAdded : req.flash('errorAdded')
         });
