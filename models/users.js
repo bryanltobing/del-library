@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const Cards = require('../models/card_request');
 
 const userSchema = mongoose.Schema({
     fullname : {
@@ -49,6 +50,12 @@ const userSchema = mongoose.Schema({
     }
 }, {
     timestamps : true
+});
+
+userSchema.virtual('card_requests', {
+    ref : 'cards',
+    localField : '_id',
+    foreignField : 'owner'
 });
 
 

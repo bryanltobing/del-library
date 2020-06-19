@@ -10,6 +10,13 @@
             margin-top: 40px;
             margin-bottom: 40px;
         }
+        .formRequest2 {
+            -webkit-box-shadow: 0 0 10px gray;
+            box-shadow: 0 0 10px gray;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            border: 4px solid #282828;
+        }
     </style>
     <body>
         
@@ -37,13 +44,14 @@
         <!-- End: Page Banner -->
 
         <!-- Start: Products Section -->
+        <% if(request.length <= 0) {%>
         <div class="container formRequest" style="padding: 20px;">
             <div class="row">
                 <div class="col-md-12">
                     <div class="contact-form bg-light margin-right">
-                        <h2 style="color: black;">Form request card <%= successAdded %> <%= errorAdded %></h2>
-                        <span class="underline left"></span>
-                        <div class="contact-fields">
+                            <h2 style="color: black;">Form request card <%= successAdded %> <%= errorAdded %></h2>
+                            <span class="underline left"></span>
+                            <div class="contact-fields">
                             <form action="/user/request-library-card" style="padding: 20px;" id="contact" name="contact" method="post" >
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
@@ -105,11 +113,76 @@
 
                                 </div>
                             </form> 
-                        </div>                                                                   
+                        </div> 
                     </div>
                 </div>
             </div>
         </div>
+        <%} else {%>  
+            <div class="container formRequest2" style="padding: 20px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="contact-form bg-light margin-right">
+                            <h2 style="color: black;">request</h2>
+                            <span class="underline left"></span>
+                            <div class="contact-fields">
+                                <% request.forEach((req) => { %>  
+                                    <form style="padding: 20px;" id="contact" name="contact" >
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" placeholder="Full Name" name="fullname" id="fullname" size="30" value="<%= req.fullname %>" aria-required="true" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" id="email" size="30" value="<%= req.email %>" aria-required="true" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" id="email" size="30" value="<%= req.prodi %>" aria-required="true" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" id="email" size="30" value="<%= req.fakultas %>" aria-required="true" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" placeholder="Nomor Induk" name="nomorinduk" id="nomorinduk" size="30" value="<%= req.nomorinduk %>" aria-required="true" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="text" placeholder="Phone Number" name="phoneNumber" id="phone" size="30" value="62<%= req.phoneNumber %>" aria-required="true" disabled/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" placeholder="Your message" id="message" name="message" aria-required="true" disabled><%= req.message %></textarea>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">Status Request</div>
+                                            <div class="col-md-2">
+                                                <% if(req.isApproved === true) {%>
+                                                    <p>Approved</p>
+                                                <%} else {%>
+                                                    <p style="color:red; font-weight: bold;">Waiting for approved</p>
+                                                <%} %>
+                                            </div>
+
+                                        </div>
+                                    </form> 
+                                <% }) %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%} %>                                                                
         <!-- End: Products Section -->
        
         

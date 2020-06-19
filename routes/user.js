@@ -60,16 +60,28 @@ router.get('/profil', auth, (req, res) => {
     });
 });
 
-router.get('/request-library-card', auth , (req, res) => {
-    res.render('pages/requestcard', {
-        title : "Request Card",
-        user : req.user,
-        successAdded : req.flash('successAdded'),
-        errorAdded : req.flash('errorAdded')
-    });
+router.get('/request-library-card', auth , async (req, res) => {
+
+    try {
+        await req.user.populate({
+            path : 'card_requests',
+        }).execPopulate();
+        res.render('pages/requestcard', {
+            title : "Request Card",
+            user : req.user,
+            request : req.user.card_requests,
+            successAdded : req.flash('successAdded'),
+            errorAdded : req.flash('errorAdded')
+        });
+    } catch(e) {
+        console.log("Error " + e);
+    };
+
+    
 });
 
 router.post('/request-library-card', auth , async (req, res) => {
+    Const 
     const cards = new Cards({
         ...req.body,
         owner : req.user._id,
@@ -81,7 +93,6 @@ router.post('/request-library-card', auth , async (req, res) => {
         res.redirect('/user/request-library-card');
     } catch (e) {
         req.flash('errorAdded', 'Data Failed Added');
-        res.redirect('/user/request-library-card');
     }
     
 });
