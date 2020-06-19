@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { auth, notAuth } = require('../middleware/auth');
+const { auth, notAuth, authRoleLibrarian } = require('../middleware/auth');
 const Cards = require('../models/card_request');
 const moment = require('moment-timezone');
 
@@ -23,7 +23,23 @@ router.get('/request-library-card', auth , async (req, res) => {
     };
 });
 
-router.get('/request-card-list', auth, async (req, res) => {
+router.post('/request-library-card', auth , async (req, res) => {
+    const cards = new Cards({
+        ...req.body,
+        owner : req.user._id,
+    });
+
+    try {
+        await cards.save();
+        req.flash('successAdded', 'Data Successfully Added');
+        res.redirect('/user/request-library-card');
+    } catch (e) {
+        req.flash('errorAdded', 'Data Failed Added');
+    }
+    
+});
+
+router.get('/request-card-list', auth, authRoleLibrarian, async (req, res) => {
     try {
         const card = await Cards.find({});
         card.forEach(function(c) {
@@ -41,7 +57,7 @@ router.get('/request-card-list', auth, async (req, res) => {
     }
 });
 
-router.patch('/request-card-list/approved-process/:id', auth, async (req, res) => {
+router.patch('/request-card-list/approved-process/:id', auth, authRoleLibrarian, async (req, res) => {
     const filter = req.params.id;
     console.log()
     try {
@@ -56,20 +72,6 @@ router.patch('/request-card-list/approved-process/:id', auth, async (req, res) =
     }
 });
 
-router.post('/request-library-card', auth , async (req, res) => {
-    const cards = new Cards({
-        ...req.body,
-        owner : req.user._id,
-    });
 
-    try {
-        await cards.save();
-        req.flash('successAdded', 'Data Successfully Added');
-        res.redirect('/user/request-library-card');
-    } catch (e) {
-        req.flash('errorAdded', 'Data Failed Added');
-    }
-    
-});
 
 module.exports = router;

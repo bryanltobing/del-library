@@ -14,4 +14,13 @@ const notAuth = (req, res, next) => {
     next();   
 }
 
-module.exports = { auth, notAuth } 
+const authRoleLibrarian = (req, res, next) => {
+    if(req.user.role !== "Librarian") {
+        return res.render('pages/403', {
+            title : '403 not authorized'
+        });
+    }
+    next();
+}
+
+module.exports = { auth, notAuth, authRoleLibrarian } 
