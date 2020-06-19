@@ -45,7 +45,7 @@ const cardSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         required : true,
         trim : true
-    }
+    },
 }, {
     timestamps : true
 });

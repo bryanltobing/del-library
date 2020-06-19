@@ -26,6 +26,10 @@ router.get('/request-library-card', auth , async (req, res) => {
 router.get('/request-card-list', auth, async (req, res) => {
     try {
         const card = await Cards.find({});
+        card.forEach(function(c) {
+            c.created = moment(c.createdAt).fromNow(false);
+        });
+
         res.render('pages/requestcard_list', {
             title : "Request Card List",
             user : req.user,

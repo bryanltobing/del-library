@@ -72,7 +72,7 @@
                         <% if(req.isApproved === false) { %>
                         <li class="category-item waiting">
                             <div class="info-bar" style="margin:30px;">
-                                <h4>Request Detail</h4>
+                                <h4>Request Detail</h4><span style="color: #576478;"><%= req.created %></span>
                                 <span class="underline left"></span>
                                 <span class="infoRequest"><strong>Name:</strong> <%= req.fullname %></span>
                                 <span class="infoRequest"><strong>Email:</strong> <%= req.email %></span>
@@ -87,7 +87,7 @@
                         <% } else {%>
                             <li class="category-item approved">
                                 <div class="info-bar" style="margin:30px;">
-                                    <h4>Request Detail</h4>
+                                    <h4>Request Detail</h4> <span><%= req.created %></span>
                                     <span class="underline left"></span>
                                     <span class="infoRequest"><strong>Name:</strong> <%= req.fullname %></span>
                                     <span class="infoRequest"><strong>Email:</strong> <%= req.email %></span>
