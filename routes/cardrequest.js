@@ -33,10 +33,26 @@ router.get('/request-card-list', auth, async (req, res) => {
         res.render('pages/requestcard_list', {
             title : "Request Card List",
             user : req.user,
-            request : card
+            request : card,
+            successUpdate : req.flash('successUpdate')
         });
     } catch(e) {
         console.log("error " + e);
+    }
+});
+
+router.patch('/request-card-list/approved-process/:id', auth, async (req, res) => {
+    const filter = req.params.id;
+    console.log()
+    try {
+        await Cards.findOneAndUpdate({ _id : filter }, {isApproved : true }, {
+            new : true
+        });
+        req.flash('successUpdate', 'Request Approved Succesfully');
+        res.redirect('/user/request-card-list');
+    } catch (e) {
+        req.flash('errorUpdate', 'Request Approved Failed');
+        res.redirect('/user/request-card-list');
     }
 });
 

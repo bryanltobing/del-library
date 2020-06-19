@@ -81,7 +81,9 @@
                                 <span class="infoRequest"><strong>Fakultas:</strong> <%= req.fakultas %></span>
                                 <span class="infoRequest"><strong>Phone:</strong> 62<%= req.phoneNumber %></span>
                                 <p><%= req.message %></p>
-                                <button href="#">Approved <i class="fa fa-long-arrow-right"></i></button>
+                                <form action="/user/request-card-list/approved-process/<%= req._id %>?_method=PATCH" method="POST">
+                                    <button type="submit">Approve <i class="fa fa-long-arrow-right"></i></button>
+                                </form>
                             </div>
                         </li>
                         <% } else {%>
@@ -116,6 +118,16 @@
         
         <%- include('../partials/footscript') %>
 
+        <%if (successUpdate.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= successUpdate %>",
+                    icon: "success",
+                    text : "Done",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
     </body>
 
 
