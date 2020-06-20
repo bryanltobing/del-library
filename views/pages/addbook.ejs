@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <%- include('../partials/head') %>
+
+    <style>
+        .formRequest {
+            -webkit-box-shadow: 0 0 10px gray;
+            box-shadow: 0 0 10px gray;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .formRequest2 {
+            -webkit-box-shadow: 0 0 10px gray;
+            box-shadow: 0 0 10px gray;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            border: 4px solid #282828;
+        }
+    </style>
+    <body>
+        
+        <!-- Start: Header Section -->
+        <%- include('../partials/navbar') %>
+        <!-- End: Header Section -->
+        
+        <!-- Start: Page Banner -->
+        <section class="page-banner services-banner">
+            <div class="container">
+                <div class="banner-header">
+                    <h2>Request Card</h2>
+                    <span class="underline center"></span>
+                    <p style="padding: 20px;" class="lead"></p>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/user/addmedia-menu">Media Menu</a></li>
+                        <li>Add Book</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End: Page Banner -->
+
+        <!-- Start: Products Section -->
+        <div class="container formRequest" style="padding: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact-form bg-light margin-right">
+                            <h2 style="color: black;">Add Book</h2>
+                            <span class="underline left"></span>
+                            <div class="contact-fields">
+                            <form action="/user/request-library-card" style="padding: 20px;" id="contact" name="contact" method="post" >
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Full Name" name="fullname" id="fullname" size="30" value="<%= user.fullname %>" aria-required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" id="email" size="30" value="<%= user.email %>" aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <select name="prodi" id="prodi" class="form-control">
+                                                <option value="">--- Prodi ---</option>
+                                                <option value="D3 Teknologi Informasi">D3 Teknologi Informasi</option>
+                                                <option value="D3 Teknologi Komputer">D3 Teknologi Komputer</option>
+                                                <option value="D4 Teknologi Rekayasa Perangkat Lunak">D4 Teknologi Rekayasa Perangkat Lunak</option>
+                                                <option value="S1 Informatika">S1 Informatika</option>
+                                                <option value="S1 Sistem Informasi">S1 Sistem Informasi</option>
+                                                <option value="S1 Teknik Elektro">S1 Teknik Elektro</option>
+                                                <option value="S1 Teknik Bioproses">S1 Teknik Bioproses</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <select name="fakultas" id="fakultas" class="form-control">
+                                                <option value="">--- Select Fakultas ---</option>
+                                                <option value="Fakultas Teknik Informatika dan Elektro">Fakultas Teknik Informatika dan Elektro</option>
+                                                <option value="Fakultas Teknik Industri">Fakultas Teknik Industri</option>
+                                                <option value="Fakultas Bioteknologi">Fakultas Bioteknologi</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Nomor Induk" name="nomorinduk" id="nomorinduk" size="30" value="<%= user.nomorinduk %>" aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="number" placeholder="Phone Number" name="phoneNumber" id="phone" size="30" value="" aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Your message" id="message" name="message" aria-required="true"></textarea>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-submit">
+                                            <input style="background-color: black;" class="btn btn-default" id="submit-contact-form" type="submit" name="submit" value="Send Request"  />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End: Products Section -->
+       
+        
+        <!-- Start: Footer -->
+        <%- include('../partials/footer') %>
+
+        <!-- End: Footer -->
+        
+        <%- include('../partials/footscript') %>
+
+        
+    </body>
+
+
+</html>
