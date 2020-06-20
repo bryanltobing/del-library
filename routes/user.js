@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 // Middleware
-const { auth, notAuth } = require('../middleware/auth');
+const { auth, notAuth, authRoleLibrarian } = require('../middleware/auth');
 
 // Models
 const Users = require('../models/users');
@@ -58,5 +58,11 @@ router.get('/profil', auth, (req, res) => {
         user : req.user
     });
 });
+
+router.get('/addmedia-menu', auth, authRoleLibrarian, (req, res) => {
+    res.render('pages/addmediamenu', {
+        title : "Add Media Menu",
+    })
+}); 
 
 module.exports = router;
