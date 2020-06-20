@@ -28,13 +28,13 @@
         <!-- End: Page Banner -->
         <!-- Start: Cart Section -->
         <% if (messages.error) { %>
-          <div class="alertLog" style="z-index: -1; position: relative;">
+          <div class="alertLog" style="z-index: 100; position: relative;">
             <span class="closebtnLog" onclick="this.parentElement.style.display='none';">&times;</span> 
             <strong>Alert! </strong><%= messages.error %>
           </div>
         <%}%>
         <% if (errorAuth.length !== 0) { %>
-          <div class="alertLog" style="z-index: -1; position: relative;">
+          <div class="alertLog" style="z-index: 100; position: relative;">
             <span class="closebtnLog" onclick="this.parentElement.style.display='none';">&times;</span> 
             <strong>Alert! </strong><%= errorAuth %>
           </div>
