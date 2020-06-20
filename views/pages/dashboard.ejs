@@ -49,15 +49,6 @@
 
     </style>
     <body>
-        <% if (messages.success) { %>
-            <div class="topFixedAlertSuccess">
-                <div class="alertLogSuccess">
-                    <span class="closebtnLogSuccess" onclick="this.parentElement.style.display='none';">&times;</span> 
-                    <strong><%= messages.success %></strong>
-                </div>
-            </div>
-        <%}%>
-        
         <!-- Start: Header Section -->
         <%- include('../partials/navbar') %>
         <!-- End: Header Section -->
@@ -220,6 +211,16 @@
         
         <%- include('../partials/footscript') %>
 
+        <% if (messages.success) { %>
+            <script>
+                swal({
+                  title : "<%= messages.success %>",
+                  icon: "success",
+                  text : "Welcome <%= name %>",
+                  button: "Okay",
+                });
+              </script>
+        <%}%>
 
         
     </body>

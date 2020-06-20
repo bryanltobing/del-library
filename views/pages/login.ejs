@@ -27,18 +27,7 @@
         </section>
         <!-- End: Page Banner -->
         <!-- Start: Cart Section -->
-        <% if (messages.error) { %>
-          <div class="alertLog" style="z-index: -1; position: relative;">
-            <span class="closebtnLog" onclick="this.parentElement.style.display='none';">&times;</span> 
-            <strong>Alert! </strong><%= messages.error %>
-          </div>
-        <%}%>
-        <% if (errorAuth.length !== 0) { %>
-          <div class="alertLog" style="z-index: -1; position: relative;">
-            <span class="closebtnLog" onclick="this.parentElement.style.display='none';">&times;</span> 
-            <strong>Alert! </strong><%= errorAuth %>
-          </div>
-        <%}%>
+
         
         <div class="container" style="margin-top: 30px; margin-bottom: 50px;  background-color: #282828; padding: 50px">
             <h1 class="text-center" style="color: #158bd3; margin: 30px;">LOGIN HERE</h1>
@@ -48,13 +37,13 @@
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="email" style="color:white;">Email:</label>
                           <div class="col-sm-10">
-                            <input  type="email" name="email" class="form-control" id="email" placeholder="Enter email" style="background-color: #202020; color: gray; border-color: #202020 ;">
+                            <input  type="email" required name="email" class="form-control" id="email" placeholder="Enter email" style="background-color: #202020; color: gray; border-color: #202020 ;">
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label col-sm-2" for="pwd" style="color:white;">Password:</label>
                           <div class="col-sm-10">
-                            <input type="password" class="form-control" name="password" id="pwd" placeholder="Enter password" style="background-color: #202020; color: gray; border-color: #202020 ;">
+                            <input type="password" required class="form-control" name="password" id="pwd" placeholder="Enter password" style="background-color: #202020; color: gray; border-color: #202020 ;">
                           </div>
                         </div>
                         <div class="form-group">
@@ -81,6 +70,25 @@
         <%- include('../partials/footscript') %>
 
     </body>
-
+    <% if (messages.error) { %>
+      <script>
+        swal({
+          title : "<%= messages.error %>",
+          icon: "error",
+          text : "failed to login",
+          button: "Okay",
+        });
+      </script>
+    <%}%>
+    <% if (errorAuth.length !== 0) { %>
+      <script>
+        swal({
+          title : "<%= errorAuth %>",
+          icon: "error",
+          text : "Login First",
+          button: "Okay",
+        });
+      </script>
+    <%}%>
 
 </html>
