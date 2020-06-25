@@ -414,6 +414,43 @@ $(function () {
         }
         return true;
     });
+
+    // Book Form Validation
+    //--------------------------------------------------------
+    var bookFormObj = $('#submit-book-form');
+    var isbn = $('#isbn');
+    var judul = $('#judul');
+    var pengarang = $('#pengarang');
+    var penerbit = $('#penerbit');
+    var bahasa = $('#bahasa');
+    var tahun = $('#tahun');
+    var lokasi = $('#lokasi');
+    var deskripsi = $('#deskripsi');
+
+    bookFormObj.on('click', function () {
+        var data = {
+            isbn: isbn.val(),
+            judul: judul.val(),
+            pengarang : pengarang.val(),
+            penerbit : penerbit.val(),
+            bahasa : bahasa.val(),
+            tahun: tahun.val(),
+            lokasi: lokasi.val(),
+            deskripsi: deskripsi.val()
+        };
+        if (data.isbn === '' ||  data.judul === '' || data.pengarang === '' || data.penerbit === '' || data.bahasa === '' || data.tahun === '' ||data.lokasi === '' || data.deskripsi === '') {
+            swal({
+                title : "error",
+                icon: "error",
+                text : "Data form selain gambar wajib diisi",
+                button: "Okay",
+            });
+        } 
+
+        return true;
+    });
+
+
 });
 
 $( window ).load(function() {
