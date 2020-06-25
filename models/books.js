@@ -11,22 +11,22 @@ const bookSchema = mongoose.Schema({
         trim : true,
         required : true
     },
-    bahasa : {
-        type : String,
-        trim : true,
-        required : true
-    },
     pengarang : {
         type : String,
         trim : true,
         required : true
     },
-    tahun : {
+    penerbit : {
         type : String,
         trim : true,
         required : true
     },
-    penerbit : {
+    bahasa : {
+        type : String,
+        trim : true,
+        required : true
+    },
+    tahun : {
         type : String,
         trim : true,
         required : true

@@ -10,4 +10,8 @@ router.get('/add-book', auth, authRoleLibrarian, (req, res) => {
     });
 });
 
+router.post('/add-book', auth, authRoleLibrarian, (req, res) => {
+    
+});
+
 module.exports = router;
