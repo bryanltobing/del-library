@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { auth, notAuth, authRoleLibrarian } = require('../middleware/auth');
 const sharp = require('sharp');
-const   moment = require('moment-timezone');
+const moment = require('moment-timezone');
 
 // Models
 const Book = require('../models/books');
+
+// Middleware
+const pagination = require('../middleware/pagination');
 
 // File uploads
 const multer = require('multer');
@@ -22,7 +25,7 @@ const upload = multer({
     }
 });
 
-
+// ------ AUTH LIBRARIAN ROLE ----------- //
 router.get('/add-book', auth, authRoleLibrarian, (req, res) => {
     res.render('pages/addbook', {
         title : "Add Book",
@@ -57,6 +60,12 @@ router.get('/getbook-image/:id', async(req, res) => {
     } catch(e) {
         res.status(404).send();
     }
+});
+
+
+// NO AUTH
+router.get('/list-book', pagination(Book) , (req, res) => {
+    res.send(res.paginatedResults);
 });
 
 module.exports = router;
