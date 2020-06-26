@@ -440,11 +440,12 @@ $(function () {
         };
         if (data.isbn === '' ||  data.judul === '' || data.pengarang === '' || data.penerbit === '' || data.bahasa === '' || data.tahun === '' ||data.lokasi === '' || data.deskripsi === '') {
             swal({
-                title : "error",
-                icon: "error",
+                title : "Warning",
+                icon: "warning",
                 text : "Data form selain gambar wajib diisi",
                 button: "Okay",
             });
+            return false;
         } 
 
         return true;
