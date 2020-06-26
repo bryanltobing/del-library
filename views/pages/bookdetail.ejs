@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    
+
+    <%- include('../partials/head') %>
+
+    <body>
+
+        <!-- Start: Header Section -->
+        <%- include('../partials/navbar') %>
+        <!-- End: Header Section -->
+
+        <!-- Start: Page Banner -->
+        <section class="page-banner services-banner">
+            <div class="container">
+                <div class="banner-header">
+                    <h2>Book Detail</h2>
+                    <span class="underline center"></span>
+                    <p class="lead"><%= data.judul %> book detail. </p>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/book-list">Books List</a></li>
+                        <li>Books Detail</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End: Page Banner -->
+
+        <!-- Start: Products Section -->
+        <div id="content" class="site-content">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <div class="booksmedia-detail-main">
+                        <div class="container">
+                            <div class="row">
+                                <!-- Start: Search Section -->
+                                <section class="search-filters">
+                                    <div class="container">
+                                        
+                                    </div>
+                                </section>
+                                <!-- End: Search Section -->
+                            </div>
+                            <div class="booksmedia-detail-box">
+                                <div class="detailed-box">
+                                    <div class="col-xs-12 col-sm-5 col-md-3">
+                                        <div class="post-thumbnail">
+                                            <img src="/getbook-image/<%= data._id %>" wi alt="Book Image">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-7 col-md-6">
+                                        <div class="post-center-content">
+                                            <h2><%= data.judul %></h2>
+                                            <p><strong>Pengarang:</strong> <%= data.pengarang%></p>
+                                            <p><strong>ISBN:</strong> <%= data.isbn %></p>
+                                            <p><strong>Penerbit:</strong> <%= data.penerbit %></p>
+                                            <p><strong>Bahasa:</strong> <%= data.bahasa %></p>
+                                            <p><strong>Tahun Buku:</strong> <%= data.tahun %></p>
+                                            <div class="actions">
+                                                <ul>
+                                                    <li>
+                                                        <!-- <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Add To Cart">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </a> -->
+                                                    </li>
+                                                    <li>
+                                                        <!-- <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Like">
+                                                            <i class="fa fa-heart"></i>
+                                                        </a> -->
+                                                    </li>
+                                                    <li>
+                                                        <!-- <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Mail">
+                                                            <i class="fa fa-envelope"></i>
+                                                        </a> -->
+                                                    </li>
+                                                    <li>
+                                                        <!-- <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Search">
+                                                            <i class="fa fa-search"></i>
+                                                        </a> -->
+                                                    </li>
+                                                    <li>
+                                                        <!-- <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Print">
+                                                            <i class="fa fa-print"></i>
+                                                        </a> -->
+                                                    </li>
+                                                    <li>
+                                                        <!-- <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="" data-original-title="Print">
+                                                            <i class="fa fa-share-alt"></i>
+                                                        </a> -->
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 ">
+                                        <div class="post-right-content">
+                                            <h4>Available now</h4>
+                                            <p><strong>Lokasi:</strong> <%= data.lokasi %></p>
+                                            <a href="#." class="btn btn-dark-gray">Pinjam Buku</a> 
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <p><strong>Deskripsi:</strong> <%= data.deskripsi %>. </p>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- End: Products Section -->
+        
+
+
+        <!-- Start: Footer -->
+        <%- include('../partials/footer') %>
+        <!-- End: Footer -->
+
+        <%- include('../partials/footscript') %>
+        
+
+    </body>
+
+
+</html>

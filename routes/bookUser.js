@@ -7,9 +7,6 @@ const moment = require('moment-timezone');
 // Models
 const Book = require('../models/books');
 
-// Middleware
-const pagination = require('../middleware/pagination');
-
 // File uploads
 const multer = require('multer');
 const upload = multer({
@@ -43,29 +40,12 @@ router.post('/add-book', auth, authRoleLibrarian, upload.single('gambar') , asyn
 
     await book.save();
     req.flash('messageAddBook', 'Buku Berhasil Ditambahkan');
-    res.send(book);
+    res.redirect(`/book-detail/${book._id}`);
 
 }, (error, req, res, next) => {
     res.status(400).send({error : error.message});
 });
 
-router.get('/getbook-image/:id', async(req, res) => {
-    try {
-        const book = await Book.findById(req.params.id);
-        if(!book || !book.gambar) {
-            throw new Error();
-        }
-        res.set('Content-Type', 'image/webp');
-        res.send(book.gambar);
-    } catch(e) {
-        res.status(404).send();
-    }
-});
 
-
-// NO AUTH
-router.get('/list-book', pagination(Book) , (req, res) => {
-    res.send(res.paginatedResults);
-});
 
 module.exports = router;
