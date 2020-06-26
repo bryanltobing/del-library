@@ -44,6 +44,8 @@ const bookSchema = mongoose.Schema({
     gambar : {
         type : Buffer,
     }
+}, {
+    timestamps : true
 });
 
 
