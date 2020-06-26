@@ -59,7 +59,6 @@ router.get('/request-card-list', auth, authRoleLibrarian, async (req, res) => {
 
 router.patch('/request-card-list/approved-process/:id', auth, authRoleLibrarian, async (req, res) => {
     const filter = req.params.id;
-    console.log()
     try {
         await Cards.findOneAndUpdate({ _id : filter }, {isApproved : true }, {
             new : true

@@ -11,7 +11,6 @@ router.get('/book-detail/:id', async(req, res) => {
     
     try {
         const book = await Book.findById(req.params.id);
-        console.log(book);
         res.render('pages/bookdetail', {
             title : 'Book - Detail',
             data : book
