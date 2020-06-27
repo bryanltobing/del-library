@@ -4,16 +4,14 @@ const router = express.Router();
 // Models
 const Book = require('../models/books');
 
-// Middleware
-const pagination = require('../middleware/pagination');
-
 router.get('/book-detail/:id', async(req, res) => {
     
     try {
         const book = await Book.findById(req.params.id);
         res.render('pages/bookdetail', {
             title : 'Book - Detail',
-            data : book
+            data : book,
+            message : req.flash('messageAddBook')
         });
     } catch(e) {
         console.log("Error " + e);
@@ -22,9 +20,37 @@ router.get('/book-detail/:id', async(req, res) => {
 });
 
 router.get('/book-list', async(req, res) => {
-    res.render('pages/booklist', {
-        title : 'Book - List'
-    });
+    var perPage = 9;
+    var page = 1;
+    try {
+        const book = await Book.find({}).skip((perPage * page) - perPage).limit(perPage);
+        const count = await Book.countDocuments();
+        res.render('pages/booklist', {
+            title : 'Book - List',
+            data : book,
+            current : page,
+            pages : Math.ceil(count / perPage)
+        });
+    } catch(e) {
+        console.log("Error " + e);
+    }
+});
+
+router.get('/book-list/:page', async(req, res) => {
+    var perPage = 9;
+    var page = req.params.page || 1;
+    try {
+        const book = await Book.find({}).skip((perPage * page) - perPage).limit(perPage);
+        const count = await Book.countDocuments();
+        res.render('pages/booklist', {
+            title : 'Book - List',
+            data : book,
+            current : page,
+            pages : Math.ceil(count / perPage)
+        });
+    } catch(e) {
+        console.log("Error " + e);
+    }
 });
 
 router.get('/getbook-image/:id', async(req, res) => {
@@ -40,9 +66,6 @@ router.get('/getbook-image/:id', async(req, res) => {
     }
 });
 
-router.get('/list-book', pagination(Book) , (req, res) => {
-    res.send(res.paginatedResults);
-});
 
 
 module.exports = router;

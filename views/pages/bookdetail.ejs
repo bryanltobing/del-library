@@ -48,7 +48,11 @@
                                 <div class="detailed-box">
                                     <div class="col-xs-12 col-sm-5 col-md-3">
                                         <div class="post-thumbnail">
-                                            <img src="/getbook-image/<%= data._id %>" wi alt="Book Image">
+                                            <% if(data.gambar === undefined ) {%>
+                                                <img src="/images/placeholder/book.png" alt="Book">
+                                            <% } else {%>
+                                                <img src="/getbook-image/<%= data._id %>" alt="Book">
+                                            <% } %>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-7 col-md-6">
@@ -121,6 +125,17 @@
         <!-- End: Footer -->
 
         <%- include('../partials/footscript') %>
+
+        <%if (message.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= message %>",
+                    icon: "success",
+                    text : "Done",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
         
 
     </body>
