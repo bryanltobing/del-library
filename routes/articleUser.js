@@ -2,9 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/add-article', (req, res) => {
+// middleware
+const { auth, authRoleLibrarian } = require('../middleware/auth');
+
+router.get('/add-article', auth, authRoleLibrarian, (req, res) => {
     res.render('pages/addarticle', {
-        title : "Add Article"
+        title : "Add Article",
+        user : req.user
     });
 });
 

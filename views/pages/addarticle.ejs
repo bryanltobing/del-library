@@ -50,59 +50,29 @@
                     <div class="contact-form bg-light margin-right">
                             <h2 style="color: black;">Add Article</h2>
                             <span class="underline left"></span>
+                            <p style="padding: 0; margin: 0;">Author : <%= user.fullname %> </p>
                             <div class="contact-fields">
                             <form action="/user/add-book" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-12 col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="ISBN" name="isbn" id="isbn" size="30" value="" aria-required="true"/>
+                                            <input class="form-control" type="text" placeholder="Judul" name="Judul" id="Judul" size="30" value="" aria-required="true"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Judul Buku" name="judul" id="judul" size="30" value="" aria-required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Pengarang" name="pengarang" id="pengarang" size="30" value="" aria-required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Penerbit" name="penerbit" id="penerbit" size="30" value="" aria-required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Bahasa" name="bahasa" id="bahasa" size="30" value="" aria-required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Tahun Buku" name="tahun" id="tahun" size="30" value="" aria-required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                        <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Lokasi Buku" name="lokasi" id="lokasi" size="30" value="" aria-required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6">
-                                    <label for="gambar">Pilih Gambar <span style="font-weight: normal;">(not required)</span></label>
-                                        <div class="form-group">
-                                            <input class="form-control" type="file" placeholder="Gambar" name="gambar" id="gambar" size="30" value=""/>
+                                            <input class="form-control" type="text" placeholder="Kategori" name="category" id="category" size="30" value="" aria-required="true"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" placeholder="Deskripsi Buku" id="deskripsi" name="deskripsi" aria-required="true"></textarea>
+                                            <textarea class="form-control" placeholder="Konten Artikel" id="deskripsi" name="deskripsi" rows="25" aria-required="true"></textarea>
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group form-submit">
-                                            <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Buat Article"  />
+                                            <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Buat Artikel"  />
                                         </div>
                                     </div>
 
