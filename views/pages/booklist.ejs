@@ -2,7 +2,6 @@
 <html lang="zxx">
     
     <%- include('../partials/head') %>
-
     <body>
 
         <!-- Start: Header Section -->
@@ -35,45 +34,7 @@
                         <div class="container">
                             <!-- Start: Search Section -->
                             <section class="search-filters">
-                                <div class="filter-box">
-                                    <h3>What are you looking for at the library?</h3>
-                                    <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group">
-                                                <select name="catalog" id="catalog" class="form-control">
-                                                    <option>Search the Catalog</option>
-                                                    <option>Catalog 01</option>
-                                                    <option>Catalog 02</option>
-                                                    <option>Catalog 03</option>
-                                                    <option>Catalog 04</option>
-                                                    <option>Catalog 05</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="form-group">
-                                                <select name="category" id="category" class="form-control">
-                                                    <option>All Categories</option>
-                                                    <option>Category 01</option>
-                                                    <option>Category 02</option>
-                                                    <option>Category 03</option>
-                                                    <option>Category 04</option>
-                                                    <option>Category 05</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="submit" value="Search">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                
                                 <div class="clear"></div>
                             </section>
                             <!-- End: Search Section -->
@@ -118,8 +79,8 @@
                                     </div>
                                     <div class="col-md-2 col-sm-12 pull-right">
                                         <div class="filter-toggle">
-                                            <a href="books-media-gird-view-v2.html" class="active"><i class="glyphicon glyphicon-th-large"></i></a>
-                                            <a href="books-media-list-view.html"><i class="glyphicon glyphicon-th-list"></i></a>
+                                            <a disabled href="/book-list" class="active"><i class="glyphicon glyphicon-th-large"></i></a>
+                                            <!-- <a href="books-media-list-view.html"><i class="glyphicon glyphicon-th-list"></i></a> -->
                                         </div>
                                     </div>
                                 </div>
@@ -143,41 +104,7 @@
                                                         <p><strong>Pengarang:</strong> <%= book.pengarang %> </p>
                                                         <p><strong>ISBN:</strong> <%= book.isbn %> </p>
                                                     </header>
-                                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
-                                                    <div class="actions">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
-                                                                    <i class="fa fa-heart"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Mail">
-                                                                    <i class="fa fa-envelope"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Search">
-                                                                    <i class="fa fa-search"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Print">
-                                                                    <i class="fa fa-print"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Share">
-                                                                    <i class="fa fa-share-alt"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    <p class="deskripsi"><%= book.deskripsi %></p>
                                                 </figcaption>
                                             </figure>
                                         </li>
@@ -365,6 +292,23 @@
 
         <%- include('../partials/footscript') %>
 
+        <script>
+            function truncateText(selector, maxLength) {
+                var element = document.querySelectorAll(selector);
+                let truncated = [];
+                for(i=0;i<element.length;i++) {
+                    truncated[i] = element[i].innerText;
+                    if(truncated[i].length > maxLength) {
+                        truncated[i] = truncated[i].substr(0, maxLength) + '...';
+                    }
+                }
+                return truncated;
+            }
+            const mantapall = document.querySelectorAll('.deskripsi');
+            mantapall.forEach((m, i) => {
+                m.innerText = truncateText('.deskripsi', 180)[i];
+            });
+        </script>
 
     </body>
 
