@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const articleSchema = mongoose.model({
+const articleSchema = mongoose.Schema({
     category : {
         type : String,
         required : true,

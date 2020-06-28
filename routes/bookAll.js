@@ -11,10 +11,11 @@ router.get('/book-detail/:id', async(req, res) => {
         res.render('pages/bookdetail', {
             title : 'Book - Detail',
             data : book,
-            message : req.flash('messageAddBook')
+            message : req.flash('messageAddBook'),
         });
     } catch(e) {
-        console.log("Error " + e);
+        req.flash('bookDetailError' ,'Buku tidak ditemukan');
+        res.redirect('/book-list');
     }
 
 });
@@ -29,7 +30,8 @@ router.get('/book-list', async(req, res) => {
             title : 'Book - List',
             data : book,
             current : page,
-            pages : Math.ceil(count / perPage)
+            pages : Math.ceil(count / perPage),
+            bookMessage : req.flash('bookDetailError')
         });
     } catch(e) {
         console.log("Error " + e);
@@ -39,17 +41,23 @@ router.get('/book-list', async(req, res) => {
 router.get('/book-list/:page', async(req, res) => {
     var perPage = 9;
     var page = req.params.page || 1;
+
     try {
         const book = await Book.find({}).skip((perPage * page) - perPage).limit(perPage);
+        if(book.length === 0) {
+            throw new Error('Buku tidak ditemukan');
+        }
         const count = await Book.countDocuments();
         res.render('pages/booklist', {
             title : 'Book - List',
             data : book,
             current : page,
-            pages : Math.ceil(count / perPage)
+            pages : Math.ceil(count / perPage),
+            bookMessage : req.flash('bookDetailError')
         });
     } catch(e) {
-        console.log("Error " + e);
+        req.flash('bookDetailError', "Buku tidak ditemukan")
+        res.redirect('/book-list');
     }
 });
 

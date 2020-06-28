@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    
+    <%- include('../partials/head') %>
+
+    <body>
+
+        <!-- Start: Header Section -->
+        <%- include('../partials/navbar') %>
+        <!-- End: Header Section -->
+
+        <!-- Start: Page Banner -->
+        <section class="page-banner services-banner">
+            <div class="container">
+                <div class="banner-header">
+                    <h2>Article Posts</h2>
+                    <span class="underline center"></span>
+                    <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/article">Article List</a></li>
+                        <li>Article Detail</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End: Page Banner -->
+
+        <!-- Start: Blog Section -->
+        <div id="content" class="site-content">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <div class="blog-detail-main">
+                        <div class="container">
+                            <div class="row">
+                                <div class="blog-page">
+                                    <div class="blog-section">
+                                        <article>
+                                            <div class="blog-detail">
+                                                <header class="entry-header">
+                                                    <div class="blog_meta_category">
+                                                        <a href="#." rel="category tag"><%= data.category %></a>
+                                                    </div>
+                                                    <h2 class="entry-title"><%= data.judul %></h2>
+                                                    <div class="entry-meta">
+                                                        <span><i class="fa fa-user"></i> <a href="#"><%= data.author %></a></span>
+                                                    </div>
+                                                </header>
+                                                <div class="post-thumbnail">
+                                                    <div class="post-date-box">
+                                                        <div class="post-date">
+                                                            <a class="date" href="#."><%= data.tanggal[0] %></a>
+                                                        </div>
+                                                        <div class="post-date-month">
+                                                            <a class="month" href="#."><%= data.tanggal[1] %></a>
+                                                        </div>
+                                                        <div class="post-date-year">
+                                                            <a style="background-color: black; color: white; width: 100px;" class="year" href="#."><%= data.tanggal[2] %></a>
+                                                        </div>
+                                                    </div>
+                                                    <figure>
+                                                        <% if(data.gambar === undefined ) {%>
+                                                            <img style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); border: 1px solid #fafafa;" src="/images/placeholder/article.png" alt="Book">
+                                                        <% } else {%>
+                                                            <img alt="article" src="/getarticle-image/<%= data._id %>" />
+                                                        <% } %>
+                                                    </figure>
+                                                </div>
+                                                <div class="post-detail">
+                                                    <div class="post-detail-head">
+                                                        <div class="post-share">
+                                                            <!-- <a href="#."><i class="fa fa-comment"></i> 37 Comments</a> -->
+                                                            <!-- <a href="#."><i class="fa fa-thumbs-o-up"></i> 110 Likes</a> -->
+                                                            <a href="#" style="text-transform: capitalize;"><i class="fa fa-refresh"></i> Terakhir di update pada <%= data.tanggalUpdate %></a>
+                                                        </div>
+                                                        <div class="post-social-share">
+                                                            <!-- <ul>
+                                                                <li>
+                                                                    <a href="#.">
+                                                                        <i class="fa fa-facebook"></i>
+                                                                        <span>/ Facebook</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li><a href="#."><i class="fa fa-twitter"></i> <span>/ Twitter</span></a></li>
+                                                                <li><a href="#."><i class="fa fa-google-plus"></i> <span>/ Google+</span></a></li>
+                                                                <li><a href="#."><i class="fa fa-youtube-play"></i> <span>/ Youtube</span></a></li>
+                                                            </ul> -->
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="entry-content">
+                                                        <p style="text-indent: 2em;"><%= data.text %></p>
+                                                    </div>
+                                                    <footer class="entry-footer">
+                                                        <!-- <div class="col-xs-12 col-sm-12 entry-tags"> 
+                                                            <strong><i class="fa fa-tags" aria-hidden="true"></i> Tags:</strong> <span><a href="#">Beauty</a> , <a href="#">Life Style</a> , <a href="#">Travel</a> , <a href="#">Fashion</a> , <a href="#">Health</a> , <a href="#">Food</a>, <a href="#">Adventure</a></span>			
+                                                        </div> -->
+                                                    </footer>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <div class="comments-area" id="comments">
+                                            <div class="comment-bg">
+                                                <h4 class="comments-title">User Comments</h4>
+                                                <span class="underline left"></span>
+                                                <p>User comments are still under development</p>
+                                            </div>
+                                            <div class="comment-respond" id="respond">
+                                                <h4 class="comment-reply-title" id="reply-title">Write your comment:</h4>
+                                                <span class="underline left"></span>
+                                                <form class="comment-form" id="commentform" method="post" action="http://libraria.demo.presstigers.com/blog-detail.html">
+                                                    <div class="row">
+                                                        <p class="comment-form-author input-required">
+                                                            <label>
+                                                                <span class="first-letter">Name</span>  
+                                                                <span class="second-letter">*</span>
+                                                            </label>
+                                                            <input name="author" id="author" type="text" disabled>
+                                                        </p>
+                                                        <p class="comment-form-email input-required">
+                                                            <label>
+                                                                <span class="first-letter">Email</span>  
+                                                                <span class="second-letter">*</span>
+                                                            </label>
+                                                            <input name="email" id="email" type="email" disabled>
+                                                        </p>
+                                                        <p class="comment-form-subject input-required">
+                                                            <label>
+                                                                <span class="first-letter">Subject</span>
+                                                            </label>
+                                                            <input name="subject" id="subject" type="text" disabled>
+                                                        </p>
+                                                        <p class="comment-form-comment">
+                                                            <textarea name="comment" id="comment" placeholder="Comment" disabled></textarea>
+                                                        </p>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <p class="form-submit">
+                                                        <input value="Submit" class="submit" id="submit" name="submit" type="submit" disabled> 
+                                                    </p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- End: Blog Section -->
+
+        
+
+        <!-- Start: Footer -->
+        <%- include('../partials/footer') %>
+        <!-- End: Footer -->
+
+        <%- include('../partials/footscript') %>
+
+        <% if (successArticle.length !== 0) { %>
+            <script>
+              swal({
+                title : "<%= successArticle %>",
+                icon: "success",
+                text : "Success",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
+
+    </body>
+
+
+</html>

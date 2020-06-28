@@ -52,16 +52,22 @@
                             <span class="underline left"></span>
                             <p style="padding: 0; margin: 0;">Author : <%= user.fullname %> </p>
                             <div class="contact-fields">
-                            <form action="/user/add-book" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
+                            <form action="/user/add-article" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-6">
+                                    <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Judul" name="Judul" id="Judul" size="30" value="" aria-required="true"/>
+                                            <input class="form-control" type="text" placeholder="Judul" name="judul" id="judul" size="30" value="" aria-required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Kategori" name="category" id="category" size="30" value="" aria-required="true"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Kategori" name="category" id="category" size="30" value="" aria-required="true"/>
+                                            <label for="gambar"> Gambar <span style="font-weight: normal;">(not required) </span></label>
+                                            <input class="form-control" type="file" placeholder="gambar" name="gambar" id="gambar" size="30" value="" aria-required="true"/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -72,7 +78,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group form-submit">
-                                            <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Buat Artikel"  />
+                                            <input style="background-color: black;" class="btn btn-default" id="submit-article-form" type="submit" name="submit" value="Buat Artikel"  />
                                         </div>
                                     </div>
 

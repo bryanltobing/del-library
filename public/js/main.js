@@ -451,6 +451,40 @@ $(function () {
         return true;
     });
 
+    var articleFormObj = $('#submit-article-form');
+    var judul = $('#judul');
+    var kategory = $('#category');
+    var text = $('#text');
+
+
+    articleFormObj.on('click', function () {
+        var data = {
+            judul: judul.val(),
+            kategory : kategory.val(),
+            text : text.val(),
+        };
+        if (data.judul === '' ||  data.kategory === '' || data.text === '') {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Data form selain gambar wajib diisi",
+                button: "Okay",
+            });
+            return false;
+        } 
+        if(data.text.length < 50) {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Data konten minimal 50 karakter",
+                button: "Okay",
+            });
+            return false;
+        }
+
+        return true;
+    });
+
 
 });
 

@@ -314,6 +314,17 @@
             });
         </script>
 
+        <% if (bookMessage.length !== 0 && bookMessage !== '') { %>
+            <script>
+            swal({
+                title : "<%= bookMessage %>",
+                icon: "error",
+                text : "Coba lagi",
+                button: "Okay",
+            });
+            </script>
+        <%}%>
+
     </body>
 
 
