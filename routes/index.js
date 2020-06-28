@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function(req, res) {
+// Models
+const Book = require('../models/books');
+
+router.get('/', async function(req, res) {
+    const book = await Book.countDocuments();
     res.render('pages/index' , {
         title : "OLIS ITDEL",
+        data : Number(book)
     });
 });
 
