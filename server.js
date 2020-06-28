@@ -16,6 +16,7 @@ require('./config/db/mongoose');
 // routes
 const index = require('./routes/index');
 const bookAll = require('./routes/bookAll');
+const articleAll = require('./routes/articleAll');
 const user = require('./routes/user');
 const cardrequest = require('./routes/cardrequest');
 const book = require('./routes/bookUser');
@@ -43,10 +44,12 @@ app.use(function(req,res,next){
 // routes use
 app.use('/', index);
 app.use('/', bookAll);
-app.use('/', article);
+app.use('/', articleAll);
 app.use('/user', user);
 app.use('/user', cardrequest);
 app.use('/user', book);
+app.use('/user', article);
+
 
 app.get('*',(req, res) => {
     res.render('pages/404', {
