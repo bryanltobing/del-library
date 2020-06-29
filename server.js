@@ -22,6 +22,7 @@ const user = require('./routes/user');
 const cardrequest = require('./routes/cardrequest');
 const book = require('./routes/bookUser');
 const article = require('./routes/articleUser');
+const cd_dvd = require('./routes/cd_dvdUser');
 
 app.set('view engine', 'ejs');
 
@@ -51,6 +52,7 @@ app.use('/user', user);
 app.use('/user', cardrequest);
 app.use('/user', book);
 app.use('/user', article);
+app.use('/user', cd_dvd);
 
 
 app.get('*',(req, res) => {
