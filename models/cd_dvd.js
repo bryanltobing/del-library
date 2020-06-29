@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { model } = require('./article');
 
 const cd_dvdSchema = new mongoose.Schema({
+    id_master : {
+        type : String,
+        required : true
+    },
     judul  :{
         type : String,
         required : true,
@@ -21,9 +25,12 @@ const cd_dvdSchema = new mongoose.Schema({
         required : true
     },
     status : {
+        type : Number,
+        default : 0,
+    },
+    uploader : {
         type : String,
-        required : true,
-        trim : true
+        required : true
     }
 }, {
     timestamps : true

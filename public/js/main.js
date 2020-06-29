@@ -485,6 +485,44 @@ $(function () {
         return true;
     });
 
+    var cd_dvdObject = $('#cd_dvd-book-form');
+    var id_master = $('#id_master');
+    var judul = $('#judul');
+    var sumber = $('#sumber');
+    var prodiPemilik = $('#prodiPemilik');
+    var keterangan = $('#keterangan');
+
+    cd_dvdObject.on('click', function () {
+        var data = {
+            id_master : id_master.val(),
+            judul: judul.val(),
+            sumber : sumber.val(),
+            prodiPemilik : prodiPemilik.val(),
+            keterangan : keterangan.val()
+        };
+        if (data.id_master === '' ||  data.judul === '' || data.sumber === '' || data.prodiPemilik === '' || data.keterangan === '') {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Data form wajib diisi",
+                button: "Okay",
+            });
+            return false;
+        } 
+        if(data.keterangan.length < 50) {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Keterangan minimal 50 karakter",
+                button: "Okay",
+            });
+            return false;
+        }
+
+        return true;
+    });
+
+    
 
 });
 
