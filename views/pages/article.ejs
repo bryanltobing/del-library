@@ -120,7 +120,18 @@
                 m.innerText = truncateText('.text', 180)[i];
             });
         </script>
-        
+        <% if (articleDetailError.length !== 0) { %>
+            <script>
+              swal({
+                title : "<%= articleDetailError %>",
+                icon: "error",
+                text : "Failed",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
+
+        articleDetailError
     </body>
 
 

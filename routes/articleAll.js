@@ -14,9 +14,9 @@ router.get('/article', async (req, res) => {
         });
         res.render('pages/article', {
             title : "Article",
-            data : article
+            data : article,
+            articleDetailError : req.flash('articleDetailError')
         });
-        console.log(article);
     } catch (e) {
         console.log("error"  + e);
     }
@@ -35,7 +35,8 @@ router.get('/article-detail/:id', async (req, res) => {
             successArticle : req.flash('successArticle')
         });
     } catch(e) {
-        res.status(400).send(e);
+        req.flash('articleDetailError' ,'Artikel tidak ditemukan');
+        res.redirect('/article');
     }
 });
 
