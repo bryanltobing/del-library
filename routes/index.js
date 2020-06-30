@@ -5,17 +5,20 @@ const router = express.Router();
 const Book = require('../models/books');
 const CD = require('../models/cd_dvd');
 const Article = require('../models/article');
+const LocalContent = require('../models/local_content');
 
 router.get('/', async function(req, res) {
     const book = await Book.countDocuments();
     const cd = await CD.countDocuments();
     const article = await Article.countDocuments();
+    const localContent = await LocalContent.countDocuments();
     res.render('pages/index' , {
         title : "OLIS ITDEL",
         data : {
             book : Number(book),
             cd : Number(cd),
-            article : Number(article)
+            article : Number(article),
+            localContent : Number(localContent)
         }
     });
 });

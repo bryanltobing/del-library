@@ -522,6 +522,45 @@ $(function () {
         return true;
     });
 
+    var localcontentform = $('#local-content-form');
+    var subject = $('#subject');
+    var jenis = $('#jenis');
+    var penulis = $('#penulis');
+    var pembimbing = $('#pembimbing');
+    var tahun = $('#tahun');
+    var tingkat = $('#tingkat');
+
+    localcontentform.on('click', function () {
+        var data = {
+            subject : subject.val(),
+            jenis: jenis.val(),
+            penulis : penulis.val(),
+            pembimbing : pembimbing.val(),
+            tahun : tahun.val(),
+            tingkat : tingkat.val()
+        };
+        if (data.subject === '' ||  data.jenis === '' || data.penulis === '' || data.pembimbing === '' || data.tahun === '' || data.tingkat === '') {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Data form wajib diisi",
+                button: "Okay",
+            });
+            return false;
+        } 
+        if(data.tahun > 2020) {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Tahun maksimal 2020",
+                button: "Okay",
+            });
+            return false;
+        }
+
+        return true;
+    });
+
     
 
 });
