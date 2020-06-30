@@ -84,19 +84,19 @@
                             </div>
                             <div class="row">
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12" style="margin-bottom: 100px;">
                                         <aside id="secondary" class="sidebar widget-area" data-accordion-group>
                                             <div class="widget widget_related_search open">
                                                 <h4 style="font-size: 30px;" class="widget-title text-center" data-control>CD / DVD</h4>
                                                 <div data-content>
                                                     <% data.forEach((d) => { %>
                                                     <div data-accordion>
-                                                        <h5 class="widget-sub-title" data-control><%= d.judul %>></h5>
+                                                        <h5 class="widget-sub-title" data-control><span><i class="fa fa-pie-chart" style="color:black; font-size: 20px; margin-right: 10px;"></i></span><%= d.judul %></h5>
                                                         <div class="widget_categories" data-content>
                                                             <ul>
-                                                                <li><a href="#"> <%= d.sumber %></a></li>
-                                                                <li><a href="#"> <%= d.prodiPemilik %></a></li>
-                                                                <li><a href="#"> <%= d.keterangan %></a></li>
+                                                                <li><span style="font-weight:bold;">Sumber: </span> <%= d.sumber %></li>
+                                                                <li><span style="font-weight: bold;">Prodi pemilik:</span> <%= d.prodiPemilik %></li>
+                                                                <li><span style="font-weight: bold; display: block;">Deskripsi:</span><%= d.keterangan %></li>
                                                                 <% if(d.status == 0) {%>
                                                                     <li style="color: green;">Tersedia</li>
                                                                 <% } else {%>
