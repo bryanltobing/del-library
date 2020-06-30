@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment-timezone');
 
 // Models
 const Book = require('../models/books');
@@ -13,6 +14,10 @@ router.get('/', async function(req, res) {
     const article = await Article.countDocuments();
     const localContent = await LocalContent.countDocuments();
     const articleTerbaru = await Article.find({}).limit(1).sort({createdAt : 'desc'});
+    articleTerbaru.forEach((a) => {
+        a.tanggal = moment(a.createdAt).tz('Asia/Jakarta').locale('id').format('LL').split(' ');
+        a.tanggalUpdate = moment(a.updatedAt).tz('Asia/Jakarta').locale('id').format('LLLL');
+    });
     res.render('pages/index' , {
         title : "OLIS ITDEL",
         data : {

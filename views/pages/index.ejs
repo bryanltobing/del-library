@@ -25,7 +25,7 @@
                             <h2>Discover Your Roots</h2>
                             <p>Good friends, good books, and a sleepy conscience: this is the ideal life</p>
                             <div class="slide-buttons hidden-sm hidden-xs">    
-                                <a href="#" class="btn btn-primary">Read More</a>
+                                <a href="#detailLanding" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                             <h2>read books every day</h2>
                             <p>Nothing is pleasanter than exploring a library</p>
                             <div class="slide-buttons hidden-sm hidden-xs">    
-                                <a href="#" class="btn btn-primary">Read More</a>
+                                <a href="#detailLanding" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             <h2>find your book</h2>
                             <p>I had found my religion: nothing seemed more important to me than a book. I saw the library as a temple</p>
                             <div class="slide-buttons hidden-sm hidden-xs">    
-                                <a href="#" class="btn btn-primary">Read More</a>
+                                <a href="#detailLanding" class="btn btn-primary">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="welcome-wrap">
-                            <div class="welcome-text">
+                            <div class="welcome-text" id="detailLanding">
                                 <h2 class="section-title">Welcome to the OLIS Del</h2>
                                 <span class="underline left"></span>
                                 <p class="lead">Pengenalan Perpustakaan</p>
@@ -386,8 +386,8 @@
                                     <% } %>
                                     <figcaption>
                                         <a href="#.">
-                                            <span class="date">07</span>
-                                            <span class="month">Mar</span>
+                                            <span class="date"><%= terbaru.articleterbaru.tanggal[0]%></span>
+                                            <span class="month"><%= terbaru.articleterbaru.tanggal[1]%></span>
                                         </a>
                                     </figcaption>
                                 </figure>
