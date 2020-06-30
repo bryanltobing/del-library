@@ -16,6 +16,7 @@ router.get('/add-dvd', auth, authRoleLibrarian, (req, res) => {
 router.post('/add-dvd', auth, authRoleLibrarian, async (req, res) => {
     const cd = new CD({
         ...req.body,
+        id_master : await CD.countDocuments() + 1,
         uploader : req.user._id
     });
 
