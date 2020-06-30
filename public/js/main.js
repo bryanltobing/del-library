@@ -561,6 +561,39 @@ $(function () {
         return true;
     });
 
+    var pengumumanform = $('#pengumuman-form');
+    var judul = $('#judul');
+    var author = $('#author');
+    var konten = $('#konten');
+
+    pengumumanform.on('click', function () {
+        var data = {
+            judul : judul.val(),
+            author: author.val(),
+            konten : konten.val(),
+        };
+        if (data.judul === '' ||  data.author === '' || data.konten === '') {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Data form wajib diisi",
+                button: "Okay",
+            });
+            return false;
+        } 
+        if(data.konten.length < 50 ) {
+            swal({
+                title : "Warning",
+                icon: "warning",
+                text : "Data konten minimal 50 karakter",
+                button: "Okay",
+            });
+            return false;
+        }
+
+        return true;
+    });
+
     
 
 });

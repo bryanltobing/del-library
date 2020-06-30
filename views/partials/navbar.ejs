@@ -60,7 +60,7 @@
                                 <li class="dropdown">
                                     <a data-toggle="dropdown" class="dropdown-toggle disabled" href="/article">ARTICLE</a>
                                 </li>
-                                <li><a href="/contact">Contact</a></li>
+                                <li><a href="/pengumuman-list">Pengumuman</a></li>
                                 <li <% if(title === "Services - OLIS ITDEL") {%>class="active" <%}%>><a href="/services">Services</a></li>
                             <li <% if(title === "Dashboard") {%>class="active" <%}%>><a href="/user/dashboard">Dashboard</a></li>
                             </ul>
@@ -89,15 +89,8 @@
                             <li>
                                 <a href="/article">Article</a>
                             </li>
-                            <li>
-                                <a href="blog.html">Blog</a>
-                                <ul>
-                                    <li><a href="blog.html">Blog Grid View</a></li>
-                                    <li><a href="blog-detail.html">Blog Detail</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="/services">Services</a></li>
+                            <li><a href="/pengumuman-list">Pengumuman</a></li>
                             <li><a href="/user/dashboard">Dashboard</a></li>
                             <% if(session) { %>
                             <form action="/user/logout?_method=DELETE" method="POST">

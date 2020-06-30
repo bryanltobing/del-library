@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <%- include('../partials/head') %>
+
+    <style>
+        .formRequest {
+            -webkit-box-shadow: 0 0 10px gray;
+            box-shadow: 0 0 10px gray;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .formRequest2 {
+            -webkit-box-shadow: 0 0 10px gray;
+            box-shadow: 0 0 10px gray;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            border: 4px solid #282828;
+        }
+    </style>
+    <body>
+        
+        <!-- Start: Header Section -->
+        <%- include('../partials/navbar') %>
+        <!-- End: Header Section -->
+        
+        <!-- Start: Page Banner -->
+        <section class="page-banner services-banner">
+            <div class="container">
+                <div class="banner-header">
+                    <h2>Add Local Content</h2>
+                    <span class="underline center"></span>
+                    <p style="padding: 20px;" class="lead"></p>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/user/addmedia-menu">Media Menu</a></li>
+                        <li>Add Local Content</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End: Page Banner -->
+
+        <!-- Start: Products Section -->
+        <div class="container formRequest" style="padding: 20px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="contact-form bg-light margin-right">
+                            <h2 style="color: black;">Add Local Content</h2>
+                            <span class="underline left"></span>
+                            <div class="contact-fields">
+                            <form action="/user/add-pengumuman" style="padding: 20px;" id="contact" name="contact" method="post" >
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Judul Pengumuman" name="judul" id="judul" size="30" value="" aria-required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" placeholder="Author" name="author" id="author" size="30" value="<%= author %>" aria-required="true" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Konten Artikel" id="konten" name="konten" rows="25" aria-required="true"></textarea>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-submit">
+                                            <input style="background-color: black;" class="btn btn-default" id="pengumuman-form" type="submit" name="submit" value="Tambah Pengumuman"  />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End: Products Section -->
+       
+        
+        <!-- Start: Footer -->
+        <%- include('../partials/footer') %>
+
+        <!-- End: Footer -->
+        
+        <%- include('../partials/footscript') %>
+
+        
+    </body>
+
+
+</html>
