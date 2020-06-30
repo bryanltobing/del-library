@@ -12,6 +12,7 @@ router.get('/', async function(req, res) {
     const cd = await CD.countDocuments();
     const article = await Article.countDocuments();
     const localContent = await LocalContent.countDocuments();
+    const articleTerbaru = await Article.find({}).limit(1).sort({createdAt : 'desc'});
     res.render('pages/index' , {
         title : "OLIS ITDEL",
         data : {
@@ -19,6 +20,9 @@ router.get('/', async function(req, res) {
             cd : Number(cd),
             article : Number(article),
             localContent : Number(localContent)
+        },
+        terbaru : {
+            articleterbaru : articleTerbaru[0]
         }
     });
 });
