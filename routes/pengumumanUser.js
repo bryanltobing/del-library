@@ -20,7 +20,8 @@ router.post('/add-pengumuman', auth, authRoleLibrarian, async (req, res) => {
             author : req.user.fullname
         });
         await pengumuman.save();
-        console.log(pengumuman);
+        req.flash('messageAddPengumuman', 'Pengumuman berhasil ditambahkan');
+        res.redirect(`/pengumuman-detail/${pengumuman._id}`);
     } catch(e) {
         console.log("error" + e);
     }

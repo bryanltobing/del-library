@@ -95,6 +95,17 @@
         <!-- End: Footer -->
 
         <%- include('../partials/footscript') %>
+
+        <% if (message.length !== 0) { %>
+            <script>
+              swal({
+                title : "<%= message %>",
+                icon: "success",
+                text : "Success",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
         
 
     </body>
