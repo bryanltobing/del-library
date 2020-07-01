@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="zxx">
     
+
     <%- include('../partials/head') %>
-    <link rel="stylesheet" type="text/css" href="/css/jquery.accordion.css">
 
     <body>
 
         <!-- Start: Header Section -->
         <%- include('../partials/navbar') %>
-        
+
         <!-- End: Header Section -->
 
         <!-- Start: Page Banner -->
         <section class="page-banner news-listing-banner services-banner">
             <div class="container">
                 <div class="banner-header">
-                    <h2>Pengumuman</h2>
+                    <h2>Pengumuman Detail</h2>
                     <span class="underline center"></span>
-                    <p class="lead">Daftar Pengumuman</p>
+                    <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
                 </div>
                 <div class="breadcrumb">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li>Pengumuman</li>
+                        <li><a href="/pengumuman-list">Pengumuman List</a></li>
+                        <li>Pengumuman Detail</li>
                     </ul>
                 </div>
             </div>
@@ -38,35 +39,14 @@
                             <!-- Start: Search Section -->
                             <section class="search-filters">
                                 <div class="filter-box">
-                                    <h3>Cari Pengumuman &amp; Pemberitahuan</h3>
-                                    <form action="http://libraria.demo.presstigers.com/news-events-detail.html" method="get">
-                                        <div class="col-md-10">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="keywords">Search by Keyword</label>
-                                                        <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-6">
-                                                    <div class="form-group">
-                                                        <input class="form-control btn-clearform" type="submit" value="Cari Pengumuman">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    
                                 </div>
                                 <div class="clear"></div>
                             </section>
                             <!-- End: Search Section -->
                             <div class="row">
-                                <% data.forEach((d) => { %>
-                                    <div class="col-md-4 news-events-list-view">
+                                <div class="col-md-12">
+                                    <div class="news-list-detail">
                                         <div class="news-list-box">
                                             <div class="single-news-list">
                                                 <figure>
@@ -87,16 +67,18 @@
                                                                 </a>
                                                             </li>
                                                         </ul>
-                                                        <h3><a href="/pengumuman-detail/<%= d._id %>"><%= d.judul %></a></h3>
-                                                        <p><%= d.konten %></p>
-                                                        <a class="btn btn-primary" href="/pengumuman-detail/<%= d._id %>">Read More</a>
+                                                        <h2><%= data.judul %></h2>
+                                                        <% data.baru.forEach((de) => { %>
+                                                            <p><%=de%></p>
+                                                        <%})%>
                                                     </div>
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
+                                        
                                     </div>
-                                <% })%>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,13 +87,15 @@
         </div>
         <!-- End: Products Section -->
 
+        
 
-        <!-- Start : Footer -->
+        <!-- Start: Footer -->
         <%- include('../partials/footer') %>
+        
         <!-- End: Footer -->
 
         <%- include('../partials/footscript') %>
-
+        
 
     </body>
 

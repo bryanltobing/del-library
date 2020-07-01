@@ -20,5 +20,23 @@ router.get('/pengumuman-list', async (req, res) => {
     }
 });
 
+router.get('/pengumuman-detail/:id', async (req, res) => {
+    try {
+        const detailPengumuman = await Pengumuman.findById(req.params.id);
+        detailPengumuman.baru = detailPengumuman.konten.split('\n');
+        console.log(detailPengumuman.baru);
+        detailPengumuman.forEach((p) => {
+            p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
+        });
+        res.render('pages/pengumumandetail', {
+            title : 'Pengumuman - Detail',
+            data : detailPengumuman,
+            message : req.flash('messageAddPengumuman'),
+        });
+    } catch(e) {
+        req.flash('pengumumanDetailError' ,'Pengumuman tidak ditemukan');
+        res.redirect('/pengumuman-list');
+    }
+});
 
 module.exports = router;
