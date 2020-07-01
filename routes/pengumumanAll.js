@@ -24,10 +24,9 @@ router.get('/pengumuman-detail/:id', async (req, res) => {
     try {
         const detailPengumuman = await Pengumuman.findById(req.params.id);
         detailPengumuman.baru = detailPengumuman.konten.split('\n');
+        detailPengumuman.tanggal = moment(detailPengumuman.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
+        console.log(detailPengumuman.tanggal);
         console.log(detailPengumuman.baru);
-        detailPengumuman.forEach((p) => {
-            p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
-        });
         res.render('pages/pengumumandetail', {
             title : 'Pengumuman - Detail',
             data : detailPengumuman,
