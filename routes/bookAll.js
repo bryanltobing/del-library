@@ -4,6 +4,9 @@ const router = express.Router();
 // Models
 const Book = require('../models/books');
 
+// function
+const escapeRegex = require('../function/search');
+
 router.get('/book-detail/:id', async(req, res) => {
     
     try {
@@ -24,15 +27,42 @@ router.get('/book-list', async(req, res) => {
     var perPage = 9;
     var page = 1;
     try {
-        const book = await Book.find({}).skip((perPage * page) - perPage).limit(perPage);
-        const count = await Book.countDocuments();
-        res.render('pages/booklist', {
-            title : 'Book - List',
-            data : book,
-            current : page,
-            pages : Math.ceil(count / perPage),
-            bookMessage : req.flash('bookDetailError')
-        });
+        if(!req.query.keywords) {
+            const book = await Book.find({}).skip((perPage * page) - perPage).limit(perPage);
+            const count = await Book.countDocuments();
+            res.render('pages/booklist', {
+                title : 'Book - List',
+                data : book,
+                current : page,
+                count,
+                pages : Math.ceil(count / perPage),
+                bookMessage : req.flash('bookDetailError')
+            });
+        } else {
+            const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
+            // GET
+            const book = await Book.find({
+                $or: [
+                    {
+                        judul : regex
+                    },
+                    {
+                        pengarang : regex
+                    }
+                ]
+             }).skip((perPage * page) - perPage).limit(perPage);
+             const count = book.length;
+             res.render('pages/booklist', {
+                 title : 'Book - List',
+                 data : book,
+                 current : page,
+                 count,
+                 pages : Math.ceil(count / perPage),
+                 bookMessage : req.flash('bookDetailError')
+             });
+        }
+        
+        
     } catch(e) {
         console.log("Error " + e);
     }
@@ -52,6 +82,7 @@ router.get('/book-list/:page', async(req, res) => {
             title : 'Book - List',
             data : book,
             current : page,
+            count,
             pages : Math.ceil(count / perPage),
             bookMessage : req.flash('bookDetailError')
         });
