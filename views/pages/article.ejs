@@ -83,7 +83,11 @@
                                     <%})%>
                                     
                                 </div>
-                                <a href="#" id="loadmore">Load More Posts</a>
+                                <% if(data.length < count) {%>
+                                    <a href="/article?limit=<%= limit+9%>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                <%} else {%>
+                                    <p style="margin-bottom: 10px auto;">All article are loaded</p>
+                                <%}%>
                             </div>
                         </div>
                     </div>

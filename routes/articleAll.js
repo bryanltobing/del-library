@@ -7,7 +7,13 @@ const Article = require('../models/article');
 
 router.get('/article', async (req, res) => {
     try {
-        const article = await Article.find({});
+        var query = parseInt(req.query.limit);
+        var limit = query;
+        if(!query) {
+            limit = 9;
+        }
+        const article = await Article.find({}).limit(limit);
+        const count = await Article.countDocuments();
         article.forEach((a) => {
             a.tanggal = moment(a.createdAt).tz('Asia/Jakarta').locale('id').format('LL').split(' ');
             a.tanggalUpdate = moment(a.updatedAt).tz('Asia/Jakarta').locale('id').format('LLLL');
@@ -15,6 +21,8 @@ router.get('/article', async (req, res) => {
         res.render('pages/article', {
             title : "Article",
             data : article,
+            count,
+            limit,
             articleDetailError : req.flash('articleDetailError')
         });
     } catch (e) {
@@ -26,6 +34,7 @@ router.get('/article', async (req, res) => {
 router.get('/article-detail/:id', async (req, res) => {
     try {
         const article = await Article.findById(req.params.id);
+        article.textFormatted = article.text.split('\n');
         article.tanggal = moment(article.createdAt).tz('Asia/Jakarta').locale('id').format('LL').split(' ');
         article.tanggalUpdate = moment(article.updatedAt).tz('Asia/Jakarta').locale('id').format('LLLL');
         

@@ -91,13 +91,15 @@
                                                         <div class="clearfix"></div>
                                                     </div>
                                                     <div class="entry-content">
-                                                        <p style="text-indent: 2em;"><%= data.text %></p>
+                                                        <% data.textFormatted.forEach((f) => { %>
+                                                            <p style="text-align: justify; color: black;"><%= f %></p>
+                                                        <%})%>
                                                     </div>
-                                                    <footer class="entry-footer">
-                                                        <!-- <div class="col-xs-12 col-sm-12 entry-tags"> 
+                                                    <!-- <footer class="entry-footer">
+                                                        <div class="col-xs-12 col-sm-12 entry-tags"> 
                                                             <strong><i class="fa fa-tags" aria-hidden="true"></i> Tags:</strong> <span><a href="#">Beauty</a> , <a href="#">Life Style</a> , <a href="#">Travel</a> , <a href="#">Fashion</a> , <a href="#">Health</a> , <a href="#">Food</a>, <a href="#">Adventure</a></span>			
-                                                        </div> -->
-                                                    </footer>
+                                                        </div>
+                                                    </footer> -->
                                                 </div>
                                             </div>
                                         </article>
