@@ -1,32 +1,65 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment-timezone');
+const escapeRegex = require('../function/search');
 
 // models
 const Article = require('../models/article');
 
 router.get('/article', async (req, res) => {
     try {
-        var query = parseInt(req.query.limit);
-        var limit = query;
-        if(!query) {
-            limit = 9;
+        if(!req.query.keywords) {
+            var query = parseInt(req.query.limit);
+            var limit = query;
+            if(!query) {
+                limit = 9;
+            }
+            const article = await Article.find({}).limit(limit);
+            const count = await Article.countDocuments();
+            article.forEach((a) => {
+                a.tanggal = moment(a.createdAt).tz('Asia/Jakarta').locale('id').format('LL').split(' ');
+                a.tanggalUpdate = moment(a.updatedAt).tz('Asia/Jakarta').locale('id').format('LLLL');
+            });
+            res.render('pages/article', {
+                title : "Article",
+                data : article,
+                count,
+                limit,
+                articleDetailError : req.flash('articleDetailError')
+            });
+        } else {
+            var query = parseInt(req.query.limit);
+            var limit = query;
+            if(!query) {
+                limit = 9;
+            }
+            var regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
+            const article = await Article.find({
+                $or : [
+                    {
+                        judul : regex 
+                    },
+                    {
+                        category : regex
+                    }
+                ]
+            }).limit(limit);
+            const count = await article.length;
+            article.forEach((a) => {
+                a.tanggal = moment(a.createdAt).tz('Asia/Jakarta').locale('id').format('LL').split(' ');
+                a.tanggalUpdate = moment(a.updatedAt).tz('Asia/Jakarta').locale('id').format('LLLL');
+            });
+            res.render('pages/article', {
+                title : "Article",
+                data : article,
+                count,
+                limit,
+                articleDetailError : req.flash('articleDetailError')
+            });
+            
         }
-        const article = await Article.find({}).limit(limit);
-        const count = await Article.countDocuments();
-        article.forEach((a) => {
-            a.tanggal = moment(a.createdAt).tz('Asia/Jakarta').locale('id').format('LL').split(' ');
-            a.tanggalUpdate = moment(a.updatedAt).tz('Asia/Jakarta').locale('id').format('LLLL');
-        });
-        res.render('pages/article', {
-            title : "Article",
-            data : article,
-            count,
-            limit,
-            articleDetailError : req.flash('articleDetailError')
-        });
     } catch (e) {
-        console.log("error"  + e);
+        console.log("Error " + e);
     }
 
 });
