@@ -43,7 +43,6 @@
                                             <div class="woocommerce table-tabs" id="responsiveTabs">
                                                 <div class="tab-content">
                                                     <div id="sectionA" class="tab-pane fade in active">
-                                                        <form method="post" action="/">
                                                             <table class="table table-bordered shop_table cart">
                                                                 <thead>
                                                                     <tr>
@@ -82,11 +81,13 @@
                                                                                             <p><span style="font-weight: bold;">Jenis Dokumen: </span> <%= d.jenis %></p>
                                                                                             <p><span style="font-weight: bold;">Tahun : </span> <%= d.tahun %></p>
                                                                                             <p><span style="font-weight: bold;">Tingkat : </span> <%= d.tingkat %></p>
+                                                                                            <p><span style="font-weight: bold;">Pembimbing : </span> <%= d.pembimbing %></p>
                                                                                         </div>
                                                                                         <div class="modal-footer">
                                                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                                         </div>
                                                                                     </div>
+
                                                                                     
                                                                                     </div>
                                                                                 </div>
@@ -99,7 +100,11 @@
                                                                     <% })%>
                                                                     </tbody>
                                                             </table>
-                                                        </form>
+                                                            <% if(data.length < count) {%>
+                                                                <a href="/localcontent-list?limit=<%=limit+7%>" class="btn btn-dark-gray btn-lg">Load more</a>
+                                                            <%} else {%>
+                                                                <p>All Local Content are Loaded</p>
+                                                            <%}%>
                                                     </div>
                                                 </div>
                                             </div>

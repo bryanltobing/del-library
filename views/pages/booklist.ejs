@@ -35,56 +35,34 @@
                         <div class="container">
                             <!-- Start: Search Section -->
                             <section class="search-filters">
-                                
+                                <div class="filter-box">
+                                    <h3>Cari Buku </h3>
+                                    <form action="/book-list" method="get">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="keywords">Cari judul atau pengarang</label>
+                                                        <input class="form-control" placeholder="Cari judul atau pengarang" id="keywords" name="keywords" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control btn-clearform" type="submit" value="Cari Buku">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                                 <div class="clear"></div>
                             </section>
                             <!-- End: Search Section -->
                             
-                            <div class="filter-options margin-list" id="book">
-                                <div class="row">                                            
-                                    <div class="col-md-3 col-sm-3">
-                                        <select name="orderby">
-                                            <option selected="selected">Sort by Title</option>
-                                            <option>Sort by popularity</option>
-                                            <option>Sort by rating</option>
-                                            <option>Sort by newness</option>
-                                            <option>Sort by price</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3">
-                                        <select name="orderby">
-                                            <option selected="selected">Sort by Author</option>
-                                            <option>Sort by popularity</option>
-                                            <option>Sort by rating</option>
-                                            <option>Sort by newness</option>
-                                            <option>Sort by price</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 col-sm-3">
-                                        <select name="orderby">
-                                            <option selected="selected">Language</option>
-                                            <option>Sort by popularity</option>
-                                            <option>Sort by rating</option>
-                                            <option>Sort by newness</option>
-                                            <option>Sort by price</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 col-sm-3">
-                                        <select name="orderby">
-                                            <option selected="selected">Publishing Date</option>
-                                            <option>Sort by popularity</option>
-                                            <option>Sort by rating</option>
-                                            <option>Sort by newness</option>
-                                            <option>Sort by price</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-2 col-sm-12 pull-right">
-                                        <div class="filter-toggle">
-                                            <a disabled href="/book-list" class="active"><i class="glyphicon glyphicon-th-large"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="booksmedia-fullwidth">
                                 <ul>
                                     <% data.forEach((book) => { %>
