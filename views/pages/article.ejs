@@ -114,9 +114,13 @@
                                     <%})%>
                                     
                                 </div>
-                                <% if(data.length < count) {%>
+                                <% if(data.length < count && !keywords) {%>
                                     <a href="/article?limit=<%= limit+9%>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
-                                <%} else {%>
+                                <%} else if(data.length < count && keywords.length > 0){ %>
+                                    <a href="/article?limit=<%= limit+9%>&keywords=<%= keywords %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                <%} else if(count<1) {%>
+                                    <h3 class="text-center" style="margin-bottom: 100px;">Artikel tidak ditemukan</h3>
+                                <% }else {%>
                                     <p style="margin-bottom: 10px auto;">All article are loaded</p>
                                 <%}%>
                             </div>
