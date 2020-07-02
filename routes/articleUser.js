@@ -13,7 +13,8 @@ const Article = require('../models/article');
 router.get('/add-article', auth, authRoleLibrarian, (req, res) => {
     res.render('pages/addarticle', {
         title : "Add Article",
-        user : req.user
+        user : req.user,
+        errorArticleAdded : req.flash('errorArticleAdded')
     });
 });
 
@@ -53,7 +54,8 @@ router.post('/add-article', auth, authRoleLibrarian, upload.single('gambar'), as
         console.log("error" + e);
     }
 }, (error, req, res, next) => {
-    res.status(400).send({ message : error.message });
+    req.flash('errorArticleAdded', `${error.message}`);
+    res.redirect('/user/add-article');
 });
 
 module.exports = router;

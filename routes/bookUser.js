@@ -26,7 +26,8 @@ const upload = multer({
 router.get('/add-book', auth, authRoleLibrarian, (req, res) => {
     res.render('pages/addbook', {
         title : "Add Book",
-        user : req.user
+        user : req.user,
+        errorBookAdded : req.flash('errorBookAdded')
     });
 });
 
@@ -50,7 +51,8 @@ router.post('/add-book', auth, authRoleLibrarian, upload.single('gambar') , asyn
     }
 
 }, (error, req, res, next) => {
-    res.status(400).send({error : error.message});
+    req.flash('errorBookAdded', `${error.message}`);
+    res.redirect('/user/add-book');
 });
 
 

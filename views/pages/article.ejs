@@ -26,6 +26,8 @@
             </div>
         </section>
         <!-- End: Page Banner -->
+
+       
         
         <!-- Start: Blog Section -->
         <div id="content" class="site-content">
@@ -33,6 +35,35 @@
                 <main id="main" class="site-main">
                     <div class="blog-main-list">
                         <div class="container">
+                             <!-- Start: Search Section -->
+                            <section class="search-filters">
+                                <div class="filter-box">
+                                    <h3>Cari Artikel </h3>
+                                    <form action="/book-list" method="get">
+                                        <div class="col-md-10">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="keywords">Cari judul atau kategori</label>
+                                                        <input class="form-control" placeholder="Cari judul atau pengarang" id="keywords" name="keywords" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <input class="form-control btn-clearform" type="submit" value="Cari Artikel">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="clear"></div>
+                            </section>
+                            <!-- End: Search Section -->
                             <div class="row">
                                 <div class="blog-page grid">
                                     <% data.forEach((d) => {%>

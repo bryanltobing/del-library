@@ -100,6 +100,18 @@
         <%- include('../partials/footscript') %>
 
         
+        <%if (errorArticleAdded.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= errorArticleAdded %>",
+                    icon: "error",
+                    text : "Failed",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
+
+        
     </body>
 
 
