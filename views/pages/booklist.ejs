@@ -59,11 +59,10 @@
                                         </div>
                                     </form>
                                     <% if(keywords) {%>
-                                        <div class="container">
-                                            <p> you searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
-                                        </div>    
+                                        <p class="text-center"> you searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
                                     <%}%>
                                 </div>
+                                
                                 <div class="clear"></div>
                             </section>
                             <!-- End: Search Section -->
@@ -76,7 +75,7 @@
                                             <figure>
                                                 <a href="/book-detail/<%= book._id %>">
                                                     <% if(book.gambar === undefined ) {%>
-                                                        <img src="/images/placeholder/book.png" alt="Book">
+                                                        <img src="/images/placeholder/book.png" alt="Book" style="height: 615px;">
                                                     <% } else {%>
                                                         <img src="/getbook-image/<%= book._id %>" alt="Book">
                                                     <% } %>
@@ -108,7 +107,11 @@
                                             <% if (current == 1) { %>
                                                 <li class="disabled"><a>First</a></li>
                                             <% } else { %>
-                                                <li><a href="/book-list/1">First</a></li>
+                                                <% if(!keywords) {%>
+                                                    <li><a href="/book-list/1">First</a></li>
+                                                <%} else {%>
+                                                    <li><a href="/book-list/1?keywords=<%=keywords%>">First</a></li>
+                                                <%}%>
                                             <% } %>
                                             <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
                                             <% if (i !== 1) { %>
@@ -118,7 +121,11 @@
                                                 <% if (i == current) { %>
                                                     <li class="active"><a><%= i %></a></li>
                                                 <% } else { %>
-                                                    <li><a href="/book-list/<%= i %>"><%= i %></a></li>
+                                                    <% if(!keywords) {%>
+                                                        <li><a href="/book-list/<%= i %>"><%= i %></a></li>
+                                                    <%} else {%>
+                                                        <li><a href="/book-list/<%= i %>?keywords=<%=keywords%>"><%= i %></a></li>
+                                                    <%}%>
                                                 <% } %>
                                                 <% if (i == Number(current) + 4 && i < pages) { %>
                                                     <li class="disabled"><a>...</a></li>
@@ -127,7 +134,11 @@
                                             <% if (current == pages) { %>
                                                 <li class="disabled"><a>Last</a></li>
                                             <% } else { %>
-                                                <li><a href="/book-list/<%= pages %>">Last</a></li>
+                                                <% if(!keywords) {%>
+                                                    <li><a href="/book-list/<%= pages %>">Last</a></li>
+                                                <%} else {%>
+                                                    <li><a href="/book-list/<%= pages %>?keywords=<%=keywords%>">Last</a></li>
+                                                <%}%>
                                             <% } %>
                                         </ul>
                                     <% } %>

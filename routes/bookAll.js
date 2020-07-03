@@ -87,7 +87,8 @@ router.get('/book-list/:page', async(req, res) => {
             current : page,
             count,
             pages : Math.ceil(count / perPage),
-            bookMessage : req.flash('bookDetailError')
+            bookMessage : req.flash('bookDetailError'),
+            keywords : req.query.keywords
         });
     } catch(e) {
         req.flash('bookDetailError', "Buku tidak ditemukan")
