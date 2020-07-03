@@ -14716,7 +14716,7 @@ a:focus {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
-  width: 462.5px;
+  width: 100%;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .news-list-box .single-news-list .content-block {

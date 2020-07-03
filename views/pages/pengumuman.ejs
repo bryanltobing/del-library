@@ -66,11 +66,9 @@
                             <!-- End: Search Section -->
                             <div class="row">
                                 <% data.forEach((d) => { %>
-                                    <div class="col-md-4 news-events-list-view">
+                                    <div class="col-md-12 news-events-list-view">
                                         <div class="news-list-box">
                                             <div class="single-news-list">
-                                                <figure>
-                                                </figure>
                                                 <div class="content-block">
                                                     <div class="member-info">
                                                         <ul class="news-event-info">
@@ -88,7 +86,7 @@
                                                             </li>
                                                         </ul>
                                                         <h3><a href="/pengumuman-detail/<%= d._id %>"><%= d.judul %></a></h3>
-                                                        <p><%= d.konten %></p>
+                                                        <p class="deskripsi"><%= d.konten %></p>
                                                         <a class="btn btn-primary" href="/pengumuman-detail/<%= d._id %>">Read More</a>
                                                     </div>
                                                 </div>
@@ -111,6 +109,24 @@
         <!-- End: Footer -->
 
         <%- include('../partials/footscript') %>
+
+        <script>
+            function truncateText(selector, maxLength) {
+                var element = document.querySelectorAll(selector);
+                let truncated = [];
+                for(i=0;i<element.length;i++) {
+                    truncated[i] = element[i].innerText;
+                    if(truncated[i].length > maxLength) {
+                        truncated[i] = truncated[i].substr(0, maxLength) + '...';
+                    }
+                }
+                return truncated;
+            }
+            const mantapall = document.querySelectorAll('.deskripsi');
+            mantapall.forEach((m, i) => {
+                m.innerText = truncateText('.deskripsi', 207)[i];
+            });
+        </script>
 
 
     </body>
