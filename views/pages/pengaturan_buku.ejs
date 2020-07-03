@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" type="text/css" href="/css/responsivetable.css" />
+    <style>
+        #danger {
+            color: white;
+            font-weight: bold;
+        }
+        #danger:hover {
+            background-color : #e31507 !important;
+            font-weight: bolder;
+        }
+        @media only screen and (max-width: 979px) {
+            #one {
+                display: none;
+            } 
+        }
+        
+    </style>
+    <body>
+        
+        <!-- Start: Header Section -->
+        <%- include('../partials/navbar') %>
+        
+        <!-- End: Header Section -->
+        
+        <!-- Start: Page Banner -->
+        <section class="page-banner services-banner">
+            <div class="container">
+                <div class="banner-header">
+                    <h2>Pengaturan Buku</h2>
+                    <span class="underline center"></span>
+                    <p class="lead">Breadcrumbs</p>
+                </div>
+                <div class="breadcrumb">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/pengaturan">Pengaturan Menu</a></li>
+                        <li>Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End: Page Banner -->
+        <!-- Start: Cart Section -->
+        <div id="content" class="site-content">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <div class="cart-main">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 style="font-size: 30px;" class="widget-title text-center" data-control>Pengaturan Buku</h4>
+                                    <div class="page type-page status-publish hentry">
+                                        <div class="entry-content">
+                                            <div class="woocommerce table-tabs" id="responsiveTabs">
+                                                <div class="tab-content">
+                                                    <div id="sectionA" class="tab-pane fade in active">
+                                                        <table class="table table-bordered shop_table cart">
+                                                            <thead>
+                                                                <tr id="one">
+                                                                    <th class="product-name">Book</th>
+                                                                    <th class="product-quantity">Action</th>
+                                                                    <th class="product-price">Deskripsi </th>                                                                
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% data.forEach((d) => { %>
+                                                                    <tr class="cart_item">
+                                                                        <td data-title="Product" class="product-name">
+                                                                            <span class="product-thumbnail">
+                                                                                <% if(d.gambar === undefined ) {%>
+                                                                                    <img src="/images/placeholder/book.png" alt="Book" style="width: 100px; height: 111px;">
+                                                                                <% } else {%>
+                                                                                    <img src="/getbook-image/<%= d._id %>" style="width: 100px; height: 111px;" alt="cart-product-1">
+                                                                                <% } %>
+                                                                            </span>
+                                                                            <span class="product-detail">
+                                                                                <a href="#"><strong class="judul" style="text-transform: capitalize;"><%= d.judul %></strong></a>
+                                                                                <span><strong>Pengarang:</strong> <%= d.pengarang %></span>
+                                                                                <span><strong>ISBN:</strong> <%= d.isbn %></span>
+                                                                                <span><strong>Penerbit:</strong> <em><%= d.penerbit %></em></span>
+                                                                                <span><strong>Bahasa:</strong><%= d.bahasa %></span>
+                                                                            </span>
+                                                                        </td>
+                                                                        <td data-title="action" class="product-action">
+                                                                            <div class="dropdown" style="margin: 10px;">
+                                                                                <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-dark-gray">Update</a>
+                                                                                    <!-- Modal -->
+                                                                                    <div class="modal fade" id="myModal" role="dialog">
+                                                                                        <div class="modal-dialog modal-lg">
+                                                                                            <!-- Modal content-->
+                                                                                            <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                                <h4 class="modal-title" style="color : #3e97cc; text-transform: capitalize;">judukewqe</h4>
+                                                                                                </div>
+                                                                                                <div class="modal-body" style="text-transform: capitalize;">
+                                                                                                    <p><span style="font-weight: bold;">Penulis: </span> helllo world</p>
+                                                                                                </div>
+                                                                                                <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                <a href="#" id="danger" class="btn btn-danger text-light">Delete</a>
+                                                                            </div>
+                                                                            <div class="addition-action">
+                                                                                <small></small>
+                                                                                <ul>
+                                                                                    <li></li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td data-title="Price" class="product-price">
+                                                                            <p class="deskripsi"><%= d.deskripsi %></p>
+                                                                        </td>
+                                                                    </tr>
+                                                                <%})%>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="container" style="margin: 30px 0px 30px -10px;">
+                                                            <nav class="navigation pagination text-center">
+                                                                <h2 class="screen-reader-text">Posts navigation</h2>
+                                                                <div class="nav-links">
+                                                                    <% if (pages > 0) { %>
+                                                                        <ul class="pagination text-center">
+                                                                            <% if (current == 1) { %>
+                                                                                <li class="disabled"><a>First</a></li>
+                                                                            <% } else { %>
+                                                                                <% if(!keywords) {%>
+                                                                                    <li><a href="/user/pengaturan/buku/1">First</a></li>
+                                                                                <%} else {%>
+                                                                                    <li><a href="/user/pengaturan/buku/1?keywords=<%=keywords%>">First</a></li>
+                                                                                <%}%>
+                                                                            <% } %>
+                                                                            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                                                            <% if (i !== 1) { %>
+                                                                                <li class="disabled"><a>...</a></li>
+                                                                            <% } %>
+                                                                            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                                                                <% if (i == current) { %>
+                                                                                    <li class="active"><a><%= i %></a></li>
+                                                                                <% } else { %>
+                                                                                    <% if(!keywords) {%>
+                                                                                        <li><a href="/user/pengaturan/buku/<%= i %>"><%= i %></a></li>
+                                                                                    <%} else {%>
+                                                                                        <li><a href="/user/pengaturan/buku/<%= i %>?keywords=<%=keywords%>"><%= i %></a></li>
+                                                                                    <%}%>
+                                                                                <% } %>
+                                                                                <% if (i == Number(current) + 4 && i < pages) { %>
+                                                                                    <li class="disabled"><a>...</a></li>
+                                                                                <% } %>
+                                                                            <% } %>
+                                                                            <% if (current == pages) { %>
+                                                                                <li class="disabled"><a>Last</a></li>
+                                                                            <% } else { %>
+                                                                                <% if(!keywords) {%>
+                                                                                    <li><a href="/user/pengaturan/buku/<%= pages %>">Last</a></li>
+                                                                                <%} else {%>
+                                                                                    <li><a href="/user/pengaturan/buku/<%= pages %>?keywords=<%=keywords%>">Last</a></li>
+                                                                                <%}%>
+                                                                            <% } %>
+                                                                        </ul>
+                                                                    <% } %>
+                                                                </div>
+                                                            </nav>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .entry-content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <!-- End: Cart Section -->
+        
+        
+        <!-- Start: Footer -->
+        <%- include('../partials/footer') %>
+
+        <!-- End: Footer -->
+        
+        <%- include('../partials/footscript') %>
+
+        <script>
+            function truncateText(selector, maxLength) {
+                var element = document.querySelectorAll(selector);
+                let truncated = [];
+                for(i=0;i<element.length;i++) {
+                    truncated[i] = element[i].innerText;
+                    if(truncated[i].length > maxLength) {
+                        truncated[i] = truncated[i].substr(0, maxLength) + '...';
+                    }
+                }
+                return truncated;
+            }
+            const mantapall = document.querySelectorAll('.judul');
+            mantapall.forEach((m, i) => {
+                m.innerText = truncateText('.judul', 30)[i];
+            });
+
+            const deskripsi = document.querySelectorAll('.deskripsi');
+            deskripsi.forEach((m, i) => {
+                m.innerText = truncateText('.deskripsi', 180)[i];
+            });
+
+            
+        </script>
+
+        
+    </body>
+
+
+</html>
