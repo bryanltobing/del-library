@@ -35,16 +35,7 @@ router.get('/article', async (req, res) => {
                 limit = 9;
             }
             var regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-            const article = await Article.find({
-                $or : [
-                    {
-                        judul : regex 
-                    },
-                    {
-                        category : regex
-                    }
-                ]
-            });
+            const article = await Article.find({ $or : [{ judul : regex }, { category : regex }]});
             const articleData = await Article.find({
                 $or : [
                     {
