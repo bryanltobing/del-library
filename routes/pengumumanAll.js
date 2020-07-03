@@ -1,16 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const moment = require('moment-timezone');
+const escapeRegex = require('../function/search');
 
 // models
 const Pengumuman = require('../models/pengumuman');
 
 router.get('/pengumuman-list', async (req, res) => {
     try {
-        const pengumuman = await Pengumuman.find({});
-        pengumuman.forEach((p) => {
-            p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
-        })
+        var pengumuman;
+        if(!req.query.keywords) {
+            pengumuman = await Pengumuman.find({});
+            pengumuman.forEach((p) => {
+                p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
+            });
+        } else {
+            const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
+            pengumuman = await Pengumuman.find({ judul : regex });
+            pengumuman.forEach((p) => {
+                p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
+            });
+        }
         res.render('pages/pengumuman', {
             title : "Pengumuman",
             data : pengumuman
