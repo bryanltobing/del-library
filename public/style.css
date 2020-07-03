@@ -17448,9 +17448,14 @@ a:focus {
 .blog-page .post-date-box .month:hover {
   color: #40a3df;
 }
+
+.blog-page .post-date-box .year:hover {
+  color: #40a3df;
+}
 @media (max-width: 1024px) {
   .blog-page .post-date-box .date,
-  .blog-page .post-date-box .month {
+  .blog-page .post-date-box .month,
+  .blog-page .post-date-box .year {
     float: left;
     width: 60px;
   }
@@ -17627,6 +17632,10 @@ a:focus {
   background-color: #40a3df;
 }
 .blog-detail .post-date-box .month {
+  color: #40a3df;
+}
+
+.blog-detail .post-date-box .year {
   color: #40a3df;
 }
 .blog-detail .post-detail {
