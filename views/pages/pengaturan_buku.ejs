@@ -102,7 +102,7 @@
                                                                                 <span><strong>Pengarang:</strong> <%= d.pengarang %></span>
                                                                                 <span><strong>ISBN:</strong> <%= d.isbn %></span>
                                                                                 <span><strong>Penerbit:</strong> <em><%= d.penerbit %></em></span>
-                                                                                <span><strong>Bahasa:</strong><%= d.bahasa %></span>
+                                                                                <span><strong>Bahasa: </strong><%= d.bahasa %></span>
                                                                             </span>
                                                                         </td>
                                                                         <td data-title="action" class="product-action">
@@ -120,7 +120,7 @@
                                                                                                     </h4>
                                                                                                 </div>
                                                                                                 <div class="modal-body" style="text-transform: capitalize;">
-                                                                                                    <form action="/user/add-book" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
+                                                                                                    <form action="/user/pengaturan/update-buku/<%= d._id %>?_method=PATCH" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
                                                                                                         <div class="row">
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
@@ -171,7 +171,7 @@
                                                                                                             </div>
                                                                                                             <div class="col-sm-12">
                                                                                                                 <div class="form-group form-submit">
-                                                                                                                    <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Tambah Buku"  />
+                                                                                                                    <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Update Buku"  />
                                                                                                                 </div>
                                                                                                             </div>
                                                                         
@@ -296,6 +296,17 @@
 
             
         </script>
+
+        <%if (updateBookError.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= updateBookError %>",
+                    icon: "Failed",
+                    text : "Failed",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
 
         
     </body>
