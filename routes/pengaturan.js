@@ -26,7 +26,6 @@ router.get('/buku', async (req, res) => {
             regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
             book = await Books.find({ $or : [ { judul : regex }, { pengarang : regex } ]}).skip((perPage * page) - perPage).limit(perPage);
             count = await Books.find({ $or : [ { judul : regex }, { pengarang : regex } ]}).countDocuments();
-            console.log(count);
         }
         res.render('pages/pengaturan_buku', {
             title : "Pengaturan Buku",

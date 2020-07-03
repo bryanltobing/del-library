@@ -54,6 +54,25 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4 style="font-size: 30px;" class="widget-title text-center" data-control>Pengaturan Buku</h4>
+                                    <form action="/user/pengaturan/buku" method="get" style="margin-top: 30px;">
+                                        <div class="container">
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="keywords" id="" placeholder="Cari Judul">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <input type="submit" class="form-control" value="Cari">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="container">
+                                        <% if(keywords){%>
+                                            <p> You searched for : <span style="font-weight: bold;"><%= keywords%></span></p>
+                                        <%}%> 
+                                    </div>
                                     <div class="page type-page status-publish hentry">
                                         <div class="entry-content">
                                             <div class="woocommerce table-tabs" id="responsiveTabs">
@@ -68,7 +87,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <% data.forEach((d) => { %>
+                                                                <% data.forEach((d, i) => { %>
                                                                     <tr class="cart_item">
                                                                         <td data-title="Product" class="product-name">
                                                                             <span class="product-thumbnail">
@@ -79,7 +98,7 @@
                                                                                 <% } %>
                                                                             </span>
                                                                             <span class="product-detail">
-                                                                                <a href="#"><strong class="judul" style="text-transform: capitalize;"><%= d.judul %></strong></a>
+                                                                                <a href="#" data-toggle="modal" data-target="#myModal<%=i%>"><strong class="judul" style="text-transform: capitalize;"><%= d.judul %></strong></a>
                                                                                 <span><strong>Pengarang:</strong> <%= d.pengarang %></span>
                                                                                 <span><strong>ISBN:</strong> <%= d.isbn %></span>
                                                                                 <span><strong>Penerbit:</strong> <em><%= d.penerbit %></em></span>
@@ -88,21 +107,79 @@
                                                                         </td>
                                                                         <td data-title="action" class="product-action">
                                                                             <div class="dropdown" style="margin: 10px;">
-                                                                                <a href="#" data-toggle="modal" data-target="#myModal" class="btn btn-dark-gray">Update</a>
+                                                                                <a href="#" data-toggle="modal" data-target="#myModal<%=i%>" class="btn btn-dark-gray">Update</a>
                                                                                     <!-- Modal -->
-                                                                                    <div class="modal fade" id="myModal" role="dialog">
+                                                                                    <div class="modal fade" id="myModal<%=i%>" role="dialog">
                                                                                         <div class="modal-dialog modal-lg">
                                                                                             <!-- Modal content-->
                                                                                             <div class="modal-content">
                                                                                                 <div class="modal-header">
-                                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                <h4 class="modal-title" style="color : #3e97cc; text-transform: capitalize;">judukewqe</h4>
+                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                                    <h4 class="modal-title" style="color : #3e97cc; text-transform: capitalize;">
+                                                                                                        <span style="color: black; font-weight: normal;">Update:</span> <%= d.judul%>
+                                                                                                    </h4>
                                                                                                 </div>
                                                                                                 <div class="modal-body" style="text-transform: capitalize;">
-                                                                                                    <p><span style="font-weight: bold;">Penulis: </span> helllo world</p>
+                                                                                                    <form action="/user/add-book" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="ISBN" name="isbn" id="isbn" size="30" value="<%= d.isbn %>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="Judul Buku" name="judul" id="judul" size="30" value="<%= d.judul%>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="Pengarang" name="pengarang" id="pengarang" size="30" value="<%= d.pengarang %>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="Penerbit" name="penerbit" id="penerbit" size="30" value="<%= d.penerbit%>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="Bahasa" name="bahasa" id="bahasa" size="30" value="<%= d.bahasa%>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="Tahun Buku" name="tahun" id="tahun" size="30" value="<%= d.tahun%>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="text" placeholder="Lokasi Buku" name="lokasi" id="lokasi" size="30" value="<%= d.lokasi%>" aria-required="true"/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-6 col-sm-6">
+                                                                                                            <label for="gambar">Pilih Gambar <span style="font-weight: normal;">(not required)</span></label>
+                                                                                                                <div class="form-group">
+                                                                                                                    <input class="form-control" type="file" placeholder="Gambar" name="gambar" id="gambar" size="30" value=""/>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-sm-12">
+                                                                                                                <div class="form-group">
+                                                                                                                    <textarea class="form-control" placeholder="Deskripsi Buku" id="deskripsi" name="deskripsi" rows="15" aria-required="true"><%= d.deskripsi%></textarea>
+                                                                                                                    <div class="clearfix"></div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="col-sm-12">
+                                                                                                                <div class="form-group form-submit">
+                                                                                                                    <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Tambah Buku"  />
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                        
+                                                                                                        </div>
+                                                                                                    </form>
                                                                                                 </div>
                                                                                                 <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -123,6 +200,9 @@
                                                                 <%})%>
                                                             </tbody>
                                                         </table>
+                                                        <% if(count<1) {%>
+                                                            <p>Hasil tidak ditemukan</p>
+                                                        <%}%>
                                                         <div class="container" style="margin: 30px 0px 30px -10px;">
                                                             <nav class="navigation pagination text-center">
                                                                 <h2 class="screen-reader-text">Posts navigation</h2>
