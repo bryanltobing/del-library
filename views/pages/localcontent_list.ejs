@@ -48,7 +48,7 @@
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <select name="jenis" id="jenis" class="form-control">
-                                                        <option value="">Berdasarkan jenis dokumen</option>
+                                                        <option value="">Filter Berdasarkan jenis dokumen</option>
                                                         <option value="Kerja Praktek">Kerja Praktek</option>
                                                         <option value="Proyek Akhir 1">Proyek Akhir 1</option>
                                                         <option value="Proyek Akhir 2">Proyek Akhir 2</option>
@@ -70,7 +70,7 @@
                                             <p> You searched for : <span style="font-weight: bold;"><%= keywords.judul%></span></p>
                                         <%}%> 
                                         <% if(keywords.jenis) {%>
-                                            <p> Sort berdasarkan dokumen <span style="font-weight: bold;"><%= keywords.jenis%></span></p>
+                                            <p> Filter berdasarkan dokumen <span style="font-weight: bold;"><%= keywords.jenis%></span></p>
                                         <%}%>
                                     </div>
                                     <div class="page type-page status-publish hentry">
@@ -135,12 +135,18 @@
                                                                     <% })%>
                                                                     </tbody>
                                                             </table>
-                                                            <% if(data.length < count) {%>
-                                                                <a href="/localcontent-list?limit=<%=limit+7%>" class="btn btn-dark-gray btn-lg">Load more</a>
-                                                            <%} else if(count < 1){ %>
-                                                                <div class="container"><p>Hasil tidak ditemukan</p></div>
-                                                            <% } else {%>
-                                                                <div class="container"><p>All Local Content are Loaded</p></div>
+                                                            <% if(data.length < count && !keywords.judul && !keywords.jenis) {%>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                            <%} else if(data.length < count && keywords.judul.length > 0 && keywords.jenis.length < 1){ %>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>&judul=<%= keywords.judul %>&jenis=" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                            <%} else if(data.length < count && keywords.jenis.length > 0 && keywords.judul.length < 1){%>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>&judul=&jenis=<%= keywords.jenis %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                            <%} else if(data.length < count && keywords.jenis.length > 0 && keywords.judul.length > 0){%>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>&judul=<%= keywords.judul %>&jenis=<%= keywords.jenis %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                            <%}else if(count<1) {%>
+                                                                <h3 class="text-center" style="margin-bottom: 100px;">Hasil tidak ditemukan</h3>
+                                                            <% }else {%>
+                                                                <div class="container"><p style="margin-bottom: 10px auto;">All local content are loaded</p></div>
                                                             <%}%>
                                                     </div>
                                                 </div>
