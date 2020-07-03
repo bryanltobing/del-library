@@ -14,7 +14,9 @@ router.get('/cd_dvd-list', async (req, res) => {
             return res.render('pages/cd_dvd', {
                 title : "CD/DVD",
                 data : cd,
-                cdSuccess : req.flash('cdSuccess')
+                cdSuccess : req.flash('cdSuccess'),
+                keywords : req.query.keywords,
+                count : cd.length
             });
         } 
         const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
@@ -22,7 +24,9 @@ router.get('/cd_dvd-list', async (req, res) => {
         res.render('pages/cd_dvd', {
             title : "CD/DVD",
             data : cd,
-            cdSuccess : req.flash('cdSuccess')
+            cdSuccess : req.flash('cdSuccess'),
+            keywords : req.query.keywords,
+            count : cd.length
         });
     } catch(e) {
         console.log("error " + e);
