@@ -27,6 +27,7 @@ const article = require('./routes/articleUser');
 const cd_dvd = require('./routes/cd_dvdUser');
 const localContent = require('./routes/localContentUser');
 const pengumuman = require('./routes/pengumumanUser');
+const pengaturan = require('./routes/pengaturan');
 
 app.set('view engine', 'ejs');
 
@@ -61,6 +62,8 @@ app.use('/user', article);
 app.use('/user', cd_dvd);
 app.use('/user', localContent);
 app.use('/user', pengumuman);
+app.use('/user/pengaturan', pengaturan);
+
 
 
 app.get('*',(req, res) => {
