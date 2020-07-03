@@ -58,6 +58,11 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <% if(keywords) {%>
+                                        <div class="container">
+                                            <p> you searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
+                                        </div>    
+                                    <%}%>
                                 </div>
                                 <div class="clear"></div>
                             </section>

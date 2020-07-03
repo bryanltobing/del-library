@@ -36,7 +36,8 @@ router.get('/book-list', async(req, res) => {
                 current : page,
                 count,
                 pages : Math.ceil(count / perPage),
-                bookMessage : req.flash('bookDetailError')
+                bookMessage : req.flash('bookDetailError'),
+                keywords : req.query.keywords
             });
         } else {
             const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
@@ -59,7 +60,8 @@ router.get('/book-list', async(req, res) => {
                  current : page,
                  count,
                  pages : Math.ceil(count / perPage),
-                 bookMessage : req.flash('bookDetailError')
+                 bookMessage : req.flash('bookDetailError'),
+                 keywords : req.query.keywords
              });
         }
         
