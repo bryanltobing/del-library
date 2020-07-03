@@ -59,6 +59,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <% if(keywords) {%>
+                                            <div class="container">
+                                                <p>You searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
+                                            </div>
+                                        <%}%>
                                     </form>
                                 </div>
                                 <div class="clear"></div>
@@ -121,7 +126,7 @@
                                 <%} else if(count<1) {%>
                                     <h3 class="text-center" style="margin-bottom: 100px;">Artikel tidak ditemukan</h3>
                                 <% }else {%>
-                                    <p style="margin-bottom: 10px auto;">All article are loaded</p>
+                                    <div class="container"><p style="margin-bottom: 10px auto;">All article are loaded</p></div>
                                 <%}%>
                             </div>
                         </div>
