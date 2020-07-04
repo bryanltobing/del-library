@@ -107,7 +107,6 @@ router.patch('/update-buku/:id', auth, authRoleLibrarian, upload.single('gambar'
         req.flash('updateBookError', `Update buku gagal Coba lagi ${e}`);
         res.redirect('/user/pengaturan/buku');
     }
-
 });
 
 router.delete('/delete-buku/:id', auth, authRoleLibrarian, async (req, res) => {
@@ -116,7 +115,7 @@ router.delete('/delete-buku/:id', auth, authRoleLibrarian, async (req, res) => {
         const book = await Books.findByIdAndDelete(idBook);
         console.log(book);
     } catch(e) {
-        console.log("Error + e");
+        res.redirect('/user/pengaturan/buku');
     }
 });
 
