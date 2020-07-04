@@ -37,7 +37,9 @@ router.get('/buku', auth, authRoleLibrarian, async (req, res) => {
             count : count,
             pages : Math.ceil(count / perPage),
             keywords : req.query.keywords,
-            updateBookError : req.flash('updateBookError')
+            messageUpdateBook : req.flash('messageUpdateBook'),
+            updateBookError : req.flash('updateBookError'),
+            bookRemoved : req.flash('bookRemoved')
         });
     } catch (e) {
         console.log("error " + e);
@@ -62,7 +64,9 @@ router.get('/buku/:page', auth, authRoleLibrarian, async(req, res) => {
             pages : Math.ceil(count / perPage),
             bookMessage : req.flash('bookDetailError'),
             keywords : req.query.keywords,
-            updateBookError : req.flash('updateBookError')
+            messageUpdateBook : req.flash('messageUpdateBook'),
+            updateBookError : req.flash('updateBookError'),
+            bookRemoved : req.flash('bookRemoved')
         });
     } catch(e) {
         console.log("Error " + e);
@@ -101,8 +105,8 @@ router.patch('/update-buku/:id', auth, authRoleLibrarian, upload.single('gambar'
         } else {
             book = await Books.findByIdAndUpdate(idBook, { ...req.body }, { new : true });
         }
-        req.flash('messageAddBook', 'Buku berhasil di update');
-        res.redirect(`/book-detail/${book._id}`);
+        req.flash('messageUpdateBook', 'Buku berhasil di update');
+        res.redirect(`/user/pengaturan/buku?keywords=${book.judul}`);
     } catch(e) {
         req.flash('updateBookError', `Update buku gagal Coba lagi ${e}`);
         res.redirect('/user/pengaturan/buku');
@@ -113,7 +117,8 @@ router.delete('/delete-buku/:id', auth, authRoleLibrarian, async (req, res) => {
     const idBook = req.params.id;
     try {
         const book = await Books.findByIdAndDelete(idBook);
-        console.log(book);
+        req.flash('bookRemoved', `Buku ${book.judul} berhasil di hapus`);
+        res.redirect('/user/pengaturan/buku');
     } catch(e) {
         res.redirect('/user/pengaturan/buku');
     }

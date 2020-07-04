@@ -324,9 +324,6 @@
                     })
                     .then((willDelete) => {
                         if (willDelete) {
-                            swal("Buku berhasil di hapus", {
-                            icon: "success",
-                            });
                             var form = document.querySelectorAll(".deleteForm");
                             form[i].submit();
                         } else {
@@ -363,6 +360,17 @@
             
         </script>
 
+        <%if (messageUpdateBook.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= messageUpdateBook %>",
+                    icon: "success",
+                    text : "Success",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
+
         <%if (updateBookError.length > 0) { %>
             <script>
                 swal({
@@ -373,6 +381,19 @@
                 });
             </script>
         <% } %>
+
+        <%if (bookRemoved.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= bookRemoved %>",
+                    icon: "error",
+                    text : "Removed",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
+
+        
 
         
     </body>
