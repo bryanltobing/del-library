@@ -37,8 +37,8 @@
                 <div class="breadcrumb">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li><a href="/pengaturan">Pengaturan Menu</a></li>
+                        <li><a href="/user/dashboard">Dashboard</a></li>
+                        <li><a href="/user/pengaturan">Pengaturan Menu</a></li>
                         <li>Dashboard</li>
                     </ul>
                 </div>
@@ -120,58 +120,58 @@
                                                                                                     </h4>
                                                                                                 </div>
                                                                                                 <div class="modal-body" style="text-transform: capitalize;">
-                                                                                                    <form action="/user/pengaturan/update-buku/<%= d._id %>?_method=PATCH" style="padding: 20px;" id="contact" name="contact" method="post" enctype="multipart/form-data" >
+                                                                                                    <form action="/user/pengaturan/update-buku/<%= d._id %>?_method=PATCH" style="padding: 20px;" id="updatebook" name="update-book-form" method="post" enctype="multipart/form-data" >
                                                                                                         <div class="row">
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="ISBN" name="isbn" id="isbn" size="30" value="<%= d.isbn %>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="ISBN" name="isbn" id="isbnupdate" size="30" value="<%= d.isbn %>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="Judul Buku" name="judul" id="judul" size="30" value="<%= d.judul%>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="Judul Buku" name="judul" id="judulupdate" size="30" value="<%= d.judul%>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="Pengarang" name="pengarang" id="pengarang" size="30" value="<%= d.pengarang %>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="Pengarang" name="pengarang" id="pengarangupdate" size="30" value="<%= d.pengarang %>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="Penerbit" name="penerbit" id="penerbit" size="30" value="<%= d.penerbit%>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="Penerbit" name="penerbit" id="penerbitupdate" size="30" value="<%= d.penerbit%>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="Bahasa" name="bahasa" id="bahasa" size="30" value="<%= d.bahasa%>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="Bahasa" name="bahasa" id="bahasaupdate" size="30" value="<%= d.bahasa%>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="Tahun Buku" name="tahun" id="tahun" size="30" value="<%= d.tahun%>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="Tahun Buku" name="tahun" id="tahunupdate" size="30" value="<%= d.tahun%>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="text" placeholder="Lokasi Buku" name="lokasi" id="lokasi" size="30" value="<%= d.lokasi%>" aria-required="true"/>
+                                                                                                                    <input class="form-control" type="text" placeholder="Lokasi Buku" name="lokasi" id="lokasiupdate" size="30" value="<%= d.lokasi%>" aria-required="true"/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-md-6 col-sm-6">
                                                                                                             <label for="gambar">Pilih Gambar <span style="font-weight: normal;">(not required)</span></label>
                                                                                                                 <div class="form-group">
-                                                                                                                    <input class="form-control" type="file" placeholder="Gambar" name="gambar" id="gambar" size="30" value=""/>
+                                                                                                                    <input class="form-control" type="file" placeholder="Gambar" name="gambar" id="gambarupdate" size="30" value=""/>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-sm-12">
                                                                                                                 <div class="form-group">
-                                                                                                                    <textarea class="form-control" placeholder="Deskripsi Buku" id="deskripsi" name="deskripsi" rows="15" aria-required="true"><%= d.deskripsi%></textarea>
+                                                                                                                    <textarea class="form-control" placeholder="Deskripsi Buku" id="deskripsiupdate" name="deskripsi" rows="15" aria-required="true"><%= d.deskripsi%></textarea>
                                                                                                                     <div class="clearfix"></div>
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="col-sm-12">
                                                                                                                 <div class="form-group form-submit">
-                                                                                                                    <input style="background-color: black;" class="btn btn-default" id="submit-book-form" type="submit" name="submit" value="Update Buku"  />
+                                                                                                                    <input style="background-color: black;" class="btn btn-default" id="update-book-form" type="submit" name="submit" value="Update Buku"  />
                                                                                                                 </div>
                                                                                                             </div>
                                                                         
@@ -184,7 +184,9 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                <a href="#" id="danger" class="btn btn-danger text-light">Delete</a>
+                                                                                    <form action="/user/pengaturan/delete-buku/<%= d._id %>?_method=DELETE" style="display: inline;" class="deleteForm" method="POST">
+                                                                                        <button type="submit" name="delete" id="danger" class="btn btn-danger text-light deleteButton">Delete</button>
+                                                                                    </form>
                                                                             </div>
                                                                             <div class="addition-action">
                                                                                 <small></small>
@@ -271,6 +273,70 @@
         <!-- End: Footer -->
         
         <%- include('../partials/footscript') %>
+
+
+        <script>
+            var bookFormObjUpdate = $('#update-book-form');
+            var isbnUpdate = $('#isbnupdate');
+            var judulUpdate = $('#judulupdate');
+            var pengarangUpdate = $('#pengarangupdate');
+            var penerbitUpdate = $('#penerbitupdate');
+            var bahasaUpdate = $('#bahasaupdate');
+            var tahunUpdate = $('#tahunupdate');
+            var lokasiUpdate = $('#lokasiupdate');
+            var deskripsiUpdate = $('#deskripsiupdate');
+
+            bookFormObjUpdate.on('click', function () {
+                console.log("wow");
+                var data = {
+                    isbn: isbnUpdate.val(),
+                    judul: judulUpdate.val(),
+                    pengarang : pengarangUpdate.val(),
+                    penerbit : penerbitUpdate.val(),
+                    bahasa : bahasaUpdate.val(),
+                    tahun: tahunUpdate.val(),
+                    lokasi: lokasiUpdate.val(),
+                    deskripsi: deskripsiUpdate.val()
+                };
+                if (data.isbn === '' ||  data.judul === '' || data.pengarang === '' || data.penerbit === '' || data.bahasa === '' || data.tahun === '' ||data.lokasi === '' || data.deskripsi === '') {
+                    swal({
+                        title : "Warning",
+                        icon: "warning",
+                        text : "Data form selain gambar wajib diisi",
+                        button: "Okay",
+                    });
+                    return false;
+                } 
+
+                return true;
+            });
+
+            const buttonDelete =  document.querySelectorAll('.deleteButton');
+            buttonDelete.forEach((button, i) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    swal({
+                        title: "Are you sure?",
+                        text: "Data akan dihapus secara permanen dan tidak dapat dipulihkan",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Buku berhasil di hapus", {
+                            icon: "success",
+                            });
+                            var form = document.querySelectorAll(".deleteForm");
+                            form[i].submit();
+                        } else {
+                            return false;
+                        }
+                    });
+                });
+            });
+
+        </script>
 
         <script>
             function truncateText(selector, maxLength) {

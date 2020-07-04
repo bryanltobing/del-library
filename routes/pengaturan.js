@@ -61,7 +61,8 @@ router.get('/buku/:page', auth, authRoleLibrarian, async(req, res) => {
             count,
             pages : Math.ceil(count / perPage),
             bookMessage : req.flash('bookDetailError'),
-            keywords : req.query.keywords
+            keywords : req.query.keywords,
+            updateBookError : req.flash('updateBookError')
         });
     } catch(e) {
         console.log("Error " + e);
@@ -107,6 +108,16 @@ router.patch('/update-buku/:id', auth, authRoleLibrarian, upload.single('gambar'
         res.redirect('/user/pengaturan/buku');
     }
 
+});
+
+router.delete('/delete-buku/:id', auth, authRoleLibrarian, async (req, res) => {
+    const idBook = req.params.id;
+    try {
+        const book = await Books.findByIdAndDelete(idBook);
+        console.log(book);
+    } catch(e) {
+        console.log("Error + e");
+    }
 });
 
 
