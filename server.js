@@ -45,6 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use(function(req,res,next){
+    global.user = req.user;
     global.session = req.isAuthenticated();
     global.errorAuth = req.flash('errorAuth');
     next();

@@ -76,17 +76,14 @@
                                                             <a href="#" style="text-transform: capitalize;"><i class="fa fa-refresh"></i> Terakhir di update pada <%= data.tanggalUpdate %></a>
                                                         </div>
                                                         <div class="post-social-share">
-                                                            <!-- <ul>
-                                                                <li>
-                                                                    <a href="#.">
-                                                                        <i class="fa fa-facebook"></i>
-                                                                        <span>/ Facebook</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li><a href="#."><i class="fa fa-twitter"></i> <span>/ Twitter</span></a></li>
-                                                                <li><a href="#."><i class="fa fa-google-plus"></i> <span>/ Google+</span></a></li>
-                                                                <li><a href="#."><i class="fa fa-youtube-play"></i> <span>/ Youtube</span></a></li>
-                                                            </ul> -->
+                                                            <% if(user !== undefined) {%>
+                                                                <% if(user.role === "Librarian") {%>
+                                                                    <ul>
+                                                                        <li><a href="#."><i class="fa fa-cog"></i> <span style="font-weight:bold;">/ Setting U</span></a></li>
+                                                                        <li><a href="#."><i class="fa fa-trash" style="color:red;"></i> <span style="color: red; font-weight: bold;">/ Delete X</span></a></li>
+                                                                    </ul>
+                                                                <%}%>
+                                                            <%}%>
                                                         </div>
                                                         <div class="clearfix"></div>
                                                     </div>
