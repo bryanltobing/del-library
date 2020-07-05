@@ -29,6 +29,7 @@ const localContent = require('./routes/localContentUser');
 const pengumuman = require('./routes/pengumumanUser');
 const pengaturan = require('./routes/pengaturan');
 const pengaturan_cdDvd = require('./routes/pengaturan_cdDvd');
+const pengaturan_localcontent = require('./routes/pengaturan_localcontent');
 
 app.set('view engine', 'ejs');
 
@@ -65,6 +66,7 @@ app.use('/user', localContent);
 app.use('/user', pengumuman);
 app.use('/user/pengaturan', pengaturan);
 app.use('/user/pengaturan', pengaturan_cdDvd);
+app.use('/user/pengaturan', pengaturan_localcontent);
 
 
 
