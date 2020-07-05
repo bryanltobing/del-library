@@ -3,10 +3,13 @@ const router = express.Router();
 
 const LocalContent = require('../models/local_content');
 
+// middleware
+const { auth, authRoleLibrarian } = require('../middleware/auth');
+
 // function
 const escapeRegex = require('../function/search');
 
-router.get('/localcontent', async(req, res) => {
+router.get('/localcontent', auth, authRoleLibrarian, async(req, res) => {
     let perpage = 6;
     let page = 1;
     let localcontent, count;
@@ -36,7 +39,7 @@ router.get('/localcontent', async(req, res) => {
     }
 }); 
 
-router.get('/localcontent/:page', async(req, res) => {
+router.get('/localcontent/:page', auth, authRoleLibrarian, async(req, res) => {
     let perpage = 6;
     let page = req.params.page || 1;
     let localcontent, count;
@@ -66,7 +69,7 @@ router.get('/localcontent/:page', async(req, res) => {
     }
 }); 
 
-router.patch('/localcontent/:id', async(req, res) => {
+router.patch('/localcontent/:id', auth, authRoleLibrarian, async(req, res) => {
     let id = req.params.id;
     try {
         const localcontent = await LocalContent.findByIdAndUpdate(id, { ...req.body } , { new : true});
@@ -78,7 +81,7 @@ router.patch('/localcontent/:id', async(req, res) => {
     }
 });
 
-router.delete('/delete-localcontent/:id', async(req, res) => {
+router.delete('/delete-localcontent/:id', auth, authRoleLibrarian, async(req, res) => {
     let id = req.params.id;
     try {
         const localcontent = await LocalContent.findByIdAndDelete(id);
