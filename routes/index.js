@@ -32,9 +32,19 @@ router.get('/', async function(req, res) {
     });
 });
 
-router.get('/services', function(req, res) {
+router.get('/services', async function(req, res) {
+    const book = await Book.countDocuments();
+    const cd = await CD.countDocuments();
+    const article = await Article.countDocuments();
+    const localContent = await LocalContent.countDocuments();
     res.render('pages/services' , {
         title : "Services - OLIS ITDEL",
+        count : {
+            book,
+            cd,
+            article,
+            localContent
+        },
         session : req.session.passport
     });
 });
