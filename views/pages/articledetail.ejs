@@ -2,7 +2,21 @@
 <html lang="zxx">
     
     <%- include('../partials/head') %>
-
+    <style>
+        #deleteBtn {
+            border: none;
+            outline: none;
+            background: none;
+            margin: 0;
+            font-weight: bold;
+            cursor: pointer;
+            color: red;
+            padding: 0;
+            text-decoration: underline;
+            font-family: inherit;
+            font-size: inherit;
+        }
+    </style>
     <body>
 
         <!-- Start: Header Section -->
@@ -79,8 +93,65 @@
                                                             <% if(user !== undefined) {%>
                                                                 <% if(user.role === "Librarian") {%>
                                                                     <ul>
-                                                                        <li><a href="#."><i class="fa fa-cog"></i> <span style="font-weight:bold;">/ Setting U</span></a></li>
-                                                                        <li><a href="#."><i class="fa fa-trash" style="color:red;"></i> <span style="color: red; font-weight: bold;">/ Delete X</span></a></li>
+                                                                        <li><a href="#." data-toggle="modal" data-target="#myModal"><i class="fa fa-cog"></i> <span style="font-weight:bold;">/ Setting U</span></a></li>
+                                                                        <!-- Modal -->
+                                                                        <div class="modal fade" id="myModal" role="dialog">
+                                                                            <div class="modal-dialog modal-lg"> 
+                                                                                <!-- Modal content-->
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                        <h4 class="modal-title text-capitalize">Update : <span style="color: #3e97cc;"><%= data.judul %></span></h4>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <form action="/user/pengaturan/update-article/<%= data._id %>?_method=PATCH" style="padding: 20px;" id="updateForm" name="update-article-form" method="post" enctype="multipart/form-data" >
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-12 col-sm-12">
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="judul">Judul</label>
+                                                                                                        <input class="form-control" type="text" placeholder="Judul" name="judul" id="judul" size="30" value="<%=data.judul%>" aria-required="true"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-12 col-sm-12">
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="category">Kategori</label>
+                                                                                                        <input class="form-control" type="text" placeholder="Kategori" name="category" id="category" size="30" value="<%=data.category%>" aria-required="true"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-md-6 col-sm-6">
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="gambar"> Gambar <span style="font-weight: normal;">(not required) </span></label>
+                                                                                                        <input class="form-control" type="file" placeholder="gambar" name="gambar" id="gambar" size="30" value="" aria-required="true"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-sm-12">
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="text">Konten Artikel</label>
+                                                                                                        <textarea class="form-control" placeholder="Konten Artikel" id="text" name="text" rows="60" aria-required="true"><%=data.text%></textarea>
+                                                                                                        <div class="clearfix"></div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="col-sm-12">
+                                                                                                    <div class="form-group form-submit">
+                                                                                                        <input style="background-color: black;" class="btn btn-default" id="update-article-form" type="submit" name="submit" value="Update Artikel"  />
+                                                                                                    </div>
+                                                                                                </div>
+                                                            
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <li>
+                                                                            <form action="/user/pengaturan/delete-article/<%= data._id %>?_method=DELETE" method="POST" id="deleteForm">
+                                                                                <button id="deleteBtn" href="#." type="submit"><i class="fa fa-trash"></i> <span class="text-capitalize">/ Delete X</span></button>
+                                                                            </form>
+                                                                        </li>
                                                                     </ul>
                                                                 <%}%>
                                                             <%}%>
@@ -160,10 +231,53 @@
 
         <%- include('../partials/footscript') %>
 
+        <script>
+            const buttonDelete =  document.querySelector('#deleteBtn');
+                buttonDelete.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    swal({
+                        title: "Are you sure?",
+                        text: "Data akan dihapus secara permanen dan tidak dapat dipulihkan",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var form = document.querySelector("#deleteForm");
+                            form.submit();
+                        } else {
+                            return false;
+                        }
+                    });
+                });
+                console.log(buttonDelete);
+        </script>
+
         <% if (successArticle.length !== 0) { %>
             <script>
               swal({
                 title : "<%= successArticle %>",
+                icon: "success",
+                text : "Success",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
+        <% if (updateArticle.length !== 0) { %>
+            <script>
+              swal({
+                title : "Success",
+                icon: "success",
+                text : "<%= updateArticle %>",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
+        <% if (error.length !== 0) { %>
+            <script>
+              swal({
+                title : "<%= error %>",
                 icon: "success",
                 text : "Success",
                 button: "Okay",

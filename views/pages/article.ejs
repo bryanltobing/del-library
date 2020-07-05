@@ -170,6 +170,19 @@
             </script>
         <%}%>
 
+        <% if (articleDelete.length !== 0) { %>
+            <script>
+              swal({
+                title : "<%= articleDelete %>",
+                icon: "error",
+                text : "Success",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
+
+        articleDelete
+
     </body>
 
 

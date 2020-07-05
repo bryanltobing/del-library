@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const { auth, authRoleLibrarian } = require('../middleware/auth');
-const Books = require('../models/books');
+
+// models
+const Article = require('../models/article');
 
 const sharp = require('sharp');
 
@@ -16,115 +18,49 @@ router.get('/', auth, authRoleLibrarian, (req, res) => {
     });
 }); 
 
-router.get('/buku', auth, authRoleLibrarian, async (req, res) => {
-    let perPage = 9;
-    let page = 1;
-    let book, count, regex;
-    
-    try {
-        if(!req.query.keywords) {
-            book = await Books.find({}).skip((perPage * page) - perPage).limit(perPage);
-            count = await Books.countDocuments();
-        } else {
-            regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-            book = await Books.find({ $or : [ { judul : regex }, { pengarang : regex } ]}).skip((perPage * page) - perPage).limit(perPage);
-            count = await Books.find({ $or : [ { judul : regex }, { pengarang : regex } ]}).countDocuments();
-        }
-        res.render('pages/pengaturan_buku', {
-            title : "Pengaturan Buku",
-            data : book,
-            current : page,
-            count : count,
-            pages : Math.ceil(count / perPage),
-            keywords : req.query.keywords,
-            messageUpdateBook : req.flash('messageUpdateBook'),
-            updateBookError : req.flash('updateBookError'),
-            bookRemoved : req.flash('bookRemoved')
-        });
-    } catch (e) {
-        console.log("error " + e);
-    }
-});
-
-router.get('/buku/:page', auth, authRoleLibrarian, async(req, res) => {
-    let perPage = 9;
-    let page = req.params.page || 1;
-
-    try {
-        const book = await Books.find({}).skip((perPage * page) - perPage).limit(perPage);
-        if(book.length === 0) {
-            throw new Error('Buku tidak ditemukan');
-        }
-        const count = await Books.countDocuments();
-        res.render('pages/pengaturan_buku', {
-            title : 'Book - List',
-            data : book,
-            current : page,
-            count,
-            pages : Math.ceil(count / perPage),
-            bookMessage : req.flash('bookDetailError'),
-            keywords : req.query.keywords,
-            messageUpdateBook : req.flash('messageUpdateBook'),
-            updateBookError : req.flash('updateBookError'),
-            bookRemoved : req.flash('bookRemoved')
-        });
-    } catch(e) {
-        console.log("Error " + e);
-        req.flash('bookDetailError', "Buku tidak ditemukan")
-        res.redirect('/pengaturan_buku');
-    }
-});
-
 // File uploads
 const multer = require('multer');
 const upload = multer({
-    limits : {
-        fileSize : 1024*1024*2
-    },
+    limits : 1024*1024*2,
     fileFilter(req, file, cb) {
-        if(!file.originalname.toLowerCase().match(/\.jpg|jpeg|png/)){
-            return cb(new Error('Please upload an image')) ;
+        if(!file.originalname.toLowerCase().match(/\.jpg|jpeg|png/)) {
+            return cb(new Error('Please upload an image'))
         }
-
         cb(undefined, true);
     }
 });
 
-router.patch('/update-buku/:id', auth, authRoleLibrarian, upload.single('gambar'), async(req, res) => {
-    const idBook = req.params.id;
+// -------------- ARTIKEL -------------- //
+router.patch('/update-article/:id', auth, authRoleLibrarian, upload.single('gambar'), async (req, res) => {
+    const idArticle = req.params.id;
+    let article;
     try {
-        let book;
         if(req.file !== undefined) {
-            book = await Books.findByIdAndUpdate(idBook, {
-                ...req.body, 
-                gambar : await sharp(req.file.buffer).webp().resize({ width : 260, height : 414}).toBuffer()}, 
-                {
-                    new : true
-                }
-            );
+            const bufferArticle = await sharp(req.file.buffer).webp().resize({ width : 1170, height : 500}).toBuffer();
+            article = await Article.findByIdAndUpdate(idArticle, { ...req.body , gambar : bufferArticle }, {new : true});
         } else {
-            book = await Books.findByIdAndUpdate(idBook, { ...req.body }, { new : true });
+            article = await Article.findByIdAndUpdate(idArticle, { ...req.body }, {new : true});
         }
-        req.flash('messageUpdateBook', 'Buku berhasil di update');
-        res.redirect(`/user/pengaturan/buku?keywords=${book.judul}`);
+        req.flash('updateArticle', `Artikel: ${article.judul} Berhasil di Update`);
+        res.redirect(`/article-detail/${article._id}`);
     } catch(e) {
-        req.flash('updateBookError', `Update buku gagal Coba lagi ${e}`);
-        res.redirect('/user/pengaturan/buku');
+        req.flash('error', `Artikel gagal di Update : ${e}`);
+        res.redirect(`/article-detail/${article._id}`);
     }
 });
 
-router.delete('/delete-buku/:id', auth, authRoleLibrarian, async (req, res) => {
-    const idBook = req.params.id;
+router.delete('/delete-article/:id', auth, authRoleLibrarian, async(req, res) => {
+    const idArticle = req.params.id;
+    let article;
     try {
-        const book = await Books.findByIdAndDelete(idBook);
-        req.flash('bookRemoved', `Buku ${book.judul} berhasil di hapus`);
-        res.redirect('/user/pengaturan/buku');
+        article = await Article.findByIdAndDelete(idArticle);
+        req.flash('articleDelete', 'Artikel Berhasil Dihapus');
+        res.redirect('/article');
     } catch(e) {
-        res.redirect('/user/pengaturan/buku');
+        req.flash('error', 'Artikel Gagal Dihapus');
+        res.redirect(`/article-detail/${article._id}`)
     }
 });
-
-
 
 
 module.exports = router;

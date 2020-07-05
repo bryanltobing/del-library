@@ -26,6 +26,7 @@ router.get('/article', async (req, res) => {
                 count,
                 limit,
                 keywords : req.query.keywords,
+                articleDelete : req.flash('articleDelete'),
                 articleDetailError : req.flash('articleDetailError')
             });
         } else {
@@ -57,6 +58,7 @@ router.get('/article', async (req, res) => {
                 count,
                 keywords : req.query.keywords,
                 limit,
+                articleDelete : req.flash('articleDelete'),
                 articleDetailError : req.flash('articleDetailError')
             });
             
@@ -77,7 +79,9 @@ router.get('/article-detail/:id', async (req, res) => {
         res.render('pages/articledetail', {
             title : "Article - Detail",
             data : article,
-            successArticle : req.flash('successArticle')
+            successArticle : req.flash('successArticle'),
+            updateArticle : req.flash('updateArticle'),
+            error : req.flash('error')
         });
     } catch(e) {
         req.flash('articleDetailError' ,'Artikel tidak ditemukan');
@@ -96,6 +100,6 @@ router.get('/getarticle-image/:id', async (req, res) => {
     } catch (e) {
         res.status(404).send(e);
     }
-})
+});
 
 module.exports = router;
