@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" type="text/css" href="/css/responsivetable.css" />
+    <style>
+        #danger {
+            color: white;
+            font-weight: bold;
+        }
+        #danger:hover {
+            background-color : #e31507 !important;
+            font-weight: bolder;
+        }
+        @media only screen and (max-width: 979px) {
+            #one {
+                display: none;
+            } 
+        }
+        
+    </style>
+<body>
+    <%- include('../partials/navbar') %>
+
+
+    <!-- Start: Page Banner -->
+    <section class="page-banner services-banner">
+        <div class="container">
+            <div class="banner-header">
+                <h2>Pengaturan Local Content</h2>
+                <span class="underline center"></span>
+                <p class="lead">Pengaturan</p>
+            </div>
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/user/dashboard">Dashboard</a></li>
+                    <li><a href="/user/pengaturan">Pengaturan Menu</a></li>
+                    <li>Pengaturan Local Content</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- End: Page Banner -->
+
+    <!-- Start -->
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="cart-main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 style="font-size: 30px;" class="widget-title text-center text-capitalize" data-control>Pengaturan Local Content</h4>
+                                <form action="/user/pengaturan/localcontent" method="get" style="margin-top: 30px;">
+                                    <div class="container">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="keywords" id="" placeholder="Cari Judul">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <input type="submit" class="form-control" value="Cari">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="container">
+                                    <% if(keywords){%>
+                                        <p> You searched for : <span style="font-weight: bold;"><%= keywords%></span></p>
+                                    <%}%> 
+                                </div>
+                                <div class="page type-page status-publish hentry">
+                                    <div class="entry-content">
+                                        <div class="woocommerce table-tabs" id="responsiveTabs">
+                                            <div class="tab-content">
+                                                <div id="sectionA" class="tab-pane fade in active">
+                                                    <table class="table table-bordered shop_table cart">
+                                                        <thead>
+                                                            <tr id="one">
+                                                                <th class="product-name">Local Content</th>
+                                                                <th class="product-quantity">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <% data.forEach((d, i) => { %>
+                                                                <tr class="cart_item">
+                                                                    <td data-title="Product" class="product-name">
+                                                                        <span class="product-thumbnail">
+                                                                            
+                                                                        </span>
+                                                                        <span class="product-detail">
+                                                                            <a href="#" data-toggle="modal" data-target="#myModal<%=i%>"><strong class="judul" style="text-transform: capitalize;"><%= d.judul %></strong></a>
+                                                                            <span><strong>Penulis:</strong> <%= d.penulis %></span>
+                                                                            <span><strong>Subject:</strong> <%= d.subject %></span>
+                                                                            <span><strong>Jenis Dokumen:</strong> <%= d.jenis %></span>
+                                                                            <span><strong>Tahun:</strong> <%= d.tahun %></span>
+                                                                            <span><strong>Tingkat:</strong> <%= d.tingkat %></span>
+                                                                            <span><strong>Pembimbing:</strong> <%= d.pembimbing %></span>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td data-title="action" class="product-action">
+                                                                        <div class="dropdown" style="margin: 10px;">
+                                                                            <a href="#" data-toggle="modal" data-target="#myModal<%=i%>" class="btn btn-dark-gray">Update</a>
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="myModal<%=i%>" role="dialog">
+                                                                                    <div class="modal-dialog modal-lg">
+                                                                                        <!-- Modal content-->
+                                                                                        <div class="modal-content">
+                                                                                            <div class="modal-header">
+                                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                                <h4 class="modal-title" style="color : #3e97cc; text-transform: capitalize;">
+                                                                                                    <span style="color: black; font-weight: normal;">Update:</span> <%= d.judul%>
+                                                                                                </h4>
+                                                                                            </div>
+                                                                                            <div class="modal-body" style="text-transform: capitalize;">
+                                                                                                <form action="/user/pengaturan/localcontent/<%= d._id %>?_method=PATCH" method="POST" class="updateForm">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <input class="form-control" type="text" placeholder="Judul Local Content" name="judul" id="judul<%=i%>" size="30" value="<%= d.judul %>" aria-required="true"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <input class="form-control" type="text" placeholder="Subject..." name="subject" id="subject<%=i%>" size="30" value="<%= d.subject %>" aria-required="true"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <fieldset class="form-group">
+                                                                                                                <div class="row">
+                                                                                                                  <legend class="col-form-label col-sm-2 pt-0">Jenis Dok</legend>
+                                                                                                                  <div class="col-sm-10">
+                                                                                                                    <div class="form-check">
+                                                                                                                      <input class="form-check-input" type="radio" name="jenis" id="jenis1" value="Kerja Praktek">
+                                                                                                                      <label class="form-check-label" for="prodi1">
+                                                                                                                        Kerja Praktek
+                                                                                                                      </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                      <input class="form-check-input" type="radio" name="jenis" id="jenis2" value="Proyek Akhir 1">
+                                                                                                                      <label class="form-check-label" for="prodi2">
+                                                                                                                        Proyek Akhir 1
+                                                                                                                      </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                      <input class="form-check-input" type="radio" name="jenis" id="jenis3" value="Proyek Akhir 2">
+                                                                                                                      <label class="form-check-label" for="prodi3">
+                                                                                                                        Proyek Akhir 2
+                                                                                                                      </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                      <input class="form-check-input" type="radio" name="jenis" id="jenis4" value="Proyek Akhir 3">
+                                                                                                                      <label class="form-check-label" for="prodi4">
+                                                                                                                        Proyek Akhir 3
+                                                                                                                      </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                      <input class="form-check-input" type="radio" name="jenis" id="jenis5" value="Tugas Akhir">
+                                                                                                                      <label class="form-check-label" for="prodi5">
+                                                                                                                        Tugas Akhir
+                                                                                                                      </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="form-check">
+                                                                                                                      <input class="form-check-input" type="radio" name="jenis" id="jenis7" value="Skripsi">
+                                                                                                                      <label class="form-check-label" for="prodi7">
+                                                                                                                        Skripsi
+                                                                                                                      </label>
+                                                                                                                    </div>
+                                                                                                                  </div>
+                                                                                                                </div>
+                                                                                                              </fieldset>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <input class="form-control" type="text" placeholder="Penulis..." name="penulis" id="penulis<%=i%>" size="30" value="<%= d.penulis %>" aria-required="true"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <input class="form-control" type="text" placeholder="Pembimbing..." name="pembimbing" id="pembimbing<%=i%>" size="30" value="<%= d.pembimbing %>" aria-required="true"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <input class="form-control" type="text" placeholder="Tahun..." name="tahun" id="tahun<%=i%>" size="30" value="<%= d.tahun %>" aria-required="true"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-md-6 col-sm-6">
+                                                                                                            <div class="form-group">
+                                                                                                                <input class="form-control" type="text" placeholder="Tingkat..." name="tingkat" id="tingkat<%=i%>" size="30" value="<%= d.tingkat %>" aria-required="true"/>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="form-group form-submit">
+                                                                                                                <input style="background-color: black;" class="btn btn-default" id="update-localcontent-form<%=i%>" type="submit" name="submit" value="Update Local Content"  />
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                    
+                                                                                                    </div>
+                                                                                                </form>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <form action="/user/pengaturan/delete-localcontent/<%= d._id %>?_method=DELETE" style="display: inline;" class="deleteForm" method="POST">
+                                                                                    <button type="submit" name="delete" id="danger" class="btn btn-danger text-light deleteButton">Delete</button>
+                                                                                </form>
+                                                                        </div>
+                                                                        <div class="addition-action">
+                                                                            <small></small>
+                                                                            <ul>
+                                                                                <li></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <%})%>
+                                                        </tbody>
+                                                    </table>
+                                                    <% if(count<1) {%>
+                                                        <p>Hasil tidak ditemukan</p>
+                                                    <%}%>
+                                                    <div class="container" style="margin: 30px 0px 30px -10px;">
+                                                        <nav class="navigation pagination text-center">
+                                                            <h2 class="screen-reader-text">Posts navigation</h2>
+                                                            <div class="nav-links">
+                                                                <% if (pages > 0) { %>
+                                                                    <ul class="pagination text-center">
+                                                                        <% if (current == 1) { %>
+                                                                            <li class="disabled"><a>First</a></li>
+                                                                        <% } else { %>
+                                                                            <% if(!keywords) {%>
+                                                                                <li><a href="/user/pengaturan/localcontent/1">First</a></li>
+                                                                            <%} else {%>
+                                                                                <li><a href="/user/pengaturan/localcontent/1?keywords=<%=keywords%>">First</a></li>
+                                                                            <%}%>
+                                                                        <% } %>
+                                                                        <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                                                        <% if (i !== 1) { %>
+                                                                            <li class="disabled"><a>...</a></li>
+                                                                        <% } %>
+                                                                        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                                                                            <% if (i == current) { %>
+                                                                                <li class="active"><a><%= i %></a></li>
+                                                                            <% } else { %>
+                                                                                <% if(!keywords) {%>
+                                                                                    <li><a href="/user/pengaturan/localcontent/<%= i %>"><%= i %></a></li>
+                                                                                <%} else {%>
+                                                                                    <li><a href="/user/pengaturan/localcontent/<%= i %>?keywords=<%=keywords%>"><%= i %></a></li>
+                                                                                <%}%>
+                                                                            <% } %>
+                                                                            <% if (i == Number(current) + 4 && i < pages) { %>
+                                                                                <li class="disabled"><a>...</a></li>
+                                                                            <% } %>
+                                                                        <% } %>
+                                                                        <% if (current == pages) { %>
+                                                                            <li class="disabled"><a>Last</a></li>
+                                                                        <% } else { %>
+                                                                            <% if(!keywords) {%>
+                                                                                <li><a href="/user/pengaturan/localcontent/<%= pages %>">Last</a></li>
+                                                                            <%} else {%>
+                                                                                <li><a href="/user/pengaturan/localcontent/<%= pages %>?keywords=<%=keywords%>">Last</a></li>
+                                                                            <%}%>
+                                                                        <% } %>
+                                                                    </ul>
+                                                                <% } %>
+                                                            </div>
+                                                        </nav>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- .entry-content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- End -->
+    
+    
+    
+    <%- include('../partials/footer') %>
+    
+    
+    <%- include('../partials/footscript') %>
+
+
+    <script>
+        
+        const form = document.querySelectorAll('.updateForm');
+
+        form.forEach((theform, index) => {
+            
+            $(`#update-localcontent-form${index}`).on('click', function () {
+                console.log("wow");
+                if ($(`#judul${index}`).val() === '' ||  $(`#subject${index}`).val() === '' || $(`#penulis${index}`).val() === '' || $(`#pembimbing${index}`).val() === '' || $(`#tahun${index}`).val() === '' || $(`#tingkat${index}`).val() === '' ) {
+                    swal({
+                        title : "Warning",
+                        icon: "warning",
+                        text : "Data form wajib diisi",
+                        button: "Okay",
+                    });
+                    return false;
+                } 
+
+                return true;
+            });
+        });
+        
+
+
+        const buttonDelete =  document.querySelectorAll('.deleteButton');
+        buttonDelete.forEach((button, i) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                swal({
+                    title: "Are you sure?",
+                    text: "Data akan dihapus secara permanen dan tidak dapat dipulihkan",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var form = document.querySelectorAll(".deleteForm");
+                        form[i].submit();
+                    } else {
+                        return false;
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
+
+    <script>
+        function truncateText(selector, maxLength) {
+            var element = document.querySelectorAll(selector);
+            let truncated = [];
+            for(i=0;i<element.length;i++) {
+                truncated[i] = element[i].innerText;
+                if(truncated[i].length > maxLength) {
+                    truncated[i] = truncated[i].substr(0, maxLength) + '...';
+                }
+            }
+            return truncated;
+        }
+        const mantapall = document.querySelectorAll('.judul');
+        mantapall.forEach((m, i) => {
+            m.innerText = truncateText('.judul', 80)[i];
+        });
+        
+    </script>
+
+    <%if (messageUpdate.length > 0) { %>
+        <script>
+            swal({
+                title : "<%= messageUpdate %>",
+                icon: "success",
+                text : "Success",
+                button: "Okay",
+            });
+        </script>
+    <% } %>
+
+    <%if (updateError.length > 0) { %>
+        <script>
+            swal({
+                title : "<%= updateError %>",
+                icon: "Failed",
+                text : "Failed",
+                button: "Okay",
+            });
+        </script>
+    <% } %>
+
+    <%if (Removed.length > 0) { %>
+        <script>
+            swal({
+                title : "Removed",
+                icon: "error",
+                text : "<%= Removed %>",
+                button: "Okay",
+            });
+        </script>
+    <% } %>
+</body>
+</html>
