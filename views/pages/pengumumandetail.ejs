@@ -3,6 +3,22 @@
     
 
     <%- include('../partials/head') %>
+    <style>
+        #update {
+            background-color: #3e97cc;
+            color: white;
+        }
+        #update:hover {
+            background-color: #5aacdb;
+        }
+        #delete {
+            background-color: #e31717;
+            color: white;
+        }
+        #delete:hover {
+            background-color: #dd6f6f;
+        }
+    </style>
 
     <body>
 
@@ -64,6 +80,12 @@
                                                                 </a>
                                                             </li>
                                                         </ul>
+                                                        <% if(user !== undefined) {%>
+                                                            <% if(user.role === "Librarian") {%>
+                                                                <button class="btn btn-primary" id="update">Update</button>
+                                                                <button class="btn btn-primary" id="delete">Delete</button>
+                                                            <%}%>
+                                                        <%}%>
                                                         <h2><%= data.judul %></h2>
                                                         <% data.baru.forEach((de) => { %>
                                                             <p><%=de%></p>
