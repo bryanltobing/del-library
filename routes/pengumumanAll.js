@@ -23,7 +23,8 @@ router.get('/pengumuman-list', async (req, res) => {
         }
         res.render('pages/pengumuman', {
             title : "Pengumuman",
-            data : pengumuman
+            data : pengumuman,
+            error : req.flash('error')
         });
     } catch(e) {
         console.log("error " + e);

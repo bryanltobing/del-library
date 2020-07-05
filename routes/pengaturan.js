@@ -5,6 +5,7 @@ const { auth, authRoleLibrarian } = require('../middleware/auth');
 
 // models
 const Article = require('../models/article');
+const Pengumuman = require('../models/pengumuman');
 
 const sharp = require('sharp');
 
@@ -65,7 +66,26 @@ router.delete('/delete-article/:id', auth, authRoleLibrarian, async(req, res) =>
 
 
 // ------------------------ PENGUMUMAN ----------------------------- //
+router.patch('/update-pengumuman/:id', auth, authRoleLibrarian, async(req, res) => {
+    const idPengumuman = req.params.id;
+    try {
+        const pengumuman = await Pengumuman.findByIdAndUpdate(idPengumuman, { ...req.body }, {new : true});
+        req.flash('messageAddPengumuman', 'Pengumuman Berhasil di Update');
+        res.redirect(`/pengumuman-detail${pengumuman._id}`);
+    } catch(e) {
+        req.flash('error', 'Pengumuman Gagal di update : ' + e);
+        res.redirect(`/pengumuman-list`);
+    }
+});
 
+router.delete('/delete-pengumuman/:id', auth, authRoleLibrarian, async(req, res) => {
+    const idPengumuman = req.params.id;
+    try {
+
+    } catch(e) {
+        
+    }
+});
 
 
 module.exports = router;

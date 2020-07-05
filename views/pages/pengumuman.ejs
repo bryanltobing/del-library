@@ -128,6 +128,18 @@
             });
         </script>
 
+        <%if (error.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= error %>",
+                    icon: "error",
+                    text : "Failed",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
+
+
 
     </body>
 
