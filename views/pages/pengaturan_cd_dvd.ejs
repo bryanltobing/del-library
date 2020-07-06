@@ -126,11 +126,13 @@
                                                                                                     <div class="row">
                                                                                                         <div class="col-md-6 col-sm-6">
                                                                                                             <div class="form-group">
+                                                                                                                <label for="judul<%=i%>">Judul</label>
                                                                                                                 <input class="form-control" type="text" placeholder="Judul CD/DVD" name="judul" id="judul<%=i%>" size="30" value="<%= d.judul %>" aria-required="true"/>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="col-md-6 col-sm-6">
                                                                                                             <div class="form-group">
+                                                                                                                <label for="sumber<%=i%>">Sumber</label>
                                                                                                                 <input class="form-control" type="text" placeholder="Sumber..." name="sumber" id="sumber<%=i%>" size="30" value="<%= d.sumber %>" aria-required="true"/>
                                                                                                             </div>
                                                                                                         </div>
@@ -188,6 +190,7 @@
                                                                                                         
                                                                                                         <div class="col-sm-12">
                                                                                                             <div class="form-group">
+                                                                                                                <label for="keterangan<%=i%>">Deskripsi</label>
                                                                                                                 <textarea class="form-control" placeholder="Deskripsi CD" id="keterangan<%=i%>" name="keterangan" rows="15" aria-required="true"><%= d.keterangan%></textarea>
                                                                                                                 <div class="clearfix"></div>
                                                                                                             </div>
