@@ -24,7 +24,8 @@ router.get('/pengumuman-list', async (req, res) => {
         res.render('pages/pengumuman', {
             title : "Pengumuman",
             data : pengumuman,
-            error : req.flash('error')
+            error : req.flash('error'),
+            deleted : req.flash('deleted')
         });
     } catch(e) {
         console.log("error " + e);

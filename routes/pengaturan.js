@@ -81,9 +81,12 @@ router.patch('/update-pengumuman/:id', auth, authRoleLibrarian, async(req, res) 
 router.delete('/delete-pengumuman/:id', auth, authRoleLibrarian, async(req, res) => {
     const idPengumuman = req.params.id;
     try {
-
+        const pengumuman = await Pengumuman.findByIdAndDelete(idPengumuman);
+        req.flash('deleted', 'Pengumuman berhasil di hapus');
+        res.redirect('/pengumuman-list');
     } catch(e) {
-        
+        req.flash('error', 'Pengumuman Gagal dihapus');
+        res.redirect('/pengumuman-list');
     }
 });
 

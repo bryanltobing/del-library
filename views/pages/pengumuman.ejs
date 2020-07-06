@@ -139,6 +139,17 @@
             </script>
         <% } %>
 
+        <%if (deleted.length > 0) { %>
+            <script>
+                swal({
+                    title : "<%= deleted %>",
+                    icon: "error",
+                    text : "Success",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
+
 
 
     </body>
