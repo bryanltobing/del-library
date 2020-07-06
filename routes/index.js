@@ -45,6 +45,7 @@ router.get('/search', async (req, res) => {
         }
         if(req.query.catalog === "Local Content") {
             route = '/localcontent-list';
+            return res.redirect(`${route}?keywords=${flash}&jenis=`);
         }
         if(req.query.catalog === "Artikel") {
             route = "/article";

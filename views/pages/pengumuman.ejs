@@ -36,7 +36,7 @@
                     <div class="main-news-list">
                         <div class="container">
                             <!-- Start: Search Section -->
-                            <section class="search-filters">
+                            <section class="search-filters" style="margin-bottom: 15px;">
                                 <div class="filter-box">
                                     <h3>Cari Pengumuman &amp; Pemberitahuan</h3>
                                     <form action="/pengumuman-list" method="get">
@@ -60,11 +60,14 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <% if(keywords) {%>
+                                        <p class="text-center"> you searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
+                                    <%}%>
                                 </div>
                                 <div class="clear"></div>
                             </section>
                             <!-- End: Search Section -->
-                            <div class="row">
+                            <div class="row" style="margin-top: 0px;">
                                 <% data.forEach((d) => { %>
                                     <div class="col-md-12 news-events-list-view">
                                         <div class="news-list-box">
@@ -95,6 +98,9 @@
                                         </div>
                                     </div>
                                 <% })%>
+                                <% if(count<1) {%>
+                                    <h3 style="margin: 50px;" class="text-center text-capitalize">Pengumuman tidak ditemukan</h3>
+                                <%}%>
                             </div>
                         </div>
                     </div>

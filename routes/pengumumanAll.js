@@ -9,14 +9,17 @@ const Pengumuman = require('../models/pengumuman');
 router.get('/pengumuman-list', async (req, res) => {
     try {
         var pengumuman;
+        var count;
         if(!req.query.keywords) {
             pengumuman = await Pengumuman.find({});
+            count = await pengumuman.length;
             pengumuman.forEach((p) => {
                 p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
             });
         } else {
             const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
             pengumuman = await Pengumuman.find({ judul : regex });
+            count = await pengumuman.length;
             pengumuman.forEach((p) => {
                 p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');
             });
@@ -25,7 +28,9 @@ router.get('/pengumuman-list', async (req, res) => {
             title : "Pengumuman",
             data : pengumuman,
             error : req.flash('error'),
-            deleted : req.flash('deleted')
+            deleted : req.flash('deleted'),
+            keywords : req.query.keywords,
+            count : count
         });
     } catch(e) {
         console.log("error " + e);
