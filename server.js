@@ -31,6 +31,7 @@ const pengaturan = require('./routes/pengaturan');
 const pengaturan_buku = require('./routes/pengaturan_buku');
 const pengaturan_cdDvd = require('./routes/pengaturan_cdDvd');
 const pengaturan_localcontent = require('./routes/pengaturan_localcontent');
+const pinjamBuku = require('./routes/pinjamBuku');
 
 app.set('view engine', 'ejs');
 
@@ -70,6 +71,7 @@ app.use('/user/pengaturan', pengaturan);
 app.use('/user/pengaturan', pengaturan_buku);
 app.use('/user/pengaturan', pengaturan_cdDvd);
 app.use('/user/pengaturan', pengaturan_localcontent);
+app.use('/user/pinjambuku', pinjamBuku);
 
 
 
