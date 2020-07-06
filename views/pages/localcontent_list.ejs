@@ -42,7 +42,7 @@
                                         <div class="container">
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="judul" id="" placeholder="Cari Judul">
+                                                    <input type="text" class="form-control" name="keywords" id="" placeholder="Cari Judul">
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
@@ -138,11 +138,11 @@
                                                             <% if(data.length < count && !keywords.judul && !keywords.jenis) {%>
                                                                 <a href="/localcontent-list?limit=<%= limit+7%>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
                                                             <%} else if(data.length < count && keywords.judul.length > 0 && keywords.jenis.length < 1){ %>
-                                                                <a href="/localcontent-list?limit=<%= limit+7%>&judul=<%= keywords.judul %>&jenis=" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>&keywords=<%= keywords.judul %>&jenis=" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
                                                             <%} else if(data.length < count && keywords.jenis.length > 0 && keywords.judul.length < 1){%>
-                                                                <a href="/localcontent-list?limit=<%= limit+7%>&judul=&jenis=<%= keywords.jenis %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>&keywords=&jenis=<%= keywords.jenis %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
                                                             <%} else if(data.length < count && keywords.jenis.length > 0 && keywords.judul.length > 0){%>
-                                                                <a href="/localcontent-list?limit=<%= limit+7%>&judul=<%= keywords.judul %>&jenis=<%= keywords.jenis %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
+                                                                <a href="/localcontent-list?limit=<%= limit+7%>&keywords=<%= keywords.judul %>&jenis=<%= keywords.jenis %>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
                                                             <%}else if(count<1) {%>
                                                                 <h3 class="text-center" style="margin-bottom: 100px;">Hasil tidak ditemukan</h3>
                                                             <% }else {%>

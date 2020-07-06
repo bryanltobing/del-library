@@ -14,11 +14,11 @@ router.get('/localcontent-list', async (req, res) => {
         var count = 0;
         var regexJudul;
         var regexJenis;
-        if(!req.query.judul && !req.query.jenis) {
+        if(!req.query.keywords && !req.query.jenis) {
             localcontent = await LocalContent.find({}).limit(limit);
             count = await LocalContent.countDocuments();
         } else {
-            regexJudul = new RegExp(escapeRegex(req.query.judul) , 'gi');
+            regexJudul = new RegExp(escapeRegex(req.query.keywords) , 'gi');
             regexJenis = new RegExp(escapeRegex(req.query.jenis), 'gi');
             localcontent = await LocalContent.find({ $and : [ { judul : regexJudul }, { jenis : regexJenis } ] }).limit(limit);
             localcontentcount = await LocalContent.find({ $and : [ { judul : regexJudul }, { jenis : regexJenis } ] });
@@ -29,7 +29,7 @@ router.get('/localcontent-list', async (req, res) => {
             data : localcontent,
             count,
             keywords : {
-                judul : req.query.judul,
+                judul : req.query.keywords,
                 jenis : req.query.jenis   
             },  
             limit,
