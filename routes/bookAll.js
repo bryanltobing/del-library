@@ -41,7 +41,7 @@ router.get('/book-list', async(req, res) => {
             });
         } else {
             const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-            const bookCount = await Book.find({ $or: [ { judul : regex }, { pengarang : regex } ]});
+            const bookCount = await Book.find({ $or: [ { judul : regex }, { pengarang : regex } , { deskripsi : regex} ]});
             // GET
             const book = await Book.find({
                 $or: [
@@ -50,6 +50,9 @@ router.get('/book-list', async(req, res) => {
                     },
                     {
                         pengarang : regex
+                    },
+                    {
+                        deskripsi : regex
                     }
                 ]
              }).skip((perPage * page) - perPage).limit(perPage);

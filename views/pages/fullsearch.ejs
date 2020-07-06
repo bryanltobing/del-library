@@ -3,7 +3,12 @@
     
 
     <%- include('../partials/head') %>
-    
+    <link rel="stylesheet" type="text/css" href="/css/responsivetable.css" />
+    <style>
+        #selengkapnyaArticle:hover{
+            background-color: rgb(4, 118, 163) !important;
+        }
+    </style>
     <body>
         
         <!-- Start: Header Section -->
@@ -98,10 +103,252 @@
                             </div>
                         </div>
                     </form>
+                    <% if(keywords.length > 2) {%>
+                        <p class="text-center">You searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
+                    <%}%>
+                    <% if(keywords.length > 2) {%>
+                        <p>Hasil : <span style="font-weight: bold;"><%= searchCount.totalCount %> data ditemukan</spans></p>
+                    <%}%>
                 </div>
             </div>
         </section>
         <!-- End: Search Section -->
+
+        <% if(keywords.length > 2) {%>
+        <div id="content" class="site-content">
+            <div id="primary" class="content-area">
+                <main id="main" class="site-main">
+                    <div class="cart-main" style="padding:0px 0px 100px 0px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="page type-page status-publish hentry">
+                                        <div class="entry-content">
+                                            <div class="woocommerce table-tabs" id="responsiveTabs">
+                                                <ul class="nav nav-tabs">
+                                                    <% if(search.book.length > 0 ) {%>
+                                                        <li class="active"><b class="arrow-up"></b><a data-toggle="tab" href="#sectionA">Book</a></li>
+                                                    <%}%>
+                                                    <% if(search.cd.length > 0 ) {%>
+                                                        <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionB">CD/DVD</a></li>
+                                                    <%}%>
+                                                    <% if(search.localcontent.length > 0 ) {%>
+                                                        <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionC">Local Content</a></li>
+                                                    <%}%>
+                                                    <% if(search.article.length > 0 ) {%>
+                                                        <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionD">Article</a></li>
+                                                    <%}%>
+                                                    <% if(search.pengumuman.length > 0 ) {%>
+                                                        <li><b class="arrow-up"></b><a data-toggle="tab" href="#sectionE">Pengumuman</a></li>
+                                                    <%}%>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <% if(search.book.length > 0 ) {%>
+                                                        <div id="sectionA" class="tab-pane fade in active">
+                                                            <div class="booksmedia-fullwidth">
+                                                                <ul>
+                                                                    <p><span style="font-weight: bold;"><%= searchCount.bookSearchCount %></span> buku ditemukan terkait dengan keywords</p>
+                                                                    <% search.book.forEach((book) => { %>
+                                                                        <li>
+                                                                            <div class="book-list-icon yellow-icon"></div>
+                                                                            <figure>
+                                                                                <a href="/book-detail/<%= book._id %>">
+                                                                                    <% if(book.gambar === undefined ) {%>
+                                                                                        <img src="/images/placeholder/book.png" alt="Book" style="height: 615px;">
+                                                                                    <% } else {%>
+                                                                                        <img src="/getbook-image/<%= book._id %>" alt="Book">
+                                                                                    <% } %>
+                                                                                </a>
+                                                                                <figcaption>
+                                                                                    <header>
+                                                                                        <h4><a href="/book-detail/<%= book._id %>"><%= book.judul %></a></h4>
+                                                                                        <p><strong>Pengarang:</strong> <%= book.pengarang %> </p>
+                                                                                        <p><strong>ISBN:</strong> <%= book.isbn %> </p>
+                                                                                    </header>
+                                                                                    <div style="font-weight: bold;">
+                                                                                        Deskrispi: 
+                                                                                    </div>
+                                                                                    <p class="bookDesc"><%= book.deskripsi %></p>
+                                                                                </figcaption>
+                                                                            </figure>
+                                                                        </li>
+                                                                    <% }) %>
+                                                                    <a href="/book-list?keywords=<%=keywords%>" class="btn btn-primary text-capitalize" style="text-transform: capitalize; color: white;">Selengkapnya <i class="fa fa-arrow-circle-right" style="font-size:14px; margin-left: 3px;"></i> </a>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    <%}%>
+                                                    
+                                                    <% if(search.cd.length > 0 ) {%>
+                                                        <div id="sectionB" class="tab-pane fade in">
+                                                            <p><span style="font-weight: bold;"><%= searchCount.cdSearchCount %></span> CD/DVD ditemukan terkait dengan keywords</p>
+                                                            <div class="col-md-12" style="margin-bottom: 100px;">
+                                                                <aside id="secondary" class="sidebar widget-area" data-accordion-group>
+                                                                    <div class="widget widget_related_search open">
+                                                                        <div data-content>
+                                                                            <% search.cd.forEach((d) => { %>
+                                                                            <div data-accordion>
+                                                                                <h5 class="widget-sub-title" data-control><span><i class="fa fa-pie-chart" style="color:black; font-size: 20px; margin-right: 10px;"></i></span><%= d.judul %></h5>
+                                                                                <div class="widget_categories" data-content>
+                                                                                    <ul>
+                                                                                        <li><span style="font-weight: bold;">Id Master : </span> <%= d.id_master %> </li>
+                                                                                        <li><span style="font-weight:bold;">Sumber: </span> <%= d.sumber %></li>
+                                                                                        <li><span style="font-weight: bold;">Prodi pemilik:</span> <%= d.prodiPemilik %></li>
+                                                                                        <li><span style="font-weight: bold; display: block;">Deskripsi:</span><%= d.keterangan %></li>
+                                                                                        <% if(d.status == 0) {%>
+                                                                                            <li style="color: green;">Tersedia</li>
+                                                                                        <% } else {%>
+                                                                                            <li style="color: red;">Tidak Tersedia</li>
+                                                                                        <%}%>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                            <% })%>
+                                                                            <a href="/cd_dvd-list?keywords=<%=keywords%>" class="btn btn-primary text-capitalize" style="text-transform: capitalize; color: white;">Selengkapnya <i class="fa fa-arrow-circle-right" style="font-size:14px; margin-left: 3px;"></i> </a>
+                                                                        </div>
+                                                                        <div class="clearfix"></div>
+                                                                    </div>
+                                                                </aside>
+                                                            </div>
+                                                        </div>
+                                                    <%}%>
+
+                                                    <% if(search.localcontent.length > 0 ) {%>
+                                                        <div id="sectionC" class="tab-pane fade in">
+                                                            <p><span style="font-weight: bold;"><%= searchCount.localcontentSearchCount %></span> Local Content ditemukan terkait dengan keywords</p>
+                                                            <table class="table table-bordered shop_table cart">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="product-name">Judul</th>
+                                                                        <th class="product-quantity">Aksi</th>
+                                                                        <th class="product-price">Jenis Dokumen</th>                                                                
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% search.localcontent.forEach((d, i) => { %>
+                                                                        <tr class="cart_item">
+                                                                            <td data-title="Product" class="product-name">
+                                                                                <span class="product-detail">
+                                                                                    <a href="#" data-toggle="modal" data-target="#myModal<%=i%>" style="text-transform: capitalize;"><strong><%= d.judul %></strong></a>
+                                                                                    <span><strong>Penulis:</strong> <%= d.penulis %></span>
+                                                                                    <span><strong>Subject:</strong> <%= d.subject %></span>
+                                                                                </span>
+                                                                            </td>
+                                                                            <td data-title="action" class="product-action">
+                                                                                <!-- Trigger the modal with a button -->
+                                                                                <button type="button" class="btn btn-dark-gray btn-lg" data-toggle="modal" data-target="#myModal<%=i%>">Detail</button>
+                                                                                
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="myModal<%=i%>" role="dialog">
+                                                                                    <div class="modal-dialog">
+                                                                                    
+                                                                                    <!-- Modal content-->
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                        <h4 class="modal-title" style="color : #3e97cc; text-transform: capitalize;"><%= d.judul %></h4>
+                                                                                        </div>
+                                                                                        <div class="modal-body" style="text-transform: capitalize;">
+                                                                                            <p><span style="font-weight: bold;">Penulis: </span> <%= d.penulis %></p>
+                                                                                            <p><span style="font-weight: bold;">Subject: </span> <%= d.subject %></p>
+                                                                                            <p><span style="font-weight: bold;">Jenis Dokumen: </span> <%= d.jenis %></p>
+                                                                                            <p><span style="font-weight: bold;">Tahun : </span> <%= d.tahun %></p>
+                                                                                            <p><span style="font-weight: bold;">Tingkat : </span> <%= d.tingkat %></p>
+                                                                                            <p><span style="font-weight: bold;">Pembimbing : </span> <%= d.pembimbing %></p>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+                                                                                    
+                                                                            </td>
+                                                                            <td data-title="Price" class="product-price">
+                                                                                <p style="font-weight: bold;"><%= d.jenis %></p>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <% })%>
+                                                                    </tbody>
+                                                            </table>
+                                                            <a href="/localcontent-list?keywords=<%=keywords%>&jenis=" class="btn btn-primary text-capitalize" style="text-transform: capitalize; color: white;">Selengkapnya <i class="fa fa-arrow-circle-right" style="font-size:14px; margin-left: 3px;"></i> </a>
+                                                        </div>
+                                                    <%}%>
+
+                                                    <% if(search.article.length > 0 ) {%>
+                                                        <div id="sectionD" class="tab-pane fade in">
+                                                            <div class="row">
+                                                                <p><span style="font-weight: bold;"><%= searchCount.articleSearchCount %></span> Artikel ditemukan terkait dengan keywords</p>
+                                                                <% search.article.forEach((d) => { %>
+                                                                    <div class="col-md-6" style="margin-top: 50px;">
+                                                                        <h6 style="margin: 10px 0px; color: #3e97cc;"><%= d.category%> </h6>
+                                                                        <h5><%= d.judul%> </h5>
+                                                                        <% if(d.gambar === undefined) {%>
+                                                                            <img src="/images/placeholder/article.png" alt="article-image">
+                                                                        <%} else {%>
+                                                                            <img style="box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);" src="/getarticle-image/<%=d._id%>" alt="article-image">
+                                                                        <%}%>
+                                                                        <p style="padding: 20px 0px;" class="text"><%= d.text %></p>
+                                                                        <a class="btn btn-primary" style="color: white;" href="/article-detail/<%= d._id %>">Read More</a>
+                                                                    </div>
+                                                                <%})%>
+                                                                <div class="col-md-12" style="margin-top:50px;" >
+                                                                    <a href="/article?keywords=<%=keywords%>" id="selengkapnyaArticle" class="btn btn-group-justified text-capitalize" style="text-transform: capitalize; background-color: #3e97cc; color: white; margin-top: 40px;">Selengkapnya <i class="fa fa-arrow-circle-right" style="font-size:14px; margin-left: 3px;"></i> </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <%}%>        
+
+                                                    <% if(search.pengumuman.length > 0 ) {%>
+                                                    <div id="sectionE" class="tab-pane fade in">
+                                                        <p><span style="font-weight: bold;"><%= searchCount.pengumumanSearchCount %></span> pengumuman ditemukan terkait dengan keywords</p>
+                                                        <% search.pengumuman.forEach((d) => { %>
+                                                            <div class="col-md-12 news-events-list-view">
+                                                                <div class="news-list-box">
+                                                                    <div class="single-news-list">
+                                                                        <div class="content-block">
+                                                                            <div class="member-info">
+                                                                                <ul class="news-event-info">
+                                                                                    <li>
+                                                                                        <a href="#" target="_blank">
+                                                                                            <i class="fa fa-calendar"></i>
+                                                                                            <%= d.tanggal[1] %> <%= d.tanggal[2] %>, <%= d.tanggal[3] %>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <a href="#" target="_blank">
+                                                                                            <i class="fa fa-clock-o"></i>
+                                                                                            <%= d.tanggal[5] %>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <h3><a href="/pengumuman-detail/<%= d._id %>"><%= d.judul %></a></h3>
+                                                                                <p class="konten"><%= d.konten %></p>
+                                                                                <a class="btn btn-primary" href="/pengumuman-detail/<%= d._id %>">Read More</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="clearfix"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <% })%>
+                                                        <a href="/pengumuman-list?keywords=<%=keywords%>" class="btn btn-primary text-capitalize" style="text-transform: capitalize; color: white;">Selengkapnya <i class="fa fa-arrow-circle-right" style="font-size:14px; margin-left: 3px;"></i> </a>
+                                                    </div>   
+                                                    <%}%>                                                 
+                                                </div>
+                                            </div>
+                                        </div><!-- .entry-content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <%}%>
         
         <!-- Start: Welcome Section -->
         <section class="welcome-section">
@@ -526,5 +773,55 @@
         mantapall.innerText = truncateText('#articleHome', 300);
     </script>
 
+    <script>
+        function truncateText(selector, maxLength) {
+            var element = document.querySelectorAll(selector);
+            let truncated = [];
+            for(i=0;i<element.length;i++) {
+                truncated[i] = element[i].innerText;
+                if(truncated[i].length > maxLength) {
+                    truncated[i] = truncated[i].substr(0, maxLength) + '...';
+                }
+            }
+            return truncated;
+        }
+        const book = document.querySelectorAll('.bookDesc');
+        book.forEach((m, i) => {
+            m.innerText = truncateText('.text', 180)[i];
+        });
+
+        const article = document.querySelectorAll('.text');
+        article.forEach((m, i) => {
+            m.innerText = truncateText('.text', 180)[i];
+        });
+
+        const pengumuman = document.querySelectorAll('.konten');
+        pengumuman.forEach((m, i) => {
+            m.innerText = truncateText('.text', 207)[i];
+        });
+
+    </script>
+
+    <%if (keywords.length < 1) { %>
+        <script>
+            swal({
+                title : "Masukkan keywords",
+                icon: "error",
+                text : "Failed",
+                button: "Okay",
+            });
+        </script>
+    <% } %>
+
+    <%if (keywords.length < 3 && keywords.length > 0) { %>
+        <script>
+            swal({
+                title : "Masukkan keywords minimal 3 karakter",
+                icon: "error",
+                text : "Failed",
+                button: "Okay",
+            });
+        </script>
+    <% } %>
 
 </html>

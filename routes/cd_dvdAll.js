@@ -20,7 +20,7 @@ router.get('/cd_dvd-list', async (req, res) => {
             });
         } 
         const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-        const cd = await CD.find({ $or : [ { judul : regex }, { sumber : regex } ] });
+        const cd = await CD.find({ $or : [ { judul : regex }, { sumber : regex } , { keterangan : regex } ] });
         res.render('pages/cd_dvd', {
             title : "CD/DVD",
             data : cd,

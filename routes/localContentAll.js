@@ -20,8 +20,19 @@ router.get('/localcontent-list', async (req, res) => {
         } else {
             regexJudul = new RegExp(escapeRegex(req.query.keywords) , 'gi');
             regexJenis = new RegExp(escapeRegex(req.query.jenis), 'gi');
-            localcontent = await LocalContent.find({ $and : [ { judul : regexJudul }, { jenis : regexJenis } ] }).limit(limit);
-            localcontentcount = await LocalContent.find({ $and : [ { judul : regexJudul }, { jenis : regexJenis } ] });
+            localcontent = await LocalContent.find(
+                {
+                    $and : [
+                        { 
+                            $and : [ { judul : regexJudul }, { jenis : regexJenis } ] 
+                        },
+                        {
+                            $or : [ {judul : regexJudul}, {subject : regexJudul} ]
+                        }
+                    ]
+        
+                }).limit(limit);
+            localcontentcount = await LocalContent.find({$and : [{ $and : [ { judul : regexJudul }, { jenis : regexJenis } ] },{$or : [ {judul : regexJudul}, {subject : regexJudul} ]}]});
             count = localcontentcount.length;
         }
         res.render('pages/localcontent_list', {

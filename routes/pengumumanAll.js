@@ -18,7 +18,7 @@ router.get('/pengumuman-list', async (req, res) => {
             });
         } else {
             const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-            pengumuman = await Pengumuman.find({ judul : regex });
+            pengumuman = await Pengumuman.find({$or : [ { judul : regex }, {konten : regex} ]} );
             count = await pengumuman.length;
             pengumuman.forEach((p) => {
                 p.tanggal = moment(p.createdAt).tz('Asia/Jakarta').locale('id').format('LLLL').split(' ');

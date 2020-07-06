@@ -62,6 +62,7 @@
                                         <% if(keywords) {%>
                                             <p class="text-center">You searched for : <span style="font-weight: bold;"><%= keywords %></span></p>
                                         <%}%>
+                                        
                                     </form>
                                 </div>
                                 <div class="clear"></div>
@@ -115,7 +116,6 @@
                                             </div>
                                         </article>
                                     <%})%>
-                                    
                                 </div>
                                 <% if(data.length < count && !keywords) {%>
                                     <a href="/article?limit=<%= limit+9%>" id="loadmore" style="margin-bottom: 10px;">Load More Posts</a>
