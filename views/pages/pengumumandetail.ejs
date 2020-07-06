@@ -11,11 +11,11 @@
         #update:hover {
             background-color: #5aacdb;
         }
-        #delete {
+        #deleteBtn {
             background-color: #e31717;
             color: white;
         }
-        #delete:hover {
+        #deleteBtn:hover {
             background-color: #dd6f6f;
         }
     </style>
@@ -82,8 +82,50 @@
                                                         </ul>
                                                         <% if(user !== undefined) {%>
                                                             <% if(user.role === "Librarian") {%>
-                                                                <button class="btn btn-primary" id="update">Update</button>
-                                                                <button class="btn btn-primary" id="delete">Delete</button>
+                                                                <button data-toggle="modal" data-target="#myModal" class="btn btn-primary" id="update">Update</button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="myModal" role="dialog">
+                                                                    <div class="modal-dialog modal-lg"> 
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                <h4 class="modal-title text-capitalize">Update : <span style="color: #3e97cc;"><%= data.judul %></span></h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form action="/user/pengaturan/update-pengumuman/<%= data._id %>?_method=PATCH" style="padding: 20px;" id="updateForm" name="update-pengumuman-form" method="post" >
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-12 col-sm-12">
+                                                                                            <div class="form-group">
+                                                                                                <label for="judul">Judul</label>
+                                                                                                <input class="form-control" type="text" placeholder="Judul" name="judul" id="judul" size="30" value="<%=data.judul%>" aria-required="true"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-12">
+                                                                                            <div class="form-group">
+                                                                                                <label for="text">Konten Pengumuman</label>
+                                                                                                <textarea class="form-control" placeholder="Konten Pengumuman" id="konten" name="konten" rows="40" aria-required="true"><%=data.konten%></textarea>
+                                                                                                <div class="clearfix"></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-12">
+                                                                                            <div class="form-group form-submit">
+                                                                                                <input style="background-color: black;" class="btn btn-default" id="update-pengumuman-form" type="submit" name="submit" value="Update Pengumuman"  />
+                                                                                            </div>
+                                                                                        </div>
+                                                    
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <form style="display: inline;" action="/user/pengaturan/delete-pengumuman/<%=data._id%>?_method=DELETE" method="POST" id="deleteForm">
+                                                                    <button type="submit" class="btn btn-primary" id="deleteBtn">Delete</button>
+                                                                </form>
                                                             <%}%>
                                                         <%}%>
                                                         <h2><%= data.judul %></h2>
@@ -114,6 +156,60 @@
         <!-- End: Footer -->
 
         <%- include('../partials/footscript') %>
+
+        <script>
+        
+            const form = document.querySelector('.updateForm');
+    
+            $(`#update-pengumuman-form`).on('click', function () {
+                console.log("wow");
+                if ($(`#judul`).val() === '' ||  $(`#konten`).val() === '' ) {
+                    swal({
+                        title : "Warning",
+                        icon: "warning",
+                        text : "Data form wajib diisi",
+                        button: "Okay",
+                    });
+                    return false;
+                } 
+                if ($(`#konten`).val().length < 50 ) {
+                    swal({
+                        title : "Warning",
+                        icon: "warning",
+                        text : "Data konten minimal 50 karakter",
+                        button: "Okay",
+                    });
+                    return false;
+                } 
+
+                return true;
+            });
+
+        </script>
+
+
+        <script>
+            const buttonDelete =  document.querySelector('#deleteBtn');
+                buttonDelete.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    swal({
+                        title: "Are you sure?",
+                        text: "Data akan dihapus secara permanen dan tidak dapat dipulihkan",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var form = document.querySelector("#deleteForm");
+                            form.submit();
+                        } else {
+                            return false;
+                        }
+                    });
+                });
+                console.log(buttonDelete);
+        </script>
 
         <% if (message.length !== 0) { %>
             <script>

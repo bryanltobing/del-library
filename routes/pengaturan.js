@@ -71,7 +71,7 @@ router.patch('/update-pengumuman/:id', auth, authRoleLibrarian, async(req, res) 
     try {
         const pengumuman = await Pengumuman.findByIdAndUpdate(idPengumuman, { ...req.body }, {new : true});
         req.flash('messageAddPengumuman', 'Pengumuman Berhasil di Update');
-        res.redirect(`/pengumuman-detail${pengumuman._id}`);
+        res.redirect(`/pengumuman-detail/${pengumuman._id}`);
     } catch(e) {
         req.flash('error', 'Pengumuman Gagal di update : ' + e);
         res.redirect(`/pengumuman-list`);
