@@ -73,7 +73,7 @@
             <div class="container">
                 <div class="filter-box">
                     <h3>What are you looking for at the library?</h3>
-                    <form action="/" method="get">
+                    <form action="/search" method="get">
                         <div class="col-md-6 col-sm-6">
                             <div class="form-group">
                                 <label class="sr-only" for="keywords">Search by Keyword</label>
@@ -83,12 +83,12 @@
                         <div class="col-md-4 col-sm-6">
                             <div class="form-group">
                                 <select name="catalog" id="catalog" class="form-control">
-                                    <option>Search the Catalog</option>
-                                    <option>Book</option>
-                                    <option>Local Content</option>
-                                    <option>Artikel</option>
-                                    <option>CD/DVD</option>
-                                    <option>Pengumuman</option>
+                                    <option value="">Search the Catalog</option>
+                                    <option value="Book">Book</option>
+                                    <option value="Local Content">Local Content</option>
+                                    <option value="Artikel">Artikel</option>
+                                    <option value="CDDVD">CD/DVD</option>
+                                    <option value="Pengumuman">Pengumuman</option>
                                 </select>
                             </div>
                         </div>

@@ -7,6 +7,7 @@ const Book = require('../models/books');
 const CD = require('../models/cd_dvd');
 const Article = require('../models/article');
 const LocalContent = require('../models/local_content');
+const Pengumuman = require('../models/pengumuman');
 
 router.get('/', async function(req, res) {
     const book = await Book.countDocuments();
@@ -30,6 +31,34 @@ router.get('/', async function(req, res) {
             articleterbaru : articleTerbaru[0]
         }
     });
+});
+
+router.get('/search', async (req, res) => {
+    let route;
+    let flash = req.query.keywords;
+    try {
+        if(req.query.catalog === "") {
+            route = "/";
+        }
+        if(req.query.catalog === "Book") {
+            route = '/book-list';
+        }
+        if(req.query.catalog === "Local Content") {
+            route = '/localcontent-list';
+        }
+        if(req.query.catalog === "Artikel") {
+            route = "/article";
+        }
+        if(req.query.catalog === "CDDVD") {
+            route = "/cd_dvd-list";
+        }
+        if(req.query.catalog === "Pengumuman") {
+            route = "/pengumuman-list";
+        }
+        res.redirect(`${route}?keywords=${flash}`);
+    } catch(e) {
+        console.log("Error " + e);
+    }
 });
 
 router.get('/services', async function(req, res) {
