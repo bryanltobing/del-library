@@ -13,11 +13,13 @@ router.get('/', auth, async (req, res) => {
         await req.user.populate({
             path : 'pinjam_buku'
         }).execPopulate();
+        req.user.pinjam_buku.forEach((buku) => {
+            buku.created = moment(buku.createdAt).fromNow(false);
+        });
         res.render('pages/pinjamanbuku', {
             title : "Pinjam Buku",
             user : req.user,
             request : req.user.pinjam_buku,
-            time : moment(req.user.pinjam_buku.createdAt).fromNow(false),
             success : req.flash('success'),
             errorAdded : req.flash('errorAdded')
         });

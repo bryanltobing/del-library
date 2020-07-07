@@ -82,7 +82,7 @@
                         <% if(req.statusPinjam === '0') { %>
                         <li class="category-item waiting">
                             <div class="info-bar" style="margin:30px;">
-                                <h4>Request Detail</h4><span style="color: #576478;"><%= time %></span>
+                                <h4>Request Detail</h4><span style="color: #576478;"><%= req.created %></span>
                                 <span class="underline left"></span>
                                 <span class="infoRequest"><img src="/getbook-image/<%=req.idBuku%>" style="width: 100px;" > </span>
                                 <span class="infoRequest"><strong>Judul Buku:</strong> <%= req.judulBuku %></span>
