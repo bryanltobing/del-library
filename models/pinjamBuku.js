@@ -50,6 +50,9 @@ const pinjamBukuSchema = mongoose.Schema({
         trim : true,
         default : 0
     },
+    tanggalPengembalian : {
+        type : Date
+    },
     owner : {
         type : mongoose.Schema.Types.ObjectId,
         trim : true,

@@ -6,7 +6,7 @@ const moment = require('moment-timezone');
 const PinjamBuku = require('../models/pinjamBuku');
 const User = require('../models/users');
 
-const { auth } = require('../middleware/auth');
+const { auth, authRoleLibrarian } = require('../middleware/auth');
 
 router.get('/', auth, async (req, res) => {
     try {
@@ -56,6 +56,19 @@ router.delete('/delete-pinjam/:id', auth, async (req, res) => {
         res.redirect('/user/pinjambuku');
     }
 });
+
+// List buku dipinjam
+router.get('/list', auth, authRoleLibrarian, async (req, res) => {
+    try {
+        const pinjambuku = await PinjamBuku.find({});
+        res.render('pages/pinjamanbuku_list', {
+            title : "List Peminjam Buku",
+            request : pinjambuku
+        });
+    } catch(e) {
+        console.log("error" + e);
+    }
+}); 
 
 
 
