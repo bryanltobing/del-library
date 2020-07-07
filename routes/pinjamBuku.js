@@ -15,6 +15,8 @@ router.get('/', auth, async (req, res) => {
         }).execPopulate();
         req.user.pinjam_buku.forEach((buku) => {
             buku.created = moment(buku.createdAt).fromNow(false);
+            buku.batasPeminjaman = moment(buku.tanggalPengembalian).locale('id').fromNow(true);
+            buku.kembali = moment(buku.tanggalPengembalian).locale('id').format('LL');
         });
         res.render('pages/pinjamanbuku', {
             title : "Pinjam Buku",
@@ -69,6 +71,16 @@ router.get('/list', auth, authRoleLibrarian, async (req, res) => {
         console.log("error" + e);
     }
 }); 
+
+router.patch('/list/approve/:id', auth, authRoleLibrarian, async(req, res) => {
+    const id = req.params.id;
+    try {
+        const pinjam = await PinjamBuku.findByIdAndUpdate(id, { statusPinjam : "1", tanggalPengembalian : new Date().setDate(new Date().getDate() + 7) }, { new : true });
+        res.redirect('/user/pinjambuku/list');
+    } catch(e) {
+        console.log("error " + e);
+    }
+});
 
 
 

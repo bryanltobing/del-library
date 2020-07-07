@@ -27,11 +27,13 @@
         }
         .category-item {
             min-height:600px !important; max-height : 500px !important; margin: 20px;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
         }
         @media only screen and (max-width: 767px) {
             .category-item {
                 margin: 10px 0px;
             }
+            
         }
     </style>
 
@@ -94,8 +96,9 @@
                                 <span class="infoRequest"><strong>Isbn Buku:</strong> <%= req.isbnBuku %></span>
                                 <span class="infoRequest"><strong>Pengarang:</strong> <%= req.pengarangBuku %> </span>
                                 <span class="infoRequest"><strong>Status:</strong>Menunggu Persetujuan</span>
-                                <form action="/user/pinjambuku/delete-pinjam/<%= req._id %>?_method=DELETE" method="POST" class="deleteForm">
+                                <form action="/user/pinjambuku/list/approve/<%= req._id %>?_method=PATCH" method="POST" class="deleteForm">
                                     <button class="deleteButton" type="submit">Setujui Request <i class="fa fa-ticket"></i></button>
+                                    <button class="" type="submit" style="color: red; background-color: rgb(241, 220, 220);">Tolak Request <i class="fa fa-remove"></i></button>
                                 </form>
                             </div>
                         </li>
