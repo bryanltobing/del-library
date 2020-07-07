@@ -41,6 +41,12 @@ const pinjamBukuSchema = mongoose.Schema({
         trim : true,
         required : true
     },
+    // status pinjam 0 menunggu 1 diterima 9 ditolak
+    statusPinjam : {
+        type : String,
+        trim : true,
+        default : 0
+    },
     gambar : {
         type : Buffer
     },
