@@ -89,8 +89,8 @@
                                 <span class="infoRequest"><strong>Isbn Buku:</strong> <%= req.isbnBuku %></span>
                                 <span class="infoRequest"><strong>Pengarang:</strong> <%= req.pengarangBuku %> </span>
                                 <span class="infoRequest"><strong>Status:</strong>Menunggu Persetujuan</span>
-                                <form action="/user/request-card-list/approved-process/<%= req._id %>?_method=PATCH" method="POST">
-                                    <button type="submit">Cancel Request <i class="fa fa-long-arrow-right"></i></button>
+                                <form action="/user/pinjambuku/delete-pinjam/<%= req._id %>?_method=DELETE" method="POST" class="deleteForm">
+                                    <button class="deleteButton" type="submit">Cancel Request <i class="fa fa-long-arrow-right"></i></button>
                                 </form>
                             </div>
                         </li>
@@ -160,6 +160,41 @@
               });
             </script>
         <%}%>
+
+        <% if (error.length !== 0) { %>
+            <script>
+              swal({
+                title : "<%= error %>",
+                icon: "error",
+                text : "failed",
+                button: "Okay",
+              });
+            </script>
+        <%}%>
+
+        <script>
+            const buttonDelete =  document.querySelectorAll('.deleteButton');
+            buttonDelete.forEach((button, i) => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    swal({
+                        title: "Are you sure?",
+                        text: "Request akan dihapus",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var form = document.querySelectorAll(".deleteForm");
+                            form[i].submit();
+                        } else {
+                            return false;
+                        }
+                    });
+                });
+            });
+        </script>
 
     </body>
 

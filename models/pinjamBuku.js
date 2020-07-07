@@ -70,4 +70,14 @@ pinjamBukuSchema.pre('save', async function(next) {
     }
 });
 
+pinjamBukuSchema.pre('deleteOne', { document : true }, async function(next) {
+    const buku = this;
+    try {
+        await User.findByIdAndUpdate({_id : buku.owner}, { $inc : { jumlahPinjaman : -1 }});
+        next();
+    } catch(e) {
+        console.log("error " + e);
+    }
+});
+
 module.exports = mongoose.model('pinjambuku', pinjamBukuSchema);

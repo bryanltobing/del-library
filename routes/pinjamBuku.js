@@ -21,7 +21,7 @@ router.get('/', auth, async (req, res) => {
             user : req.user,
             request : req.user.pinjam_buku,
             success : req.flash('success'),
-            errorAdded : req.flash('errorAdded')
+            error : req.flash('error')
         });
     } catch(e) {
         console.log("Error " + e);
@@ -43,5 +43,20 @@ router.post('/' , auth, async (req, res) => {
         res.redirect('/book-list');
     }
 });
+
+router.delete('/delete-pinjam/:id', auth, async (req, res) => {
+    const id = req.params.id;
+    try {
+        const book = await PinjamBuku.findById(id);
+        await book.deleteOne();
+        req.flash('success', 'Request berhasil dihapus');
+        res.redirect('/user/pinjamBuku');
+    } catch(e) {
+        req.flash('error', 'gagal ' + e);
+        res.redirect('/user/pinjambuku');
+    }
+});
+
+
 
 module.exports = router;
