@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+// models user
+const User = require('../models/users');
+
 const pinjamBukuSchema = mongoose.Schema({
     idBuku : {
         type : mongoose.Schema.Types.ObjectId,
@@ -41,14 +44,11 @@ const pinjamBukuSchema = mongoose.Schema({
         trim : true,
         required : true
     },
-    // status pinjam 0 menunggu 1 diterima 9 ditolak
+    // status pinjam 0 menunggu 1 diterima 9 ditolak 5 completed
     statusPinjam : {
         type : String,
         trim : true,
         default : 0
-    },
-    gambar : {
-        type : Buffer
     },
     owner : {
         type : mongoose.Schema.Types.ObjectId,
@@ -59,5 +59,15 @@ const pinjamBukuSchema = mongoose.Schema({
     timestamps : true
 });
 
+
+pinjamBukuSchema.pre('save', async function(next) {
+    const buku = this;  
+    try {
+        await User.findOneAndUpdate({_id : buku.owner} , { $inc : { jumlahPinjaman : 1 } });
+        next();
+    } catch(e) {
+        console.log("error " + e);
+    }
+});
 
 module.exports = mongoose.model('pinjambuku', pinjamBukuSchema);

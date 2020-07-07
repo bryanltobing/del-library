@@ -107,54 +107,61 @@
                                                 <div class="row">
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <input class="form-control" type="text" placeholder="idBuku" name="idBuku" id="idBuku" size="30" value="<%=data._id%>" aria-required="true"/>
+                                                            <input class="form-control" type="hidden" placeholder="idBuku" name="idBuku" id="idBuku" size="30" value="<%=data._id%>" aria-required="true"/>
                                                         </div>
                                                     </div>
                                                     <% if(user !== undefined) {%>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
-                                                                <input class="form-control" type="text" placeholder="namaPeminjam" name="namaPeminjam" id="namaPeminjam" size="30" value="<%=user.fullname%>" aria-required="true"/>
+                                                                <input class="form-control" type="hidden" placeholder="namaPeminjam" name="namaPeminjam" id="namaPeminjam" size="30" value="<%=user.fullname%>" aria-required="true"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
-                                                                <input class="form-control" type="text" placeholder="nomorIndukPeminjam" name="nomorIndukPeminjam" id="nomorIndukPeminjam" size="30" value="<%=user.nomorinduk%>" aria-required="true"/>
+                                                                <input class="form-control" type="hidden" placeholder="nomorIndukPeminjam" name="nomorIndukPeminjam" id="nomorIndukPeminjam" size="30" value="<%=user.nomorinduk%>" aria-required="true"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
-                                                                <input class="form-control" type="text" placeholder="emailPeminjam" name="emailPeminjam" id="emailPeminjam" size="30" value="<%=user.email%>" aria-required="true"/>
+                                                                <input class="form-control" type="hidden" placeholder="emailPeminjam" name="emailPeminjam" id="emailPeminjam" size="30" value="<%=user.email%>" aria-required="true"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6 col-sm-6">
                                                             <div class="form-group">
-                                                                <input class="form-control" type="text" placeholder="rolePeminjam" name="rolePeminjam" id="rolePeminjam" size="30" value="<%=user.role%>" aria-required="true"/>
+                                                                <input class="form-control" type="hidden" placeholder="rolePeminjam" name="rolePeminjam" id="rolePeminjam" size="30" value="<%=user.role%>" aria-required="true"/>
                                                             </div>
                                                         </div>
                                                     <%}%>
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <input class="form-control" type="text" placeholder="judulBuku" name="judulBuku" id="judulBuku" size="30" value="<%=data.judul%>" aria-required="true"/>
+                                                            <input class="form-control" type="hidden" placeholder="judulBuku" name="judulBuku" id="judulBuku" size="30" value="<%=data.judul%>" aria-required="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <input class="form-control" type="text" placeholder="isbnBuku" name="isbnBuku" id="isbnBuku" size="30" value="<%=data.isbn%>" aria-required="true"/>
+                                                            <input class="form-control" type="hidden" placeholder="isbnBuku" name="isbnBuku" id="isbnBuku" size="30" value="<%=data.isbn%>" aria-required="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="form-group">
-                                                            <input class="form-control" type="text" placeholder="pengarangBuku" name="pengarangBuku" id="pengarangBuku" size="30" value="<%=data.pengarang%>" aria-required="true"/>
+                                                            <input class="form-control" type="hidden" placeholder="pengarangBuku" name="pengarangBuku" id="pengarangBuku" size="30" value="<%=data.pengarang%>" aria-required="true"/>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" type="text" placeholder="gambar" name="gambar" id="gambar" size="30" value="<%=data.gambar%>" aria-required="true"/>
+                                                    <%if(user!==undefined){%>
+                                                        <%if(user.jumlahPinjaman>2) {%>
+                                                            <div class="col-sm-12">
+                                                                <p>Anda mencapai batas melakukan peminjaman</p>
+                                                            </div>
+                                                        <%} else {%>
+                                                            <div class="col-sm-12">
+                                                                <button href="#." type="submit" class="btn btn-dark-gray">Pinjam Buku</button>
+                                                            </div>
+                                                        <%}%>
+                                                    <%} else {%>
+                                                        <div class="col-sm-12">
+                                                            <button href="#." type="submit" class="btn btn-dark-gray">Pinjam Buku</button>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-12">
-                                                        <button href="#." type="submit" class="btn btn-dark-gray">Pinjam Buku</button>
-                                                    </div>
+                                                    <%}%>
                                                 </div>
                                             </form>
                                              

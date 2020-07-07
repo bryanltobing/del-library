@@ -4,6 +4,7 @@ const moment = require('moment-timezone');
 
 // models
 const PinjamBuku = require('../models/pinjamBuku');
+const User = require('../models/users');
 
 const { auth } = require('../middleware/auth');
 
@@ -12,12 +13,12 @@ router.get('/', auth, async (req, res) => {
         await req.user.populate({
             path : 'pinjam_buku'
         }).execPopulate();
-        res.render('pages/requestcard', {
+        res.render('pages/pinjamanbuku', {
             title : "Pinjam Buku",
             user : req.user,
             request : req.user.pinjam_buku,
-            time : moment(req.user.pinjam_buku.createdAt).tz('Asia/Jakarta').format('LLLL'),
-            successAdded : req.flash('successAdded'),
+            time : moment(req.user.pinjam_buku.createdAt).fromNow(false),
+            success : req.flash('success'),
             errorAdded : req.flash('errorAdded')
         });
     } catch(e) {
@@ -33,9 +34,11 @@ router.post('/' , auth, async (req, res) => {
     });
     try {
         await pinjamBuku.save();
-        console.log(pinjamBuku);
+        req.flash('success', 'Request peminjaman berhasil dibuat');
+        res.redirect('/user/pinjambuku');
     } catch(e) {
-        console.log("error " + e );
+        req.flash('error', 'Request peminjaman gagal dibuat ' + e);
+        res.redirect('/book-list');
     }
 });
 

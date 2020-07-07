@@ -47,6 +47,16 @@ const userSchema = mongoose.Schema({
                 throw new Error("The password must be greater than 6")
             }
         }
+    },
+    jumlahPinjaman : {
+        type : Number,
+        default : 0,
+        max : 3,
+        validate(value) {
+            if(value > 3) {
+                throw new Error("Pinjaman maksimal 3 buku");
+            } 
+        }
     }
 }, {
     timestamps : true
