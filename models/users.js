@@ -58,6 +58,12 @@ userSchema.virtual('card_requests', {
     foreignField : 'owner'
 });
 
+userSchema.virtual('pinjam_buku', {
+    ref : 'pinjambuku',
+    localField : '_id',
+    foreignField : 'owner'
+});
+
 
 userSchema.pre('save', async function(next) {
     const user = this;  

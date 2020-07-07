@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const pinjamBukuSchema = mongoose.Schema({
+    idBuku : {
+        type : mongoose.Schema.Types.ObjectId,
+        required : true,
+        trim : true
+    },
     namaPeminjam : {
         type : String,
         required : true,
@@ -11,7 +16,7 @@ const pinjamBukuSchema = mongoose.Schema({
         required : true,
         trim : true
     },
-    prodiPeminjam : {
+    emailPeminjam : {
         type : String,
         required : true,
         trim : true
@@ -36,8 +41,11 @@ const pinjamBukuSchema = mongoose.Schema({
         trim : true,
         required : true
     },
-    gambarBuku : {
-        type : String,
+    gambar : {
+        type : Buffer
+    },
+    owner : {
+        type : mongoose.Schema.Types.ObjectId,
         trim : true,
         required : true
     }
@@ -46,4 +54,4 @@ const pinjamBukuSchema = mongoose.Schema({
 });
 
 
-module.exports = pinjamBukuSchema;
+module.exports = mongoose.model('pinjambuku', pinjamBukuSchema);
