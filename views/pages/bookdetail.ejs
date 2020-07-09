@@ -4,6 +4,16 @@
 
     <%- include('../partials/head') %>
 
+    <% if(user!== undefined){%>
+        <%if(user.role === "Librarian") {%>
+        <style>
+            .pinjam{
+                display: none !important;
+            }
+        </style>
+        <%}%>
+    <%}%>
+
     <body>
 
         <!-- Start: Header Section -->
@@ -154,12 +164,12 @@
                                                             </div>
                                                         <%} else {%>
                                                             <div class="col-sm-12">
-                                                                <button href="#." type="submit" class="btn btn-dark-gray">Pinjam Buku</button>
+                                                                <button href="#." type="submit" class="btn btn-dark-gray pinjam">Pinjam Buku</button>
                                                             </div>
                                                         <%}%>
                                                     <%} else {%>
                                                         <div class="col-sm-12">
-                                                            <button href="#." type="submit" class="btn btn-dark-gray">Pinjam Buku</button>
+                                                            <button href="#." type="submit" class="btn btn-dark-gray pinjam">Pinjam Buku</button>
                                                         </div>
                                                     <%}%>
                                                 </div>
