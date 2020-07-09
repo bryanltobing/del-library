@@ -23,4 +23,14 @@ const authRoleLibrarian = (req, res, next) => {
     next();
 }
 
-module.exports = { auth, notAuth, authRoleLibrarian } 
+const authAnggotaPerpustakaan = (req, res, next) => {
+    if(req.user.role !== "Dosen") {
+        if(req.user.statusKeanggotaan !== true) {
+            req.flash('success', 'Request kartu perpustakaan terlebih dahulu');
+            return res.redirect('/user/request-library-card');
+        }
+    }
+    next();
+};
+
+module.exports = { auth, notAuth, authRoleLibrarian, authAnggotaPerpustakaan } 

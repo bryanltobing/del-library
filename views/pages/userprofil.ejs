@@ -86,6 +86,22 @@
                                                         <td class="titikdua">:</td>
                                                         <td><%= user.email %></td>
                                                     </tr>
+                                                    <% if(user.role !== "Librarian" && user.role !== "Dosen") {%>
+                                                        <tr>
+                                                            <td><strong>Status keanggotaan</strong></td>
+                                                            <td class="titikdua">:</td>
+                                                            <% if(user.statusKeanggotaan === true) {%>
+                                                                <td style="color: green; font-weight: bold;">Sudah memiliki kartu perpustakaan</td>
+                                                            <%} else {%>
+                                                                <td style="color: red">Belum memiliki kartu perpustakaan</td>
+                                                            <%}%>
+                                                        </tr>
+                                                    <%}%>
+                                                    <% if(user.role !== "Librarian") {%>
+                                                        <td><strong>Jumlah Pinjaman</strong></td>
+                                                        <td class="titikdua">:</td>
+                                                        <td><%= user.jumlahPinjaman %></td>
+                                                    <%}%>
                                                 </table>
                                             </div>
                                             

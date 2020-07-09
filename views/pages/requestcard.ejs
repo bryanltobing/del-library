@@ -208,6 +208,17 @@
                 });
             </script>
         <% } %>
+
+        <%if (success.length > 0) { %>
+            <script>
+                swal({
+                    title : "Request kartu perpustakaan",
+                    icon: "warning",
+                    text : "Request kartu perpustakaan terlebih dahulu",
+                    button: "Okay",
+                });
+            </script>
+        <% } %>
         
     </body>
 

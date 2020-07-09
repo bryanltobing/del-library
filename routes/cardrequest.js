@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth, notAuth, authRoleLibrarian } = require('../middleware/auth');
 const Cards = require('../models/card_request');
+const User = require('../models/users');
 const moment = require('moment-timezone');
 
 router.get('/request-library-card', auth , async (req, res) => {
@@ -16,6 +17,7 @@ router.get('/request-library-card', auth , async (req, res) => {
             request : req.user.card_requests,
             time : moment(req.user.card_requests.createdAt).tz('Asia/Jakarta').format('LLLL'),
             successAdded : req.flash('successAdded'),
+            success : req.flash('success'),
             errorAdded : req.flash('errorAdded')
         });
     } catch(e) {
@@ -60,9 +62,10 @@ router.get('/request-card-list', auth, authRoleLibrarian, async (req, res) => {
 router.patch('/request-card-list/approved-process/:id', auth, authRoleLibrarian, async (req, res) => {
     const filter = req.params.id;
     try {
-        await Cards.findOneAndUpdate({ _id : filter }, {isApproved : true }, {
+        const card = await Cards.findOneAndUpdate({ _id : filter }, {isApproved : true }, {
             new : true
         });
+        await User.findOneAndUpdate({ _id : card.owner  }, { statusKeanggotaan : true })
         req.flash('successUpdate', 'Request Approved Succesfully');
         res.redirect('/user/request-card-list');
     } catch (e) {

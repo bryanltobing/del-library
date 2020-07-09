@@ -6,7 +6,7 @@ const moment = require('moment-timezone');
 const PinjamBuku = require('../models/pinjamBuku');
 const User = require('../models/users');
 
-const { auth, authRoleLibrarian } = require('../middleware/auth');
+const { auth, authRoleLibrarian, authAnggotaPerpustakaan } = require('../middleware/auth');
 
 router.get('/', auth, async (req, res) => {
     try {
@@ -36,7 +36,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 
-router.post('/' , auth, async (req, res) => {
+router.post('/' , auth, authAnggotaPerpustakaan, async (req, res) => {
     const pinjamBuku = new PinjamBuku({
         ...req.body,
         owner : req.user._id
