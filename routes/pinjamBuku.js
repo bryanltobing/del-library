@@ -17,6 +17,11 @@ router.get('/', auth, async (req, res) => {
             buku.created = moment(buku.createdAt).fromNow(false);
             buku.batasPeminjaman = moment(buku.tanggalPengembalian).locale('id').fromNow(true);
             buku.kembali = moment(buku.tanggalPengembalian).locale('id').format('LL');
+            if(buku.statusPinjam === '1') {
+                if(new Date() > buku.tanggalPengembalian) {
+                    buku.statusPinjam = '2'
+                }
+            }
         });
         res.render('pages/pinjamanbuku', {
             title : "Pinjam Buku",
@@ -67,6 +72,11 @@ router.get('/list', auth, authRoleLibrarian, async (req, res) => {
             buku.created = moment(buku.createdAt).fromNow(false);
             buku.batasPeminjaman = moment(buku.tanggalPengembalian).locale('id').fromNow(true);
             buku.kembali = moment(buku.tanggalPengembalian).locale('id').format('LL');
+            if(buku.statusPinjam === '1') {
+                if(new Date() > buku.tanggalPengembalian) {
+                    buku.statusPinjam = '2'
+                }
+            }
         });
         res.render('pages/pinjamanbuku_list', {
             title : "List Peminjam Buku",
@@ -100,6 +110,19 @@ router.patch('/list/reject/:id', auth, authRoleLibrarian, async(req, res) => {
         res.redirect('/user/pinjambuku/list');
     } catch(e) {
         req.flash('error', 'Gagal menolak request ' + e);
+        console.log("error " + e);
+    }
+});
+
+router.patch('/list/complete/:id', auth, authRoleLibrarian, async(req, res) => {
+    const id = req.params.id;
+    try {
+        const pinjam = await PinjamBuku.findByIdAndUpdate(id, { statusPinjam : "5" }, { new : true });
+        const user = await User.findOneAndUpdate({ _id : pinjam.owner }, { $inc : { jumlahPinjaman : -1 } });
+        req.flash('success', 'Marked as complete');
+        res.redirect('/user/pinjambuku/list');
+    } catch(e) {
+        req.flash('error', 'Failed ' + e);
         console.log("error " + e);
     }
 });
