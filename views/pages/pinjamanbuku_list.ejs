@@ -22,6 +22,9 @@
         .approved {
             background-color: lightgreen;
         }
+        .late {
+            background-color: rgb(219, 219, 127);
+        }
         .peminjam {
             display: block;
         }
@@ -85,6 +88,7 @@
                     <div class="filter btn" data-filter="all">All Request</div>
                     <div class="filter btn" data-filter=".waiting">Waiting</div>
                     <div class="filter btn" data-filter=".approved">Approved</div>
+                    <div class="filter btn" data-filter=".late">Late return</div>
                 </div>
             </div>
             <div id="category-filter">
@@ -133,7 +137,28 @@
                                     <button style="background-color: limegreen; cursor: context-menu;" href="#">Request Already Approved <i class="fa fa-long-arrow-right"></i></button>
                                 </div>
                             </li>
-                        <% }%>
+                        <% } else if(req.statusPinjam === "2") { %>
+                            <li class="category-item late">
+                                <div class="info-bar" style="margin:30px;">
+                                    <h4>Late return</h4><span style="color: #576478;"><%= req.created %></span>
+                                    <span class="underline left"></span>
+                                    <span class="infoRequest"><strong class="peminjam">Nama Peminjam:</strong> <%= req.namaPeminjam %></span>
+                                    <span class="infoRequest"><strong class="peminjam">Nomor Induk:</strong> <%= req.nomorIndukPeminjam %></span>
+                                    <span class="infoRequest"><strong class="peminjam">Email:</strong> <%= req.emailPeminjam %></span>
+                                    <span class="infoRequest"><strong class="peminjam">Role:</strong> <%= req.rolePeminjam %></span>
+                                    <span class="infoRequest"><img src="/getbook-image/<%=req.idBuku%>" style="width: 100px;" > </span>
+                                    <span class="infoRequest"><strong>Judul Buku:</strong> <%= req.judulBuku %></span>
+                                    <span class="infoRequest"><strong>Isbn Buku:</strong> <%= req.isbnBuku %></span>
+                                    <span class="infoRequest"><strong>Pengarang:</strong> <%= req.pengarangBuku %> </span>
+                                    <span class="infoRequest"><strong>Status:</strong>Disetujui</span>
+                                    <div style="border: 2px solid white; padding: 5px; margin: 5px 0px;">
+                                        <span class="infoRequest"><strong>Batas Pengembalian:</strong><%= req.batasPeminjaman %></span>
+                                        <span class="infoRequest"><strong>Tanggal:</strong><%= req.kembali %></span>
+                                    </div>
+                                    <button style="background-color: rgb(204, 204, 58); cursor: context-menu;" href="#">Request Already Approved <i class="fa fa-long-arrow-right"></i></button>
+                                </div>
+                            </li>
+                        <%}%>
                     <% }) %>
                 
                 </ul>
