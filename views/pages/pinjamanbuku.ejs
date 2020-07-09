@@ -28,6 +28,9 @@
         .completed {
             background-color: rgb(122, 181, 236);
         }
+        .late {
+            background-color: rgb(235, 235, 130);
+        }
         .category-item {
             min-height:450px !important; max-height : 500px !important; margin: 10px !important;
         }
@@ -73,6 +76,7 @@
                     <div class="filter btn" data-filter=".waiting">Waiting</div>
                     <div class="filter btn" data-filter=".approved">Approved</div>
                     <div class="filter btn" data-filter=".rejected">Rejected</div>
+                    <div class="filter btn" data-filter=".late">Late return</div>
                     <div class="filter btn" data-filter=".completed">Completed</div>
                 </div>
             </div>
@@ -133,6 +137,19 @@
                                     <span class="infoRequest"><strong>Pengarang:</strong> <%= req.pengarangBuku %> </span>
                                     <span class="infoRequest"><strong>Status:</strong>Rejected</span>
                                     <button style="background-color: rgb(15, 103, 204); cursor: context-menu;" href="#">Request Rejected <i class="fa fa-long-arrow-right"></i></button>
+                                </div>
+                            </li>
+                        <%} else if(req.statusPinjam === '2') {%>
+                            <li class="category-item late">
+                                <div class="info-bar" style="margin:30px;">
+                                    <h4>Request Detail</h4><span style="color: #576478;"><%= req.created %></span>
+                                    <span class="underline left"></span>
+                                    <span class="infoRequest"><img src="/getbook-image/<%=req.idBuku%>" style="width: 100px;" > </span>
+                                    <span class="infoRequest"><strong>Judul Buku:</strong> <%= req.judulBuku %></span>
+                                    <span class="infoRequest"><strong>Isbn Buku:</strong> <%= req.isbnBuku %></span>
+                                    <span class="infoRequest"><strong>Pengarang:</strong> <%= req.pengarangBuku %> </span>
+                                    <span class="infoRequest"><strong>Status:</strong>Rejected</span>
+                                    <button style="background-color: rgb(187, 187, 42); cursor: context-menu;" href="#">Late returning the book <i class="fa fa-long-arrow-right"></i></button>
                                 </div>
                             </li>
                         <%}%>
