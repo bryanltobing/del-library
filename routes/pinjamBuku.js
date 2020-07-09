@@ -63,9 +63,16 @@ router.delete('/delete-pinjam/:id', auth, async (req, res) => {
 router.get('/list', auth, authRoleLibrarian, async (req, res) => {
     try {
         const pinjambuku = await PinjamBuku.find({});
+        pinjambuku.forEach((buku) => {
+            buku.created = moment(buku.createdAt).fromNow(false);
+            buku.batasPeminjaman = moment(buku.tanggalPengembalian).locale('id').fromNow(true);
+            buku.kembali = moment(buku.tanggalPengembalian).locale('id').format('LL');
+        });
         res.render('pages/pinjamanbuku_list', {
             title : "List Peminjam Buku",
-            request : pinjambuku
+            request : pinjambuku,
+            success : req.flash('success'),
+            error : req.flash('error')
         });
     } catch(e) {
         console.log("error" + e);
@@ -76,8 +83,23 @@ router.patch('/list/approve/:id', auth, authRoleLibrarian, async(req, res) => {
     const id = req.params.id;
     try {
         const pinjam = await PinjamBuku.findByIdAndUpdate(id, { statusPinjam : "1", tanggalPengembalian : new Date().setDate(new Date().getDate() + 7) }, { new : true });
+        req.flash('success', 'Berhasil disetujui');
         res.redirect('/user/pinjambuku/list');
     } catch(e) {
+        req.flash('error', 'Gagal disetujui' + e);
+        console.log("error " + e);
+    }
+});
+
+router.patch('/list/reject/:id', auth, authRoleLibrarian, async(req, res) => {
+    const id = req.params.id;
+    try {
+        const pinjam = await PinjamBuku.findByIdAndUpdate(id, { statusPinjam : "9" }, { new : true });
+        const user = await User.findOneAndUpdate({ _id : pinjam.owner }, { $inc : { jumlahPinjaman : -1 } });
+        req.flash('success', 'Request ditolak');
+        res.redirect('/user/pinjambuku/list');
+    } catch(e) {
+        req.flash('error', 'Gagal menolak request ' + e);
         console.log("error " + e);
     }
 });
