@@ -48,7 +48,7 @@ const pinjamBukuSchema = mongoose.Schema({
     statusPinjam : {
         type : String,
         trim : true,
-        default : 0
+        default : "0"
     },
     tanggalPengembalian : {
         type : Date
