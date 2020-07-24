@@ -401,6 +401,7 @@ $(function () {
                 text : "All field must be filled in",
                 button: "Okay",
             });
+            return false;
         } else {
             if (validateEmail(emailaddress)) {
                 if (emailerrorvalidation === 1) {
